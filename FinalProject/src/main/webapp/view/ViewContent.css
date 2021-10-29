@@ -1,0 +1,56 @@
+@charset "ISO-8859-1";
+*{
+    box-sizing: border-box;
+}
+#hrViewContent{
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 20px;
+    height:0.5px;
+    width: 60%;
+    border-width:0;
+    color:gray;
+    background-color:gray
+}
+#flexContainer{
+    width: 60%;
+    padding-top:0px;
+    padding-left:0px;
+    border:groove;
+    border-width: 1.5px;
+    border-top-width: 0px;
+    border-radius: 3px;
+}
+#divViewContentList{
+    margin-bottom: 10px;
+    margin-top: 0px;
+    margin-left: 0px;
+    background-color: rgb(210, 210, 210);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+table,th,tr,td{
+    border:1px gray;
+    border:groove thin;
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    
+}
+#columnHeader,#columnAction{
+    text-align: center;
+}
+table{
+    width: 80%;
+    margin-left: 10%;
+}
+#divNextPreviousPage{
+    margin: auto;
+    width: 15%;
+}
+.formatButton{
+    background-color: green;
+    border:none;
+    border-radius: 2px;
+    color: white;
+}
