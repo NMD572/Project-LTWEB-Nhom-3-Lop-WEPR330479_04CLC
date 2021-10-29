@@ -9,4 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+		<servlet-name>Tiles Dispatch</servlet-name>
+		<servlet-class>org.apache.tiles.web.util.TilesDispatchServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Tiles Dispatch</servlet-name>
+		<url-pattern>*.tiles</url-pattern>
+	</servlet-mapping>
 </web-app>

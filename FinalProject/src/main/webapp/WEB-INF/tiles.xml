@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+  <definition name="view" template="/layout/Main.jsp">
+    <put-attribute name="title" value="View Content" />
+    <put-attribute name="header" value="/layout/Header.jsp" />
+    <put-attribute name="body" value="/view/ViewContent.jsp" />
+    <put-attribute name="leftmenu" value="/layout/LeftMenu.jsp" />
+  </definition>
+  
+  <!-- Add page -->
+  <definition name="add" extends="view">
+    <put-attribute name="title" value="Add Content" />
+    <put-attribute name="body" value="/view/" />
+  </definition>
+  
+  <!-- List page -->
+  <definition name="edit" extends="view">
+    <put-attribute name="title" value="Edit Content" />
+    <put-attribute name="body" value="/view/" />
+  </definition>
+</tiles-definitions>
