@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dao.DAOContent;
+import dao.ViewContentDAO;
 
 @WebServlet("/ViewContentController")
 public class ViewContentController extends HttpServlet {
@@ -22,7 +22,7 @@ public class ViewContentController extends HttpServlet {
 		doPost(request,response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DAOContent dbContent = new DAOContent();
+		ViewContentDAO dbContent = new ViewContentDAO();
 		ResultSet rs = dbContent.getAllContent();
 		request.setAttribute("rs", rs);
 		request.getRequestDispatcher("/view/ViewContent.jsp").forward(request, response);

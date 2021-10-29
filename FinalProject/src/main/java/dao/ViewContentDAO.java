@@ -2,10 +2,10 @@ package dao;
 
 import java.sql.ResultSet;
 
-public class DAOContent {
+public class ViewContentDAO {
 	DAL dal;
 	
-	public DAOContent() 
+	public ViewContentDAO() 
 	{
 		dal=new DAL();
 	}
