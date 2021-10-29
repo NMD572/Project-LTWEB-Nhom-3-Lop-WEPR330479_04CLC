@@ -3,16 +3,38 @@ package model;
 public class Content {
 	private int id;
 	private String Title;
+	private String Brief;
 	private String Content;
 	private String CreateDate;
 	private String UpdateTime;
 	private String Sort;
 	private String AuthorID;
+
+	public Content(int id, String title, String brief, String content) {
+	super();
+	this.id = id;
+	this.Title = title;
+	this.Brief = brief;
+	this.Content = content;
+	}
+
+	public Content(String title, String brief, String content) {
+	super();
+	this.Title = title;
+	this.Brief = brief;
+	this.Content = content;
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getBrief() {
+		return Brief;
+	}
+	public void setBrief(String brief) {
+		Brief = brief;
 	}
 	public String getTitle() {
 		return Title;
