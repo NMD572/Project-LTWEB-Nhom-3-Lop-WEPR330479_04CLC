@@ -15,7 +15,7 @@ public class DAL {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost/dbcuoiky";
 			String user="root";
-			String password="19110269";
+			String password="0393279375";
 			con=DriverManager.getConnection(url, user, password);
 		}
 		catch(ClassNotFoundException e)
