@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
@@ -12,9 +13,9 @@ public class DAL {
 	public DAL() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost/webproject";
+			String url="jdbc:mysql://localhost/dbcuoiky";
 			String user="root";
-			String password="0393279375";
+			String password="19110269";
 			con=DriverManager.getConnection(url, user, password);
 		}
 		catch(ClassNotFoundException e)
@@ -35,6 +36,21 @@ public class DAL {
 		try {
 			stsm=con.createStatement();
 			return stsm.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public ResultSet getDataRegis(String sql,int id,String username,String password,String email) {
+		
+		try {
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.setInt(1, id);
+			statement.setString(2, username);
+			statement.setString(3, password);
+			statement.setString(4, email);
+			return statement.executeQuery(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
