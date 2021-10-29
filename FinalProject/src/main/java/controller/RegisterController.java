@@ -49,20 +49,16 @@ public class RegisterController extends HttpServlet {
 		regis.setPassword(password);
 		regis.setEmail(email);
 		RegisterDAO registerDAO = new RegisterDAO();
-		String rs = registerDAO.Register(regis, repassword);
+		if(password.equals(repassword)) {
+			registerDAO.InsertMember(regis);
+			response.sendRedirect("Login.jsp");
+		}
+		else response.sendRedirect("Register.jsp");
 		
 		
-        
-		 if(rs.equals("SUCCESS")) //If function returns success string then user will be rooted to Home page
-         {
-             request.setAttribute("userName", username); //with setAttribute() you can define a "key" and value pair so that you can get it in future using getAttribute("key")
-             request.getRequestDispatcher("/Login.jsp").forward(request, response);//RequestDispatcher is used to send the control to the invoked page.
-         }
-         else
-         {
-             request.setAttribute("errMessage", rs); //If authenticateUser() function returnsother than SUCCESS string it will be sent to Login page again. Here the error message returned from function has been stored in a errMessage key.
-             request.getRequestDispatcher("/Register.jsp").forward(request, response);//forwarding the request
-         }
+		
+		
+   
 	}
 
 }
