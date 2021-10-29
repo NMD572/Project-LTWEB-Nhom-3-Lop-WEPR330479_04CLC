@@ -23,9 +23,14 @@ public class ViewContentController extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ViewContentDAO dbContent = new ViewContentDAO();
-		ResultSet rs = dbContent.getAllContent();
+		ResultSet rs;
+		try {
+		rs = dbContent.getAllContent();
 		request.setAttribute("rs", rs);
 		request.getRequestDispatcher("view.tiles").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

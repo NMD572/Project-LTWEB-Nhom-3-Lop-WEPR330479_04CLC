@@ -10,18 +10,10 @@
 	crossorigin="anonymous">
 </head>
 <body>
-
-
-
 	<br>
 	<div class="container col-md-5">
 		<div class="card">
 			<div class="card-body">
-				
-
-
-
-
 				<caption>
 					<h2>
 						<c:if test="${content != null}">

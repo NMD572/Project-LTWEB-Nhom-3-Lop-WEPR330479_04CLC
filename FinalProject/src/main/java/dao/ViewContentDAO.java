@@ -11,6 +11,8 @@ public class ViewContentDAO {
 	}
 	public ResultSet getAllContent() 
 	{
-		return dal.getData("Select Title,Brief,CreateDate From Content");
+		return dal.getData("Select @rownum := @rownum + 1 AS STT,Title,Brief,CreateDate\r\n"
+				+ "From Content,(SELECT @rownum := 0) r\r\n"
+				+ "Order by CreateDate desc;");
 	}
 }

@@ -13,7 +13,7 @@ import dao.*;
 /**
  * Servlet implementation class RegisterController
  */
-@WebServlet("/view/RegisterController")
+@WebServlet("/RegisterController")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        String username;

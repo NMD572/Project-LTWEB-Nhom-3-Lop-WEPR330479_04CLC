@@ -11,9 +11,9 @@ import model.Member;
 
 public class RegisterDAO {
 	//DAL dal ;
-	private static String jdbcURL = "jdbc:mysql://localhost/dbcuoiky";
+	private static String jdbcURL = "jdbc:mysql://localhost/webproject";
 	private static String jdbcUser = "root";
-	private static String jdbcPass = "19110269";
+	private static String jdbcPass = "0393279375";
 	
 	private static String insert_query = "INSERT INTO member (id, username, password,email) VALUES (?,?,?,?)";
 	private static String count ="select count(id)+1 as count from member";
@@ -54,7 +54,7 @@ public class RegisterDAO {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-				stmt.setInt(1,id);  
+				stmt.setInt(1,id); 
 				stmt.setString(2,member.getUsername());
 				stmt.setString(3,member.getPassword());
 				stmt.setString(4,member.getEmail());

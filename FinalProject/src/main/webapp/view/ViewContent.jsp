@@ -29,36 +29,38 @@ html{
     margin-left: 0px;
     margin-bottom: 20px;
     height:0.5px;
-    width: 60%;
+    width: 1500px;
     border-width:0;
     color:gray;
-    background-color:gray
+    background-color:gray;
 }
 #flexContainer{
-    width: 60%;
+    width: 1500px;
     padding-top:0px;
     padding-left:0px;
-    border:groove;
-    border-width: 1.5px;
-    border-top-width: 0px;
+    border: 1.5px solid rgb(180, 180, 180);
+    border-top: 0;
     border-radius: 3px;
 }
 #divViewContentList{
-    margin-bottom: 10px;
-    margin-top: 0px;
-    margin-left: 0px;
     background-color: rgb(210, 210, 210);
+    border-top:1.5px solid rgb(180, 180, 180);
+    border-bottom: 1.5px solid rgb(180, 180, 180);
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 10px;
+    padding-left: 10px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
 table{
     width: 95%;
     margin-left: 2.5%;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 table,th,tr,td{
     border:1px gray;
-    border:groove thin;
+    border:solid rgb(180, 180, 180) thin;
     border-collapse: collapse;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
@@ -85,13 +87,19 @@ tr:nth-child(even) {
 #divNextPreviousPage{
     margin: auto;
     width: 15%;
-    padding-bottom: 5px;
+    height:40px;
 }
 .formatButton{
     background-color: green;
     border:none;
     border-radius: 2px;
     color: white;
+   	height:30px;
+  	width:30px;
+}
+#numberOfPage{
+	font-size:20px;
+	line-height:30px;
 }
 </style>
 <body>
@@ -113,7 +121,7 @@ tr:nth-child(even) {
                 <%ResultSet rs=(ResultSet)request.getAttribute("rs");%>
                 <%try{while(rs.next()){%>
                 <tr>
-                	<td class="centerHeader"></td>
+                	<td class="centerHeader"><%=rs.getInt("STT")%></td>
                 	<td class="marginLeftHeader"><%=rs.getString("Title")%></td>
                 	<td class="marginLeftHeader"><%=rs.getString("Brief")%></td>
                 	<td class="marginLeftHeader"><%=dateFormat.format(rs.getDate("CreateDate"))%></td>

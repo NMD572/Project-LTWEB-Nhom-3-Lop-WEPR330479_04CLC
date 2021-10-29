@@ -7,11 +7,22 @@
 <meta charset="ISO-8859-1">
 <title><tiles:getAsString name="title"/></title>
 </head>
+<style>
+#divInline{	
+	display: flex;
+}
+#divBody{
+	margin-top: 50px;
+	margin-left: 30px;
+}
+</style>
 <body>
 <header>
 	<tiles:insertAttribute name="header"/>
 </header>
-<div class=""><tiles:insertAttribute name="leftmenu"/></div>
-<div class=""><tiles:insertAttribute name="body"/></div>
+<div id="divInline">
+<div><tiles:insertAttribute name="leftmenu"/></div>
+<div id="divBody"><tiles:insertAttribute name="body"/></div>
+</div>
 </body>
 </html>
