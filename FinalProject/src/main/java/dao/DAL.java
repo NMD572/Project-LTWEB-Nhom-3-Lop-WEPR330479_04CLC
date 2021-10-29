@@ -13,7 +13,7 @@ public class DAL {
 	public DAL() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost/dbcuoiky";
+			String url="jdbc:mysql://localhost/webproject";
 			String user="root";
 			String password="0393279375";
 			con=DriverManager.getConnection(url, user, password);

@@ -12,7 +12,7 @@ import dao.*;
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet("/view/LoginController")
+@WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String username;
@@ -48,7 +48,7 @@ public class LoginController extends HttpServlet {
 		if(rs.equals("SUCCESS")) //If function returns success string then user will be rooted to Home page
         {
             request.setAttribute("userName", username); //with setAttribute() you can define a "key" and value pair so that you can get it in future using getAttribute("key")
-            request.getRequestDispatcher("/Home.jsp").forward(request, response);//RequestDispatcher is used to send the control to the invoked page.
+            request.getRequestDispatcher("ViewContentController").forward(request, response);//RequestDispatcher is used to send the control to the invoked page.
         }
         else
         {

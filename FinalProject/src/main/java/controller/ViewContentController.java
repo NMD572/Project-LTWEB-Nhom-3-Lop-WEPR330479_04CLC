@@ -25,7 +25,7 @@ public class ViewContentController extends HttpServlet {
 		ViewContentDAO dbContent = new ViewContentDAO();
 		ResultSet rs = dbContent.getAllContent();
 		request.setAttribute("rs", rs);
-		request.getRequestDispatcher("/view/ViewContent.jsp").forward(request, response);
+		request.getRequestDispatcher("view.tiles").forward(request, response);
 	}
 
 }
