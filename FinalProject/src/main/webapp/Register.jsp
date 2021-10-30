@@ -15,6 +15,7 @@
   position: static;
 }
 .Register{
+margin: auto;
   border: 0.25px solid green;
   padding: 20px 30px 20px 30px;
         width:520px;

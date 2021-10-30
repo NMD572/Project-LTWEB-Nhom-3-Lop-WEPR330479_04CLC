@@ -65,7 +65,6 @@ html{
   padding-left: 10px;
 }
 #divViewContent>a>svg,#divFormContent>a>svg{
-  padding-top:2px;
   padding-right: 2px;
 }
 </style>

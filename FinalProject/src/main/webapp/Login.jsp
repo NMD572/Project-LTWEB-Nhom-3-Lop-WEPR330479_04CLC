@@ -9,9 +9,10 @@
 </head>
 <style>
 .login{
+	margin:auto;
   border: 0.25px solid green;
   padding: 20px 30px 20px 30px;
-        width:520px;
+  width:520px;
   position: static;
 }
 .Register{

@@ -13,7 +13,7 @@ import model.Content;
 /**
  * Servlet implementation class AddContentServlet
  */
-@WebServlet(urlPatterns = {"/view/AddContentServlet"})
+@WebServlet(urlPatterns = {"/AddContentServlet"})
 public class AddContentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ContentDAO contentDAO;    
