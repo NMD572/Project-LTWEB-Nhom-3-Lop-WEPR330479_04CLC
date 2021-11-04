@@ -56,7 +56,7 @@ html{
 table{
     width: 95%;
     margin-left: 2.5%;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 table,th,tr,td{
     border:1px gray;
@@ -98,6 +98,8 @@ tr:nth-child(even) {
   	width:30px;
 }
 #numberOfPage{
+	margin-left:5px;
+	margin-right:5px;
 	font-size:20px;
 	line-height:30px;
 }
