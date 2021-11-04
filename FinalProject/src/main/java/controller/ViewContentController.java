@@ -23,6 +23,7 @@ public class ViewContentController extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ViewContentDAO dbContent = new ViewContentDAO();
+		//fix: thay vi gui ve resultset thi se gui List<Content>
 		ResultSet rs;
 		try {
 		rs = dbContent.getAllContent();

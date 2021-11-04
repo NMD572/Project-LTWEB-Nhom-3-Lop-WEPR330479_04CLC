@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ContentDAO;
 import model.Content;
 
+import constant.UserConstant;
 /**
  * Servlet implementation class AddContentServlet
  */
@@ -36,6 +37,8 @@ public class AddContentServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int UserID=UserConstant.UserID;
+		System.out.print(UserID);
 		String title = request.getParameter("title");
 		String brief = request.getParameter("brief");
 		String content = request.getParameter("content");

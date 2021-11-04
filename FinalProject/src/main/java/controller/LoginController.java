@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.*;
 import dao.*;
+import constant.UserConstant;
 /**
  * Servlet implementation class LoginController
  */
@@ -30,12 +31,14 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//fix: can than
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	//fix: lay ra du lieu Member va if else trong ham nay
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		username = request.getParameter("username");
 		password = request.getParameter("password");
@@ -44,10 +47,14 @@ public class LoginController extends HttpServlet {
 		login.setUsername(username);
 		login.setPassword(password);
 		LoginDAO loginDAO = new LoginDAO();
+		//fix: move to if(rs.equals("success")
+		UserConstant.UserID=loginDAO.getUserID(username);
+		
 		String rs = loginDAO.authenticateUser(login);
+		
 		if(rs.equals("SUCCESS")) //If function returns success string then user will be rooted to Home page
         {
-            request.setAttribute("userName", username); //with setAttribute() you can define a "key" and value pair so that you can get it in future using getAttribute("key")
+            request.setAttribute("userName", username); //with setAttribute() you can define a "key" and value pair so that you can get it in future using getAttribute("key")      
             request.getRequestDispatcher("ViewContentController").forward(request, response);//RequestDispatcher is used to send the control to the invoked page.
         }
         else

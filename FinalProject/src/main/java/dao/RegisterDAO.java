@@ -11,12 +11,15 @@ import model.Member;
 
 public class RegisterDAO {
 	//DAL dal ;
+	//fix: use class DAL to connect mysql --> delete 3 row
 	private static String jdbcURL = "jdbc:mysql://localhost/webproject";
 	private static String jdbcUser = "root";
 	private static String jdbcPass = "0393279375";
 	
 	private static String insert_query = "INSERT INTO member (id, username, password,email) VALUES (?,?,?,?)";
 	private static String count ="select count(id)+1 as count from member";
+	
+	//delete this function
 	public static Connection getConnection()
 	{	
 		try {
@@ -54,12 +57,15 @@ public class RegisterDAO {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+				//fix: don't insert id
 				stmt.setInt(1,id); 
 				stmt.setString(2,member.getUsername());
 				stmt.setString(3,member.getPassword());
 				stmt.setString(4,member.getEmail());
-				int i=stmt.executeUpdate();  
-				System.out.println(i+" records inserted");  
+				int i=stmt.executeUpdate();
+				
+				//test xong thi dung in nua nha
+				//System.out.println(i+" records inserted");  
 				  
 				cnn.close();  				  
 			}
