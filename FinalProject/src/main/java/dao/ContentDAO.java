@@ -2,6 +2,7 @@ package dao;
 
 
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import model.Content;
@@ -16,10 +18,12 @@ public class ContentDAO
 {
 	static DAL dal=new DAL();
 	private static String insert_query = "INSERT INTO content (Title, Brief, Content,CreateDate,UpdateTime,Authorld) VALUES (?, ?, ?,NOW(),NOW(),1)";
-	private static String select_all_content_query = "Select ID,@rownum := @rownum + 1 AS STT,Title,Brief,CreateDate From Content,(SELECT @rownum := 0) r Order by CreateDate desc;";
-	private static String select_content_For_Member_query = "Select ID,@rownum := @rownum + 1 AS STT,Title,Brief,CreateDate From Content,(SELECT @rownum := 0) r Where Content.AuthorId=? Order by CreateDate desc;";
+	private static String select_all_content_query = "Select ID,@rownum := @rownum + 1 AS STT,Title,Brief,DATE_FORMAT(CreateDate, \"%d/%m/%Y %H:%i\") as CreateDate From Content,(SELECT @rownum := 0) r Order by CreateDate desc;";
+	private static String select_content_For_Member_query = "Select ID,@rownum := @rownum + 1 AS STT,Title,Brief,DATE_FORMAT(CreateDate, \"%d/%m/%Y %H:%i\") as CreateDate From Content,(SELECT @rownum := 0) r Where Content.AuthorId=? Order by CreateDate desc;";
 	private static String delete_query = "DELECT from content where id = ?";
 	private static String update_query = "UPDATE content SET Title = ?, Brief = ?, Content = ? where id = ?";
+	private static String searchAllContent_Procedure = "{ CALL searchAllContent(?) }";
+	private static String searchContentForMember_Procedure = "{ CALL searchContentForMember(?,?) }";
 
 	public ContentDAO(){
 		
@@ -78,14 +82,13 @@ public class ContentDAO
 		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(select_all_content_query)) 
 		{  					
 			ResultSet rs = stmt.executeQuery();
-			DateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			while (rs.next())
 			{
 				int id = rs.getInt("ID");
 				int stt=rs.getInt("STT");
 				String title = rs.getString("Title");
 				String brief = rs.getString("Brief");
-				String createdate = dateFormat.format(rs.getDate("CreateDate"));
+				String createdate = rs.getString("CreateDate");
 				contents.add(new Content(id,stt,title,brief,createdate));
 			}
 			rs.close();
@@ -105,14 +108,13 @@ public class ContentDAO
 		{
 			stmt.setInt(1, memberID);
 			ResultSet rs = stmt.executeQuery();
-			DateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			while (rs.next())
 			{
 				int id = rs.getInt("ID");
 				int stt=rs.getInt("STT");
 				String title = rs.getString("Title");
 				String brief = rs.getString("Brief");
-				String createdate = dateFormat.format(rs.getDate("CreateDate"));
+				String createdate =rs.getString("CreateDate");
 				contents.add(new Content(id,stt,title,brief,createdate));
 			}
 			rs.close();
@@ -125,6 +127,58 @@ public class ContentDAO
 		}		
 		return contents;
 	}
-	
-	
+	public List<Content> searchAllContent(String search)
+	{
+		List<Content> contents = new ArrayList<Content>();				    		
+		try (Connection cnn = dal.getConnection() ; CallableStatement stmt = cnn.prepareCall(searchAllContent_Procedure)) 
+		{
+			stmt.setString(1, search);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next())
+			{
+				int id = rs.getInt("ID");
+				int stt=rs.getInt("STT");
+				String title = rs.getString("Title");
+				String brief = rs.getString("Brief");
+				String createdate =rs.getString("CreateDate");
+				contents.add(new Content(id,stt,title,brief,createdate));
+			}
+			rs.close();
+			cnn.close();  				  
+		}
+		catch(Exception e)
+		{ 
+			//System.out.println(e);
+			e.printStackTrace();
+		}		
+		return contents;
+	}
+	public List<Content> searchContentForMember(int memberID,String search)
+	{
+		
+		List<Content> contents = new ArrayList<Content>();				    		
+		try (Connection cnn = dal.getConnection() ; CallableStatement stmt = cnn.prepareCall(searchContentForMember_Procedure)) 
+		{
+			stmt.setInt(1, memberID);
+			stmt.setString(2, search);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next())
+			{
+				int id = rs.getInt("ID");
+				int stt=rs.getInt("STT");
+				String title = rs.getString("Title");
+				String brief = rs.getString("Brief");
+				String createdate =rs.getString("CreateDate");
+				contents.add(new Content(id,stt,title,brief,createdate));
+			}
+			rs.close();
+			cnn.close();  				  
+		}
+		catch(Exception e)
+		{ 
+			//System.out.println(e);
+			e.printStackTrace();
+		}		
+		return contents;
+	}
 }

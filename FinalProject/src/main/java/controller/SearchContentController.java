@@ -1,35 +1,32 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
-import model.*;
-import dao.*;
+import constant.ContentConstant;
 import constant.UserConstant;
+import dao.ContentDAO;
+import model.Content;
 
 /**
- * Servlet implementation class EditUserController
+ * Servlet implementation class SearchContentController
  */
-@WebServlet("/EditUserController")
-public class EditUserController extends HttpServlet {
+@WebServlet("/SearchContentController")
+public class SearchContentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private String firstname;
-	private String lastname;
-	private String email;
-	private String phone;
-	private String description;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditUserController() {
+    public SearchContentController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,30 +43,23 @@ public class EditUserController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		firstname = request.getParameter("firstname");
-		lastname = request.getParameter("lastname");
-		email = request.getParameter("email");
-		phone = request.getParameter("phone");
-		description=request.getParameter("description");
-		Member edit = new Member();
-		edit.setFirstName(firstname);
-		edit.setLastName(lastname);
-		edit.setPhone(phone);
-		edit.setEmail(email);
-		edit.setDescription(description);
-		edit.setId(UserConstant.UserID);
-		RegisterDAO editDAO=new RegisterDAO();
+		// TODO Auto-generated method stub
+		ContentDAO dbContent = new ContentDAO();
+		String search = request.getParameter("searchString");
+		if(search.length()==0)
+			search=" ";
 		try {
-			if(editDAO.UpdateMember(edit)) {
-				response.sendRedirect("editprofile.tiles");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		List<Content> contents = new ArrayList<Content>();
+		if(UserConstant.UserID==ContentConstant.adminID)
+			contents = dbContent.searchAllContent(search);
+		else
+			contents = dbContent.searchContentForMember(UserConstant.UserID,search);
+		request.setAttribute("listContent", contents);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("view.tiles");
+		dispatcher.forward(request, response);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			
-		
-		
 	}
 
 }

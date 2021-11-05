@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ContentDAO;
 import model.Content;
 import constant.UserConstant;
+import constant.ContentConstant;
 @WebServlet("/ViewContentController")
 public class ViewContentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,7 +31,7 @@ public class ViewContentController extends HttpServlet {
 		ContentDAO dbContent = new ContentDAO();
 		try {
 		List<Content> contents = new ArrayList<Content>();
-		if(UserConstant.UserID==1)
+		if(UserConstant.UserID==ContentConstant.adminID)
 			contents = dbContent.getAllContent();
 		else
 			contents = dbContent.getContentForMember(UserConstant.UserID);
