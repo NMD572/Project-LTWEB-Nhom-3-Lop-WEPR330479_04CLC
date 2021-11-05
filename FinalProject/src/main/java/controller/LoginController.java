@@ -44,23 +44,23 @@ public class LoginController extends HttpServlet {
 		password = request.getParameter("password");
 		
 		Member login = new Member();
-		login.setUsername(username);
-		login.setPassword(password);
+		
 		LoginDAO loginDAO = new LoginDAO();
 		//fix: move to if(rs.equals("success")
 		UserConstant.UserID=loginDAO.getUserID(username);
+		LoginDAO.authenticateUser(login);
 		
-		String rs = loginDAO.authenticateUser(login);
+	
 		
-		if(rs.equals("SUCCESS")) //If function returns success string then user will be rooted to Home page
+		if(password.equals(login.getPassword())) //If function returns success string then user will be rooted to Home page
         {
             request.setAttribute("userName", username); //with setAttribute() you can define a "key" and value pair so that you can get it in future using getAttribute("key")      
-            request.getRequestDispatcher("ViewContentController").forward(request, response);//RequestDispatcher is used to send the control to the invoked page.
+            request.getRequestDispatcher("/view/EditProfile.jsp").forward(request, response);//RequestDispatcher is used to send the control to the invoked page.
         }
         else
         {
-            request.setAttribute("errMessage", rs); //If authenticateUser() function returnsother than SUCCESS string it will be sent to Login page again. Here the error message returned from function has been stored in a errMessage key.
-            request.getRequestDispatcher("/Login.jsp").forward(request, response);//forwarding the request
+            request.setAttribute("errMessage", username); //If authenticateUser() function returnsother than SUCCESS string it will be sent to Login page again. Here the error message returned from function has been stored in a errMessage key.
+            request.getRequestDispatcher("/Register.jsp").forward(request, response);//forwarding the request
         }
 	}
 

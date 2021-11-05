@@ -10,62 +10,33 @@ import model.Content;
 import model.Member;
 
 public class RegisterDAO {
-	//DAL dal ;
-	//fix: use class DAL to connect mysql --> delete 3 row
-	private static String jdbcURL = "jdbc:mysql://localhost/webproject";
-	private static String jdbcUser = "root";
-	private static String jdbcPass = "0393279375";
+	static DAL dal=new DAL() ;
 	
-	private static String insert_query = "INSERT INTO member (id, username, password,email) VALUES (?,?,?,?)";
-	private static String count ="select count(id)+1 as count from member";
+	public RegisterDAO() 
+	{
+		
+	}
+	private static String insert_query = "INSERT INTO member ( username, password,email) VALUES (?,?,?)";
+	private static String update_query = "UPDATE member SET Firstname = ?, Lastname = ?, Phone = ?,Email =?,Description=? where id = ?";
 	
 	//delete this function
-	public static Connection getConnection()
-	{	
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		    String url = jdbcURL;
-		    String user = jdbcUser;
-		    String password = jdbcPass;
-		    return DriverManager.getConnection(url, user, password);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    return null;
-	};
+	
 
 	public static void InsertMember (Member member)
 	{		
-		ResultSet resultSet = null;
-		int id=0;
-		Statement stsm;
 		
- 	 
 		
-		try (Connection cnn = getConnection() ; PreparedStatement stmt = cnn.prepareStatement(insert_query)) 
+		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(insert_query)) 
 			{  
-			try {
-				stsm=cnn.createStatement();
-				resultSet= stsm.executeQuery(count);
-				 while(resultSet.next()) // Until next row is present otherwise it return false
-		             {
-		              id = resultSet.getInt("count") ;//fetch the values present in database
-		              
-	             }
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 				//fix: don't insert id
-				stmt.setInt(1,id); 
-				stmt.setString(2,member.getUsername());
-				stmt.setString(3,member.getPassword());
-				stmt.setString(4,member.getEmail());
-				int i=stmt.executeUpdate();
 				
-				//test xong thi dung in nua nha
-				//System.out.println(i+" records inserted");  
+				stmt.setString(1,member.getUsername());
+				stmt.setString(2,member.getPassword());
+				stmt.setString(3,member.getEmail());
+				stmt.executeUpdate();
+				
+			
 				  
 				cnn.close();  				  
 			}
@@ -75,45 +46,24 @@ public class RegisterDAO {
 			e.printStackTrace();
 			}			
 	}
-	
-	public RegisterDAO() 
+	public boolean UpdateMember(Member member) throws SQLException
 	{
-		//dal=new DAL();
+		boolean rowsAffected;
+		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(update_query)) 
+		{
+			stmt.setString(1,member.getFirstName()); 
+			stmt.setString(2,member.getLastName());  
+			stmt.setString(3,member.getPhone()); 
+			stmt.setString(4,member.getEmail());
+			stmt.setString(5,member.getDescription());
+			stmt.setInt(6,member.getId());
+			int i=stmt.executeUpdate();  
+			rowsAffected = i > 0;	  
+			cnn.close();  
+		}
+		return rowsAffected;
 	}
-	
-//	 public String Register(Member regis,String repassword)
-//     {
-//         String Username = regis.getUsername(); //Assign user entered values to temporary variables.
-//         String Password = regis.getPassword();
-//         String Email = regis.getEmail();
-//         int id =0;
-//         
-//         ResultSet resultSet = null;
-//         ResultSet resultSetId = null; 
-//         String sql ="INSERT INTO member (id, username, password,email) VALUES (?,?,?,?)";
-//         String count ="select count(id)+1 as count from member";
-//         
-// 
-//         try
-//         {
-//        	 resultSetId = dal.getData(count);
-//        	 while(resultSetId.next()) // Until next row is present otherwise it return false
-//             {
-//              id = resultSetId.getInt("count") ;//fetch the values present in database
-//              
-//             }
-//        	 resultSet = dal.getDataRegis(sql, id, Username, Password, Email);
-//        	 if( Password.equals(repassword))
-//             {
-//                return "SUCCESS"; ////If the user entered values are already present in the database, which means user has already registered so return a SUCCESS message.
-//             }
-//             
-//         }
-//             catch(SQLException e)
-//             {
-//                e.printStackTrace();
-//             }
-//             return "Invalid user credentials"; // Return appropriate message in case of failure
-//         }
 }
+	
+	
 

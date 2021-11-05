@@ -45,11 +45,11 @@
         <h1>Edit Profile</h1>
 			<h2>Profile From Elements</h2>
         <div class="AfEdit">
-				<form action ="EditController" method ="post" class = "editform">
+				<form action ="EditUserController" method ="post" class = "editform">
 				<h3>First Name</h3><input type ="text" name ="firstname" id ="b" placeholder="Enter the first name"/><BR>
          <h3>Last Name</h3> <input type ="text" name ="lastname" id ="b" placeholder="Enter the last name"/><BR>
           	<h3>Email</h3>
-           <input type ="text" name ="phone" id ="b" placeholder="Enter your phone number"/><BR>
+           <input type ="text" name ="email" id ="b" placeholder="Enter your mail"/><BR>
           <h3>Phone</h3>
           <input type ="text" name ="phone" id ="b" placeholder="Enter your phone number"/><BR>
           <h3>Description</h3>
