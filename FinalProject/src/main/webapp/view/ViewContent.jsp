@@ -100,6 +100,7 @@ tr:nth-child(even) {
 }
 </style>
 <body>
+<h1 id="load">Loading</h1>
 <div class="load5s">
         <h1>View Content</h1>
         <hr id="hrViewContent">
@@ -151,6 +152,7 @@ tr:nth-child(even) {
                 {
                     clearInterval(timer);
                     document.querySelector(".load5s").style.visibility="visible";
+                    document.querySelector("#load").style.display="none";
                 }
             },1000);
         }
