@@ -1,29 +1,35 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import model.*;
 import dao.*;
+import constant.UserConstant;
 
 /**
- * Servlet implementation class RegisterController
+ * Servlet implementation class EditUserController
  */
-@WebServlet("/RegisterController")
-public class RegisterController extends HttpServlet {
+@WebServlet("/EditUserController")
+public class EditUserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       String username;
-       String password;
-       String repassword;
-       String email;
+	
+	private String firstname;
+	private String lastname;
+	private String email;
+	private String phone;
+	private String description;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterController() {
+    public EditUserController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +39,6 @@ public class RegisterController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//fix: can than
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -41,25 +46,30 @@ public class RegisterController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		username = request.getParameter("username");
-		password = request.getParameter("password");
-		repassword=request.getParameter("repassword");
+		firstname = request.getParameter("firstname");
+		lastname = request.getParameter("lastname");
 		email = request.getParameter("email");
-		Member regis = new Member();
-		regis.setUsername(username);
-		regis.setPassword(password);
-		regis.setEmail(email);
-		
-		if(password.equals(repassword)) {
-			RegisterDAO.InsertMember(regis);
-			response.sendRedirect("Login.jsp");
+		phone = request.getParameter("phone");
+		description=request.getParameter("description");
+		Member edit = new Member();
+		edit.setFirstName(firstname);
+		edit.setLastName(lastname);
+		edit.setPhone(phone);
+		edit.setEmail(email);
+		edit.setDescription(description);
+		edit.setId(UserConstant.UserID);
+		RegisterDAO editDAO=new RegisterDAO();
+		try {
+			if(editDAO.UpdateMember(edit)) {
+				response.sendRedirect("/view/EditProfile.jsp");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else response.sendRedirect("Register.jsp");
+			
 		
 		
-		
-		
-   
 	}
 
 }
