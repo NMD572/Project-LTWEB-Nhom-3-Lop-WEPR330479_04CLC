@@ -2,6 +2,7 @@ package model;
 
 public class Content {
 	private int id;
+	private int stt;
 	private String Title;
 	private String Brief;
 	private String Content;
@@ -16,6 +17,15 @@ public class Content {
 	this.Title = title;
 	this.Brief = brief;
 	this.Content = content;
+	}
+	
+	public Content(int id, int stt, String title, String brief, String createDate) {
+		super();
+		this.id = id;
+		this.stt = stt;
+		Title = title;
+		Brief = brief;
+		CreateDate = createDate;
 	}
 
 	public Content(String title, String brief, String content) {
@@ -71,5 +81,13 @@ public class Content {
 	}
 	public void setAuthorID(String authorID) {
 		AuthorID = authorID;
+	}
+
+	public int getStt() {
+		return stt;
+	}
+
+	public void setStt(int stt) {
+		this.stt = stt;
 	}
 }

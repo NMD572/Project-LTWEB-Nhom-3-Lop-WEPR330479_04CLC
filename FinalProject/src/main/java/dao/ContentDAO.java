@@ -1,19 +1,23 @@
 package dao;
 
 
-//import java.util.ArrayList;
-//import java.util.List;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Content;
 public class ContentDAO 
 {
 	static DAL dal=new DAL();
 	private static String insert_query = "INSERT INTO content (Title, Brief, Content,CreateDate,UpdateTime,Authorld) VALUES (?, ?, ?,NOW(),NOW(),1)";
-	private static String select_content_query = "SELECT * FROM content";
+	private static String select_all_content_query = "Select ID,@rownum := @rownum + 1 AS STT,Title,Brief,CreateDate From Content,(SELECT @rownum := 0) r Order by CreateDate desc;";
+	private static String select_content_For_Member_query = "Select ID,@rownum := @rownum + 1 AS STT,Title,Brief,CreateDate From Content,(SELECT @rownum := 0) r Where Content.AuthorId=? Order by CreateDate desc;";
 	private static String delete_query = "DELECT from content where id = ?";
 	private static String update_query = "UPDATE content SET Title = ?, Brief = ?, Content = ? where id = ?";
 
@@ -36,7 +40,7 @@ public class ContentDAO
 		catch(Exception e)
 			{ 
 				//System.out.println(e);
-			e.printStackTrace();
+				e.printStackTrace();
 			}			
 	}
 	
@@ -67,20 +71,22 @@ public class ContentDAO
 		}
 		return rowsAffected;
 	}
-	/*
-	public static List<Content> selectContent()
+	
+	public List<Content> getAllContent()
 	{
-		ArrayList<Content> contents = new ArrayList<Content>();				    		
-		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(select_content_query)) 
+		List<Content> contents = new ArrayList<Content>();				    		
+		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(select_all_content_query)) 
 		{  					
 			ResultSet rs = stmt.executeQuery();
+			DateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			while (rs.next())
 			{
-				int id = rs.getInt("id");
-				String title = rs.getString("title");
-				String brief = rs.getString("brief");
-				String ct = rs.getString("content");
-				contents.add(new Content(id,title,brief,ct));
+				int id = rs.getInt("ID");
+				int stt=rs.getInt("STT");
+				String title = rs.getString("Title");
+				String brief = rs.getString("Brief");
+				String createdate = dateFormat.format(rs.getDate("CreateDate"));
+				contents.add(new Content(id,stt,title,brief,createdate));
 			}
 			rs.close();
 			cnn.close();  				  
@@ -88,9 +94,36 @@ public class ContentDAO
 		catch(Exception e)
 		{ 
 			//System.out.println(e);
-		e.printStackTrace();
+			e.printStackTrace();
 		}		
 		return contents;
 	}
-	*/
+	public List<Content> getContentForMember(int memberID)
+	{
+		List<Content> contents = new ArrayList<Content>();				    		
+		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(select_content_For_Member_query)) 
+		{
+			stmt.setInt(1, memberID);
+			ResultSet rs = stmt.executeQuery();
+			DateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			while (rs.next())
+			{
+				int id = rs.getInt("ID");
+				int stt=rs.getInt("STT");
+				String title = rs.getString("Title");
+				String brief = rs.getString("Brief");
+				String createdate = dateFormat.format(rs.getDate("CreateDate"));
+				contents.add(new Content(id,stt,title,brief,createdate));
+			}
+			rs.close();
+			cnn.close();  				  
+		}
+		catch(Exception e)
+		{ 
+			//System.out.println(e);
+			e.printStackTrace();
+		}		
+		return contents;
+	}
+	
 }

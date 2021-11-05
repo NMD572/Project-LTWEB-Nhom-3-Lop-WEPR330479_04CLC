@@ -1,15 +1,19 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.sql.ResultSet;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dao.ViewContentDAO;
 
+import dao.ContentDAO;
+import model.Content;
+import constant.UserConstant;
 @WebServlet("/ViewContentController")
 public class ViewContentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,13 +26,16 @@ public class ViewContentController extends HttpServlet {
 		doPost(request,response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ViewContentDAO dbContent = new ViewContentDAO();
-		//fix: thay vi gui ve resultset thi se gui List<Content>
-		ResultSet rs;
+		ContentDAO dbContent = new ContentDAO();
 		try {
-		rs = dbContent.getAllContent();
-		request.setAttribute("rs", rs);
-		request.getRequestDispatcher("view.tiles").forward(request, response);
+		List<Content> contents = new ArrayList<Content>();
+		if(UserConstant.UserID==1)
+			contents = dbContent.getAllContent();
+		else
+			contents = dbContent.getContentForMember(UserConstant.UserID);
+		request.setAttribute("listContent", contents);
+		RequestDispatcher dispatcher =request.getRequestDispatcher("view.tiles");
+		dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

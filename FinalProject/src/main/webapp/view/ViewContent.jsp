@@ -1,12 +1,7 @@
-<%@page import="java.sql.SQLException"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.text.DateFormat" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -119,20 +114,19 @@ tr:nth-child(even) {
                     <th class="marginLeftHeader" style="width:20%">Created Date</th>
                     <th class="centerHeader" style="width:15%">Actions</th>
                 </tr>
-                <%DateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy HH:mm");%>
-                <%ResultSet rs=(ResultSet)request.getAttribute("rs");%>
-                <%try{while(rs.next()){%>
-                <tr>
-                	<td class="centerHeader"><%=rs.getInt("STT")%></td>
-                	<td class="marginLeftHeader"><%=rs.getString("Title")%></td>
-                	<td class="marginLeftHeader"><%=rs.getString("Brief")%></td>
-                	<td class="marginLeftHeader"><%=dateFormat.format(rs.getDate("CreateDate"))%></td>
-                	<td class="centerHeader">
-            			<a href="#">Edit</a>
-            			<a href="#">Delete</a>
-            		</td>
-                	<%}}catch(SQLException e) {e.printStackTrace();}%>
-                </tr>
+                <c:forEach var="content" items="${listContent}">
+                	<tr>
+                		<td class="centerHeader"><c:out value="${content.stt}" /></td>
+                		<td class="marginLeftHeader"><c:out value="${content.title}" /></td>
+                		<td class="marginLeftHeader"><c:out value="${content.brief}" /></td>
+                		<td class="marginLeftHeader"><c:out value="${content.createDate}" /></td>
+                		<td class="centerHeader">
+            				<a href="#">Edit</a>
+            				<a href="#">Delete</a>
+            			</td>
+                	
+                	</tr>
+                </c:forEach>
             </table>
         </div>
         <div id="divNextPreviousPage">
