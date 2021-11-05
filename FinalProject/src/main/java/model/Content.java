@@ -9,7 +9,7 @@ public class Content {
 	private String CreateDate;
 	private String UpdateTime;
 	private String Sort;
-	private String AuthorID;
+	private int AuthorID;
 
 	public Content(int id, String title, String brief, String content) {
 	super();
@@ -26,6 +26,14 @@ public class Content {
 		Title = title;
 		Brief = brief;
 		CreateDate = createDate;
+	}
+
+	public Content(String title, String brief, String content, int authorID) {
+		super();
+		Title = title;
+		Brief = brief;
+		Content = content;
+		AuthorID = authorID;
 	}
 
 	public Content(String title, String brief, String content) {
@@ -76,11 +84,11 @@ public class Content {
 	public void setSort(String sort) {
 		Sort = sort;
 	}
-	public String getAuthorID() {
+	public int getAuthorID() {
 		return AuthorID;
 	}
-	public void setAuthorID(String authorID) {
-		AuthorID = authorID;
+	public void setAuthorID(int authorID) {
+		this.AuthorID = authorID;
 	}
 
 	public int getStt() {

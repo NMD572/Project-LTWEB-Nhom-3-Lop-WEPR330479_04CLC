@@ -15,13 +15,13 @@ import constant.UserConstant;
  * Servlet implementation class AddContentServlet
  */
 @WebServlet(urlPatterns = {"/AddContentServlet"})
-public class AddContentServlet extends HttpServlet {
+public class AddContentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ContentDAO contentDAO;    
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddContentServlet() {
+    public AddContentController() {
         super();
     	this.contentDAO = new ContentDAO();
     }
@@ -38,11 +38,10 @@ public class AddContentServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int UserID=UserConstant.UserID;
-		System.out.print(UserID);
 		String title = request.getParameter("title");
 		String brief = request.getParameter("brief");
 		String content = request.getParameter("content");
-		Content newct = new Content(title,brief,content);
+		Content newct = new Content(title,brief,content,UserID);
 		ContentDAO.InsertContent(newct);
 		response.sendRedirect("add.tiles");
 	}

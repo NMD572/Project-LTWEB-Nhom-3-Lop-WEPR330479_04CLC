@@ -14,7 +14,7 @@
 
 		<div class = "title"> <h1>Add Content</h1> </div>
 
-		<form action="AddContentServlet" method="post">
+		<form action="AddContentController" method="post">
 
 			<div class = "content-form-elements">
 				Content Form Elements

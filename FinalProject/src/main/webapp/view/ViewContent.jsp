@@ -117,15 +117,14 @@ tr:nth-child(even) {
                 </tr>
                 <c:forEach var="content" items="${listContent}">
                 	<tr>
-                		<td class="centerHeader"><c:out value="${content.stt}" /></td>
-                		<td class="marginLeftHeader"><c:out value="${content.title}" /></td>
-                		<td class="marginLeftHeader"><c:out value="${content.brief}" /></td>
-                		<td class="marginLeftHeader"><c:out value="${content.createDate}" /></td>
+                		<td class="centerHeader"><c:out value="${content.getStt()}" /></td>
+                		<td class="marginLeftHeader"><c:out value="${content.getTitle()}" /></td>
+                		<td class="marginLeftHeader"><c:out value="${content.getBrief()}" /></td>
+                		<td class="marginLeftHeader"><c:out value="${content.getCreateDate()}" /></td>
                 		<td class="centerHeader">
-            				<a href="#">Edit</a>
-            				<a href="#">Delete</a>
-            			</td>
-                	
+            				<a href="EditContentController?id=<c:out value="${content.getId()}" />">Edit</a>
+            				<a href="DeleteContentController?id=<c:out value="${content.getId()}" />">Delete</a>
+            			</td>      
                 	</tr>
                 </c:forEach>
             </table>
