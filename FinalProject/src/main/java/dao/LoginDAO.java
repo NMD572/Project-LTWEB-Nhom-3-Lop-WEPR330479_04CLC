@@ -43,9 +43,10 @@ public class LoginDAO {
          String userNameDB = "";
          String passwordDB = "";
          try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(sql)) 
-			{  			
-        	 ResultSet rs = stmt.executeQuery();
+			{
         	 stmt.setString(1, login.getUsername());
+        	 ResultSet rs = stmt.executeQuery();
+        	 
 
         	 while (rs.next())
  			{
