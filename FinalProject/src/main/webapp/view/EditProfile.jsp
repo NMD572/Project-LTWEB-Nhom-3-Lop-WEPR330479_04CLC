@@ -1,38 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="ISO-8859-1"%>
    
+
+   
 <!DOCTYPE html>
 <style>
+    .title{
+        width:1100px;
+		
+        font-size: 40px;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        border-bottom: 1px solid ;
+    }
+    .divProfilefrom{
+        padding: 10px;
+		width: 1400px;
+		background: lightgrey;
+    }
 .Edit{
-  border: 0.25px solid green;
-  padding: 20px 30px 20px 30px;
-  width:520px;
-  position: relative;
+     margin-top: 5px;
+	margin-bottom: 10px;
+		/* height:600px; */
+		border: 1px solid grey;
+		border-radius: 6px;
+		width: 1400px;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+       
 }
-#editform > h2{
-  
-    background-color: #DCDCDC;
-    border-color: #DCDCDC;
-}
+
 .AfEdit{
-  
+    margin-left:20px
 }
 #button{
-        padding: 5px 5px 5px 5px;
-        width:120px;
-        position: static;
-        font-size: 10px        
-    	background-color: #228B22;
-    	border-color: #228B22;
+   
+  
+  color: black;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border: 0.5px solid #b3b3b3 ;
+  border-radius: 6px;
+  background-color: whitesmoke;
 }
 #b{
         width: 450px;
         height: 55px;
-        margin: 5px 0 10px;
+        margin: 5px 0 5px;
+        border: 0.5px solid #b3b3b3 ;
+         border-radius: 6px;
 }      
-.edit{
-    display: block;
-}
+
 </style>
 <html>
 <head>
@@ -40,10 +61,11 @@
 <title>Login</title> 
 </head>
 	<body>
-    
+        <div class = "title">
+            Edit Profile</div>
   		<div class ="Edit" id ='editform'>
-        <h1>Edit Profile</h1>
-			<h2>Profile From Elements</h2>
+            
+				<div class="divProfilefrom">Profile Form Elements</div>
         <div class="AfEdit">
 				<form action ="EditUserController" method ="post" class = "editform">
 				<h3>First Name</h3><input type ="text" name ="firstname" id ="b" placeholder="Enter the first name"/><BR>
@@ -67,6 +89,9 @@
 </html>
           
     
+   
+    
+   
    
     
    
