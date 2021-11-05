@@ -21,4 +21,9 @@
     <put-attribute name="title" value="Edit Content" />
     <put-attribute name="body" value="/view/" />
   </definition>
+  <!-- EditProfile page -->
+  <definition name="editprofile" extends="view">
+    <put-attribute name="title" value="Edit Profile" />
+    <put-attribute name="body" value="/view/EditProfile.jsp" />
+  </definition>
 </tiles-definitions>
