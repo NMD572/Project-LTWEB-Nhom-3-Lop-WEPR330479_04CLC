@@ -10,47 +10,100 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<br>
-	<div class="container col-md-5">
-		<div class="card">
-			<div class="card-body">
-				<caption>
-					<h2>
-						<c:if test="${content != null}">
-            			Edit Content
-            		</c:if>
-						<c:if test="${content == null}">
-            			Add Content
-            		</c:if>
-					</h2>
-				</caption>
-				
-					<form action="AddContentServlet" method="post">
-					
-					<fieldset class="form-group">
-					<label>Title</label> <input type="text"
-						value="<c:out value='${content.title}' />" class="form-control"
-						name="title" required="required">
-				</fieldset>
+	<div class = "container">
 
-				<fieldset class="form-group">
-					<label>Content</label> <input type="text"
-						value="<c:out value='${content.brief}' />" class="form-control"
-						name="brief">
-				</fieldset>
+		<div class = "title"> <h1>Add Content</h1> </div>
 
-				<fieldset class="form-group">
-					<label>Brief</label> <input type="text"
-						value="<c:out value='${user.content}' />" class="form-control"
-						name="content">
-				</fieldset>
+		<form action="AddContentServlet" method="post">
 
-				<button type="submit" class="btn btn-success">Submit Button</button>
-					
-					</form>
-				
+			<div class = "content-form-elements">
+				Content Form Elements
 			</div>
-		</div>
+
+			<div class ="title">
+				<b> <label>Title</label> </b>
+				<input type="text" value="<c:out value='${content.title}' />" class="form-control"
+					   name="title" required="required">
+			</div>
+
+			<div class = "brief">
+				<b> <label>Content</label> </b>
+				<textarea type="text" value="<c:out value='${content.brief}' />" class="form-control"
+						  name="brief" required="required">
+				</textarea>
+			</div>
+
+			<div class = "content">
+				<b> <label>Brief</label> </b>
+				<textarea type="text" value="<c:out value='${user.content}' />" class="form-control"
+						  name="content" required="required">
+			</textarea>
+			</div>
+
+			<div class = "btn">
+				<button type="submit" class="btn btn-success">Submit Button</button>
+				<button type="submit" class="btn btn-success">Reset Button</button>
+			</div>
+
+		</form>
 	</div>
 </body>
 </html>
+
+
+<style>
+	.container form .title
+	{
+		width:1100px;
+		margin-left: 20px;
+	}
+	.container form .brief
+	{
+		width:1100px;
+		margin-left:20px
+	}
+	.container form .brief textarea
+	{
+		height: 70px;
+	}
+	.container form .content
+	{
+		width:1100px;
+		margin-left:20px;
+	}
+	.container form .content textarea
+	{
+		height: 220px;
+	}
+	.container form .form-control
+	{
+		margin-bottom: 20px;
+	}
+	.container
+	{
+		margin-top: 5px;
+		/* background: #71b7e6; */
+		border: 2px black;
+	}
+	.container form
+	{
+		margin-top: 5px;
+		margin-bottom: 20px;
+		/* height:600px; */
+		border: 1px solid grey;
+		border-radius: 2px;
+		width: 1400px;
+	}
+	.container form .content-form-elements
+	{
+		padding: 10px;
+		width: 1400px;
+		background: lightgrey;
+		/* border: 1px solid black; 		 */
+	}
+	.container form .btn
+	{
+		margin-left: 4px;
+		margin-bottom: 4px;
+	}
+</style>
