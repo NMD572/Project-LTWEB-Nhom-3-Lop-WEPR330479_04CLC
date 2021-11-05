@@ -44,18 +44,15 @@ public class LoginController extends HttpServlet {
 		password = request.getParameter("password");
 		
 		Member login = new Member();
-		
+		login.setUsername(username);
 		LoginDAO loginDAO = new LoginDAO();
 		//fix: move to if(rs.equals("success")
 		UserConstant.UserID=loginDAO.getUserID(username);
 		LoginDAO.authenticateUser(login);
-		
-	
-		
 		if(password.equals(login.getPassword())) //If function returns success string then user will be rooted to Home page
         {
             request.setAttribute("userName", username); //with setAttribute() you can define a "key" and value pair so that you can get it in future using getAttribute("key")      
-            request.getRequestDispatcher("/view/EditProfile.jsp").forward(request, response);//RequestDispatcher is used to send the control to the invoked page.
+            request.getRequestDispatcher("view.tiles").forward(request, response);//RequestDispatcher is used to send the control to the invoked page.
         }
         else
         {

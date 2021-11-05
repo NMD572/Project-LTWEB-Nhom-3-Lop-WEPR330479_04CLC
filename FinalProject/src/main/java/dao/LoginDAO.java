@@ -15,7 +15,7 @@ public class LoginDAO {
 		
 	}
 	private static String getID ="select id from member Where username=? ";
-	
+	private static String sql ="select Username,Password from member Where username=?";
 	public int getUserID(String username)
 	{
 		int id=5;
@@ -40,17 +40,13 @@ public class LoginDAO {
      {
          //String Username = login.getUsername(); //Assign user entered values to temporary variables.
         //String Password = login.getPassword();
-         
-         
-         
-        
-         
-         String sql ="select Username,Password from member";
          String userNameDB = "";
          String passwordDB = "";
          try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(sql)) 
 			{  			
         	 ResultSet rs = stmt.executeQuery();
+        	 stmt.setString(1, login.getUsername());
+
         	 while (rs.next())
  			{
         		 userNameDB = rs.getString("Username"); //fetch the values present in database
