@@ -44,7 +44,7 @@ public class AddContentServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		Content newct = new Content(title,brief,content);
 		ContentDAO.InsertContent(newct);
-		response.sendRedirect("content-form.jsp");
+		response.sendRedirect("add.tiles");
 	}
 
 }
