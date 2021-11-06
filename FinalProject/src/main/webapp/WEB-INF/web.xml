@@ -17,5 +17,13 @@
 		<servlet-name>Tiles Dispatch</servlet-name>
 		<url-pattern>*.tiles</url-pattern>
 	</servlet-mapping>
-	
+	<!-- CharsetFilter start -->
+	<filter>
+		<filter-name>CharacterSetFilter</filter-name>
+		<filter-class>config.CharsetFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterSetFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>
