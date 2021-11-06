@@ -19,7 +19,7 @@ public class ContentDAO
 	static DAL dal=new DAL();
 	private static String insert_query = "INSERT INTO content (Title, Brief, Content,CreateDate,UpdateTime,AuthorId) VALUES (?, ?, ?,NOW(),NOW(),?)";
 	private static String select_all_content_query = "Select ID,STT, Title, Brief, DATE_FORMAT(CreateDate, \"%d/%m/%Y %H:%i\") as CreateDate From (Select ID,@rownum := @rownum + 1 AS STT,Title,Brief, CreateDate From Content,(SELECT @rownum := 0) r Order by CreateDate desc) as A;";
-	private static String select_content_For_Member_query = "Select ID,STT, Title, Brief, DATE_FORMAT(CreateDate, \"%d/%m/%Y %H:%i\") as CreateDate From (Select ID,@rownum := @rownum + 1 AS STT,Title,Brief,CreateDate From Content,(SELECT @rownum := 0) r Where Content.AuthorId=1 Order by CreateDate desc) as A;";
+	private static String select_content_For_Member_query = "Select ID,STT, Title, Brief, DATE_FORMAT(CreateDate, \"%d/%m/%Y %H:%i\") as CreateDate From (Select ID,@rownum := @rownum + 1 AS STT,Title,Brief,CreateDate From Content,(SELECT @rownum := 0) r Where Content.AuthorId=? Order by CreateDate desc) as A;";
 	private static String delete_query = "DELECT from content where id = ?";
 	private static String update_query = "UPDATE content SET Title = ?, Brief = ?, Content = ? where id = ?";
 	private static String searchAllContent_Procedure = "{ CALL searchAllContent(?) }";

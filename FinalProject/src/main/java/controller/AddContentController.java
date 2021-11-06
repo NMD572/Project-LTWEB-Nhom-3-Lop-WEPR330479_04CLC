@@ -14,7 +14,7 @@ import constant.UserConstant;
 /**
  * Servlet implementation class AddContentServlet
  */
-@WebServlet(urlPatterns = {"/AddContentServlet"})
+@WebServlet(urlPatterns = {"/AddContentController"})
 public class AddContentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ContentDAO contentDAO;    
