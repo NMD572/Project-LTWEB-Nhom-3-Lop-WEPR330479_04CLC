@@ -17,7 +17,7 @@ html{
 #divMenu{
   background-color: rgb(240, 240, 240);
   border-right:  1px solid rgb(180, 180, 180);
-  height: 100vh;
+  height: calc(100vh - 50px);
   width: 250px;
 }
 #divSearch{
