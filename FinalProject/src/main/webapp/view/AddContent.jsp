@@ -4,25 +4,22 @@
 <html>
 <head>
 <title>Content form</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
 </head>
 <body>
 	<div class = "container">
 
-		<div class = "title"> <h1>Add Content</h1> </div>
+		<div class = "form-title"> <h1>Add Content</h1> </div>
 
 		<form action="AddContentController" method="post">
 
 			<div class = "content-form-elements">
-				Content Form Elements
+				<div class = "content-form-elements-title">
+					Content Form Elements
+				</div>
 			</div>
-
 			<div class ="title">
 				<b> <label>Title</label> </b>
-				<input type="text" value="<c:out value='${content.title}' />" class="form-control"
+				<input type="text" value="<c:out value='${content.title}' />" class="form-control" placeholder="&nbsp Enter the title"
 					   name="title" required="required">
 			</div>
 
@@ -52,28 +49,68 @@
 
 
 <style>
+	.form-title
+	{
+		font-family: Arial, Helvetica, sans-serif;
+		border-bottom: 1px solid lightgrey;
+		/* border: 1px solid lightgrey; */
+		width: 1400px;
+		height: 50px;
+		justify-content: center;
+	}
 	.container form .title
 	{
 		width:1100px;
+		height: 90px;
+		margin-top:10px;
 		margin-left: 20px;
+		/*border: 1px solid black;*/
+		display: flex;
+		flex-direction: column;
+		font-family: Arial, Helvetica, sans-serif;
+
+	}
+	.container form .title ::placeholder{
+		color: lightgray
+	}
+	.container form .title input
+	{
+		margin-top: 5px;
+		height: 40px;
+		padding: 10px;
 	}
 	.container form .brief
 	{
 		width:1100px;
-		margin-left:20px
+		margin-left:20px;
+		/*border: 1px solid red;*/
+		display: flex;
+		flex-direction: column;
+		font-family: Arial, Helvetica, sans-serif;
 	}
 	.container form .brief textarea
 	{
-		height: 70px;
+		height: 100px;
+		margin-top: 5px;
+		padding: 10px;
+		font-family: Arial, Helvetica, sans-serif;
 	}
 	.container form .content
 	{
 		width:1100px;
 		margin-left:20px;
+		/* border: 1px solid green;  */
+		display: flex;
+		flex-direction: column;
+		font-family: Arial, Helvetica, sans-serif;
 	}
 	.container form .content textarea
 	{
 		height: 220px;
+		margin-top: 5px;
+		margin-bottom:15px;
+		padding: 10px;
+		font-family: Arial, Helvetica, sans-serif;
 	}
 	.container form .form-control
 	{
@@ -87,7 +124,7 @@
 	}
 	.container form
 	{
-		margin-top: 5px;
+		margin-top: 20px;
 		margin-bottom: 20px;
 		/* height:600px; */
 		border: 1px solid grey;
@@ -96,14 +133,30 @@
 	}
 	.container form .content-form-elements
 	{
+		font-family: Arial, Helvetica, sans-serif;
 		padding: 10px;
-		width: 1400px;
-		background: lightgrey;
+		width: 1398px;
+		background: rgb(240, 240, 240);
 		/* border: 1px solid black; 		 */
+	}
+	.container form .content-form-elements .content-form-elements-title
+	{
+		margin-left: 10px;
 	}
 	.container form .btn
 	{
-		margin-left: 4px;
-		margin-bottom: 4px;
+		margin-left: 10px;
+		margin-bottom: 15px;
+		font-size: 15px;
+		font-family: Arial, Helvetica, sans-serif;
+		height: 30px;
+
+		width: 250px;
+		justify-content: center;
+		display: flex;
+	}
+	.container form .btn button
+	{
+		line-height: 30px;
 	}
 </style>

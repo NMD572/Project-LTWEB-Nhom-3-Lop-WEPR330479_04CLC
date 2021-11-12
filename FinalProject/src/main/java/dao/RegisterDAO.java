@@ -17,7 +17,7 @@ public class RegisterDAO {
 		
 	}
 	private static String insert_query = "INSERT INTO member ( username, password,email) VALUES (?,?,?)";
-	private static String update_query = "UPDATE member SET Firstname = ?, Lastname = ?, Phone = ?,Email =?,Description=? where id = ?";
+	private static String update_query = "UPDATE member SET Firstname = ?, Lastname = ?, Phone = ?,Description=? where id = ?";
 	
 	//delete this function
 	
@@ -54,9 +54,8 @@ public class RegisterDAO {
 			stmt.setString(1,member.getFirstName()); 
 			stmt.setString(2,member.getLastName());  
 			stmt.setString(3,member.getPhone()); 
-			stmt.setString(4,member.getEmail());
-			stmt.setString(5,member.getDescription());
-			stmt.setInt(6,member.getId());
+			stmt.setString(4,member.getDescription());
+			stmt.setInt(5,member.getId());
 			int i=stmt.executeUpdate();  
 			rowsAffected = i > 0;	  
 			cnn.close();  

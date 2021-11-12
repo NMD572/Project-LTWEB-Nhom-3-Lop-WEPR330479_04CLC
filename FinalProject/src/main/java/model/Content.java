@@ -11,6 +11,12 @@ public class Content {
 	private String Sort;
 	private int AuthorID;
 
+	public Content(int id)
+	{
+		super();
+		this.id = id;
+	}
+	
 	public Content(int id, String title, String brief, String content) {
 	super();
 	this.id = id;

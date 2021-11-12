@@ -1,36 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   
-
-   
 <!DOCTYPE html>
 <style>
     .title{
-        width:1100px;
+        width:100vw;
 		
         font-size: 40px;
         font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        border-bottom: 1px solid ;
+        border-bottom: 1px solid #b3b3b3 ;
+      
+        
     }
-    .divProfilefrom{
-        padding: 10px;
-		width: 1400px;
+    #divProfilefrom{
+        left: 0px;
+        padding: 20px;
+        font-size: 20px;
+		width: 98.94vw;
 		background: lightgrey;
+        border: 0px solid grey;
+		border-radius: 6px;
+        margin-bottom: 10px;
     }
 .Edit{
      margin-top: 5px;
-	margin-bottom: 10px;
+	 margin-bottom: 10px;
+     
+    
 		/* height:600px; */
 		border: 1px solid grey;
 		border-radius: 6px;
-		width: 1400px;
+		width: 98vw;
         font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
        
 }
 
-.AfEdit{
-    margin-left:20px
-}
 #button{
    
   
@@ -45,15 +48,31 @@
   border: 0.5px solid #b3b3b3 ;
   border-radius: 6px;
   background-color: whitesmoke;
+  margin-left:20px;
+  margin-top: 20px;
 }
-#b{
-        width: 450px;
-        height: 55px;
-        margin: 5px 0 5px;
-        border: 0.5px solid #b3b3b3 ;
-         border-radius: 6px;
+input{
+    border: 0.5px solid #b3b3b3 ;
+    border-radius: 10px;   
+    padding-left: 10px;
+    margin-bottom: 10px;
 }      
-
+.row{
+    display: flex;
+    
+    height: 55px;
+    min-width: 75vw;
+   
+}
+.inputform{
+    margin-left:20px;
+    
+    
+    
+}
+#des{
+    height: 100px;
+}
 </style>
 <html>
 <head>
@@ -65,20 +84,38 @@
             Edit Profile</div>
   		<div class ="Edit" id ='editform'>
             
-				<div class="divProfilefrom">Profile Form Elements</div>
+				
         <div class="AfEdit">
 				<form action ="EditUserController" method ="post" class = "editform">
-				<h3>First Name</h3><input type ="text" name ="firstname" id ="b" placeholder="Enter the first name"/><BR>
-         <h3>Last Name</h3> <input type ="text" name ="lastname" id ="b" placeholder="Enter the last name"/><BR>
-          	<h3>Email</h3>
-           <input type ="text" name ="email" id ="b" placeholder="Enter your mail"/><BR>
-          <h3>Phone</h3>
-          <input type ="text" name ="phone" id ="b" placeholder="Enter your phone number"/><BR>
-          <h3>Description</h3>
-					<input type ="text"name ="description" id ="b"  /><BR>
-    				
-          <input type="submit" value ="Submit Button" id ="button"/> 
-           <input type="submit" value ="Reset Button" id ="button"/> <br>
+                    <div class = row>
+                        <div id="divProfilefrom">Profile Form Elements</div>
+                     </div>
+                    <div class ="inputform">
+                        <div class = row>
+                            <h3>First Name</h3>
+                        </div>
+                        <input type ="text" name ="firstname" class = "row"  placeholder="Enter the first name"/>
+                        <div class = row>
+                            <h3>Last Name</h3> 
+                        </div>
+                        <input type ="text" name ="lastname" class = "row" placeholder="Enter the last name"/>
+                        <div class = "row">
+                            <h3>Email</h3>
+                        </div>
+                        <div class = "row">
+                        <p>  your_email@example.com </p>
+                        </div>
+                        <div class = "row">
+                            <h3>Phone</h3>
+                        </div>
+                        <input type ="text" name ="phone" class = "row" placeholder="Enter your phone number"/>
+                        <div class = "row">
+                            <h3>Description</h3>
+                        </div>
+                        <input type ="text"name ="description" class = "row" id ="des"  />
+                    </div>
+             <input type="submit" value ="Submit Button" id ="button"/> 
+             <input type="submit" value ="Reset Button" id ="button"/> <br>
 				</form>
         </div>
    		</div>
@@ -88,10 +125,3 @@
 	</body>
 </html>
           
-    
-   
-    
-   
-   
-    
-   

@@ -18,10 +18,11 @@ html{
   background-color: rgb(240, 240, 240);
   border-right:  1px solid rgb(180, 180, 180);
   height: calc(100vh - 50px);
-  width: 250px;
+  width: 15vw;
 }
 #divSearch{
   height: 60px;
+  width: 100%;
   padding-top: 12.5px;
   padding-left: 7px;
 }
@@ -56,6 +57,9 @@ html{
 #divFormContent{
   border-bottom: 1px solid rgb(200, 200, 200);
 }
+#divViewContent{
+	width:100%;
+}
 #divViewContent>a, #divFormContent>a{
   width: 250px;
   display: inline-block;
@@ -65,7 +69,7 @@ html{
   padding-left: 10px;
 }
 #divViewContent>a>svg,#divFormContent>a>svg{
-  padding-top:1px;
+  padding-top: 1px;
   padding-right: 2px;
 }
 </style>
@@ -98,7 +102,6 @@ html{
                 Form contents
             </a>
         </div>
-        
     </div>
 </body>
 </html>

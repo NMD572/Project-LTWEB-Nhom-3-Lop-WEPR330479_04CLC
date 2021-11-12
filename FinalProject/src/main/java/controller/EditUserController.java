@@ -23,7 +23,7 @@ public class EditUserController extends HttpServlet {
 	
 	private String firstname;
 	private String lastname;
-	private String email;
+	
 	private String phone;
 	private String description;
     /**
@@ -48,14 +48,14 @@ public class EditUserController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		firstname = request.getParameter("firstname");
 		lastname = request.getParameter("lastname");
-		email = request.getParameter("email");
+		
 		phone = request.getParameter("phone");
 		description=request.getParameter("description");
 		Member edit = new Member();
 		edit.setFirstName(firstname);
 		edit.setLastName(lastname);
 		edit.setPhone(phone);
-		edit.setEmail(email);
+		
 		edit.setDescription(description);
 		edit.setId(UserConstant.UserID);
 		RegisterDAO editDAO=new RegisterDAO();

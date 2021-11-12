@@ -18,18 +18,19 @@ public class ContentDAO
 {
 	static DAL dal=new DAL();
 	private static String insert_query = "INSERT INTO content (Title, Brief, Content,CreateDate,UpdateTime,AuthorId) VALUES (?, ?, ?,NOW(),NOW(),?)";
-	private static String select_all_content_query = "Select ID,STT, Title, Brief, DATE_FORMAT(CreateDate, \"%d/%m/%Y %H:%i\") as CreateDate From (Select ID,@rownum := @rownum + 1 AS STT,Title,Brief, CreateDate From Content,(SELECT @rownum := 0) r Order by CreateDate desc) as A;";
-	private static String select_content_For_Member_query = "Select ID,STT, Title, Brief, DATE_FORMAT(CreateDate, \"%d/%m/%Y %H:%i\") as CreateDate From (Select ID,@rownum := @rownum + 1 AS STT,Title,Brief,CreateDate From Content,(SELECT @rownum := 0) r Where Content.AuthorId=? Order by CreateDate desc) as A;";
+	private static String select_all_content_query = "Select ID,STT, Title, Brief, DATE_FORMAT(CreateDate, \"%d/%m/%Y %H:%i\") as CreateDate From (Select ID,@rownum := @rownum + 1 AS STT,Title,Brief, CreateDate From Content,(SELECT @rownum := 0) r Order by CreateDate desc) as A Limit 0,10;";
+	private static String select_content_For_Member_query = "Select ID,STT, Title, Brief, DATE_FORMAT(CreateDate, \"%d/%m/%Y %H:%i\") as CreateDate From (Select ID,@rownum := @rownum + 1 AS STT,Title,Brief,CreateDate From Content,(SELECT @rownum := 0) r Where Content.AuthorId=? Order by CreateDate desc) as A Limit 0,10;";
 	private static String delete_query = "DELECT from content where id = ?";
 	private static String update_query = "UPDATE content SET Title = ?, Brief = ?, Content = ? where id = ?";
-	private static String searchAllContent_Procedure = "{ CALL searchAllContent(?) }";
-	private static String searchContentForMember_Procedure = "{ CALL searchContentForMember(?,?) }";
+	private static String searchAllContent_Procedure = "{ CALL searchAllContentWithPaging(?,0,10) }"; //chinh lai 0,10 de phan trang
+	private static String searchContentForMember_Procedure = "{ CALL searchContentForMemberWithPaging(?,?,0,10) }"; //chinh lai 0 10 de phan trang
 
+	private static String select_contentinfo_from_id = "Select * FROM content where id = ?";
 	public ContentDAO(){
 		
 	}
 	//PreparedStatement interface
-	public static void InsertContent (Content content)
+	public void InsertContent (Content content)
 	{					    		
 		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(insert_query)) 
 			{  					
@@ -64,7 +65,7 @@ public class ContentDAO
 		return rowsAffected;
 	}
 	
-	public static boolean DeleteContent (int id) throws SQLException
+	public boolean DeleteContent (int id) throws SQLException
 	{
 		boolean rowsAffected;
 		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(delete_query)) 
@@ -181,5 +182,33 @@ public class ContentDAO
 			e.printStackTrace();
 		}		
 		return contents;
+	}
+	
+	public Content selectContentInfo(int id)
+	{
+		Content ct = new Content(id);
+		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(select_contentinfo_from_id ))
+		{
+			stmt.setInt(1,id);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+
+				String title = rs.getString("Title");
+				ct.setTitle(title);
+				String brief = rs.getString("Brief");
+				ct.setBrief(brief);
+				String content = rs.getString("Content");
+				ct.setContent(content);
+
+			}
+			rs.close();
+			cnn.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return ct;
 	}
 }

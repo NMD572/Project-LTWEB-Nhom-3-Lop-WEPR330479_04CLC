@@ -12,7 +12,7 @@
 	display: flex;
 }
 #divBody{
-	margin-top: 50px;
+	margin-top: 40px;
 	margin-left: 30px;
 }
 </style>

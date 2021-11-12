@@ -13,13 +13,13 @@
   <!-- Add page -->
   <definition name="add" extends="view">
     <put-attribute name="title" value="Add Content" />
-    <put-attribute name="body" value="/view/content-form.jsp" />
+    <put-attribute name="body" value="/view/AddContent.jsp" />
   </definition>
   
-  <!-- List page -->
+  <!-- Edit page -->
   <definition name="edit" extends="view">
     <put-attribute name="title" value="Edit Content" />
-    <put-attribute name="body" value="/view/" />
+    <put-attribute name="body" value="/view/EditContent.jsp" />
   </definition>
   <!-- EditProfile page -->
   <definition name="editprofile" extends="view">

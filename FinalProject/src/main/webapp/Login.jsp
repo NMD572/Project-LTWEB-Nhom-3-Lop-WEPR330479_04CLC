@@ -1,73 +1,106 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <link rel="stylesheet" href="LoginRegisStyle.css"/> 
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Login</title> 
 </head>
 <style>
-.login{
-	margin:auto;
-  border: 0.25px solid green;
-  padding: 20px 30px 20px 30px;
-  width:520px;
-  position: static;
-}
-.Register{
-  border: 0.25px solid green;
-  padding: 20px 30px 20px 30px;
-        width:520px;
- 
-}
-h1{
-  
-    background-color: #DCDCDC;
-    border-color: #DCDCDC;
-}
-
-.Aflogin{
+    .Login{
+        margin-top: 12%;
+        margin-left: 35%;
+        margin-right: 35%;
+        min-width: 500px;
         
-       
-        font-size: 40px
-      
-      }
+    }
+.AfLogin{
+           
+		border: 1px solid grey;
+		border-radius: 6px;
+		width: 98%;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        
+}
+input{
+    border: 0.5px solid lightgrey;
+    border-radius: 10px;   
+    padding-left: 10px;
+}   
+#title1{
+   
+        padding: 20px;
+        font-size: 20px;
+		width: 98.94%;
+		background: lightgrey;
+        border: 0px solid grey;
+		border-radius: 6px;
+}
       
 #button{
         padding: 20px 30px 20px 30px;
-        width:500px;
+        width:90%;
         position: static;
-        font-size: 40px
-              color: #fff;
+        font-size: 40px;
+        color: #fff;
     
     background-color: #228B22;
     border-color: #228B22;
+    margin-top: 20px;
 }
       #b{
-        width: 500px;
-        height: 55px;
-        margin: 5px 0 10px;
+        width: 90%;
+        height: 45px;
+        margin: 20px 0 20px;
       }
          
-     div {
-    display: block;
-}
+    .inputform{
+        margin-left:20px
+    }
+ .row{
+    display: flex;
+    
+    min-height: 35px;
+    min-width: 75%;
+   
+ }
+ #c {
+     text-decoration: none;
+     font-size: 25px;
+     margin-top: 15px;
+ }
 </style>
 	<body>
   		<div class ="Login">
-			<h1>Please Sign In </h1>
+            
 			 <div class="AfLogin">
-				<form action ="LoginController" method ="post" class = "loginform" name="form"  method="post" onsubmit="return validate()">
-					<input type ="text" name ="username" id ="b" placeholder="E-mail"/><BR>
-					<input type ="password" name ="password" id ="b" placeholder="Pasword" /><BR>
-    				<input type="checkbox" name="remember" id ="a" value="remember">Remember me <br>
-          <input type="submit" value ="Login" id ="button"/> <br>
-   					<a href="Register.jsp" target="_blank"id ="a">Click here to Register</a>
+                <form action ="LoginController" method ="post" class = "loginform" name="form"  method="post" onsubmit="return validate()">
+                 <div class="row" >
+                     <div id ="title1">
+                    Please Sign In 
+                     </div>
+                 </div>
+                 <div class = "inputform">
+                    <div class="row">
+                        <input type ="text" name ="username" id ="b" placeholder="E-mail"/>
+
+                    </div>
+                    <div class="row">
+                        <input type ="password" name ="password" id ="b" placeholder="Pasword" />
+                    </div>
+                    <div class="row">
+                        <input type="checkbox" name="remember" id ="a" value="remember">Remember me 
+                    </div>
+                    <div class="row">
+                        <input type="submit" value ="Login" id ="button"/> 
+                    </div>
+                    <div class="row">
+                        <a href="Register.jsp" target="_blank"id ="c">Click here to Register</a>
+                    </div>
+                </div>
 				</form>
         </div>
    		</div>
 	</body>
 </html>
-    
    

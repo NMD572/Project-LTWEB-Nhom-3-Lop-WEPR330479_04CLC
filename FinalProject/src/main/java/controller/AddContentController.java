@@ -17,7 +17,7 @@ import constant.UserConstant;
 @WebServlet(urlPatterns = {"/AddContentController"})
 public class AddContentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private ContentDAO contentDAO;    
+    private ContentDAO contentDAO=new ContentDAO();    
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,7 +42,7 @@ public class AddContentController extends HttpServlet {
 		String brief = request.getParameter("brief");
 		String content = request.getParameter("content");
 		Content newct = new Content(title,brief,content,UserID);
-		ContentDAO.InsertContent(newct);
+		contentDAO.InsertContent(newct);
 		response.sendRedirect("add.tiles");
 	}
 

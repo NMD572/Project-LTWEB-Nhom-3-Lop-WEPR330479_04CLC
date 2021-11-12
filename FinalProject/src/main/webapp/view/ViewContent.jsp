@@ -19,18 +19,22 @@ html{
 .load5s{
     visibility: hidden;
 }
+#titleViewContent{
+	font-size:45px;
+	margin-bottom:8px;
+}
 #hrViewContent{
     margin-top: 0px;
     margin-left: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     height:0.5px;
-    width: 1500px;
+    width: 83vw;
     border-width:0;
     color:gray;
-    background-color:gray;
+    background-color: rgba(210, 210, 210,0.5);
 }
 #flexContainer{
-    width: 1500px;
+    width: 83vw;
     padding-top:0px;
     padding-left:0px;
     border: 1px solid rgb(180, 180, 180);
@@ -38,19 +42,19 @@ html{
     border-radius: 3px;
 }
 #divViewContentList{
-    background-color: rgb(210, 210, 210);
+    background-color: rgba(210, 210, 210,0.3);
     border-top:1.5px solid rgb(180, 180, 180);
     border-bottom: 1.5px solid rgb(180, 180, 180);
-    height: 30px;
-    line-height: 30px;
-    margin-bottom: 10px;
+    height: 45px;
+    line-height: 45px;
+    margin-bottom: 20px;
     padding-left: 10px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
 table{
-    width: 95%;
-    margin-left: 2.5%;
+    width: 98%;
+    margin-left: 1%;
     margin-bottom: 15px;
 }
 table,th,tr,td{
@@ -93,7 +97,7 @@ td>div{
     text-align: center;
 }
 tr:nth-child(even) {
-    background-color: rgba(210, 210, 210,0.5);
+    background-color: rgba(210, 210, 210,0.3);
 }
 #tableContent td > a{
     text-decoration: none;
@@ -122,7 +126,7 @@ tr:nth-child(even) {
 <body>
 <h1 id="load">Loading</h1>
 <div class="load5s">
-        <h1>View Content</h1>
+        <h1 id="titleViewContent">View Content</h1>
         <hr id="hrViewContent">
         <div id="flexContainer" >
             <div id="divViewContentList">View Content List</div>

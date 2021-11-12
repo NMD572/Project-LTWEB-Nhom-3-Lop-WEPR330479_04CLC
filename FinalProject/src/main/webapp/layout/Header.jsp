@@ -19,6 +19,7 @@ html{
     border-bottom: 1px solid rgb(180, 180, 180);  
     background-color: rgb(240, 240, 240);
     height: 50px;
+    width:100%;
 }
 #header > div{
     display: inline-block;
@@ -26,11 +27,12 @@ html{
 }
 #divCMS{
     color: rgb(80, 80, 80);
-    padding-left:10px;
-    padding-right: 1800px;
+    width: 5vw;
+    padding-left:10px
     text-transform: uppercase;
 }
 #divUser{
+	margin-left:90vw;
     position: relative;
     width: 45px;
 }
