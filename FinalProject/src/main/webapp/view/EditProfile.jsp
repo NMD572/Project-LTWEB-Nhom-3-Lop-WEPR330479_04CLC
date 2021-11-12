@@ -18,7 +18,7 @@
 		width: 80.94vw;
 		background: rgb(240, 240, 240);
         border: 0px solid grey;
-		border-radius: 4px;
+		border-radius: 2px;
         margin-bottom: 10px;
     }
 .Edit{
@@ -28,7 +28,7 @@
     
 		/* height:600px; */
 		border: 1px solid grey;
-		border-radius: 4px;
+		border-radius: 2px;
 		width: 80vw;
         font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
        

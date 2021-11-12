@@ -17,7 +17,7 @@
 .AfLogin{
            
 		border: 1px solid grey;
-		border-radius: 6px;
+		border-radius: 2px;
 		width: 98%;
         font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         
@@ -34,7 +34,7 @@ input{
 		width: 98.94%;
 		background: rgb(240, 240, 240);
         border: 0px solid grey;
-		border-radius: 6px;
+		border-radius: 2px;
 }
       
 #button{
@@ -91,7 +91,7 @@ input{
                         <input type ="password" name ="password" id ="b" placeholder="Pasword" />
                     </div>
                     <div class="row">
-                        <input type="checkbox" name="remember" id ="a" value="remember">Remember me 
+                        <input type="checkbox" name="remember" id ="a" value="remember">Remember Me 
                     </div>
                     <div class="row">
                         <input type="submit" value ="Login" id ="button"/> 
