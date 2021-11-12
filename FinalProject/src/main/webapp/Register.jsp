@@ -17,7 +17,7 @@
 .AfRegis{
            
 		border: 1px solid grey;
-		border-radius: 6px;
+		border-radius: 2px;
 		width: 98%;
         font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -33,7 +33,7 @@ input{
 		width: 98.94%;
 		background: rgb(240, 240, 240);
         border: 0px solid grey;
-		border-radius: 6px;
+		border-radius: 2px;
 }
       
 #button{
