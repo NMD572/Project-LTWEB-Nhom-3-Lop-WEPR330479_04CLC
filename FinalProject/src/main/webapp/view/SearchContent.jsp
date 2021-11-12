@@ -25,13 +25,15 @@ html{
     margin-left: 0px;
     margin-bottom: 15px;
     height:0.5px;
-    width: 83vw;
+    width: 80vw;
+    min-width: 780px;
     border-width:0;
     color:gray;
     background-color: rgba(210, 210, 210,0.5);
 }
 #flexContainer{
-    width: 83vw;
+    width: 80vw;
+    min-width: 780px;
     padding-top:0px;
     padding-left:0px;
     border: 1px solid rgb(180, 180, 180);

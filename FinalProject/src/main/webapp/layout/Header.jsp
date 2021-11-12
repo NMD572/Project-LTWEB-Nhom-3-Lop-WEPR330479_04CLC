@@ -14,25 +14,23 @@
 html{
     font-family: Helvetica, Arial, sans-serif;
 }
-
 #header{
     border-bottom: 1px solid rgb(180, 180, 180);  
     background-color: rgb(240, 240, 240);
     height: 50px;
-    width:100%;
+    display: flex;
+    justify-content: space-between;
 }
 #header > div{
-    display: inline-block;
     line-height: 50px;
 }
 #divCMS{
     color: rgb(80, 80, 80);
-    width: 5vw;
-    padding-left:10px
+    width: 50px;
+    padding-left: 10px;
     text-transform: uppercase;
 }
 #divUser{
-	margin-left:90vw;
     position: relative;
     width: 45px;
 }
@@ -43,7 +41,6 @@ html{
     margin-left: -105px;
     width: 150px;
 }
-
 #nav li{
     background-color: #fff;
 }

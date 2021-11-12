@@ -19,6 +19,7 @@ html{
   border-right:  1px solid rgb(180, 180, 180);
   height: calc(100vh - 50px);
   width: 15vw;
+  min-width: 150px;
 }
 #divSearch{
   height: 60px;
@@ -35,14 +36,14 @@ html{
   border-bottom-left-radius: 3px;
   padding-left: 10px;
   height: 35px;
-  width: 200px;
+  width: 75%;
 }
 ::placeholder{
   color:grey;
 }
 #divSearch>form>button{
   height: 35px;
-  width: 35px;
+  width: 15%;
   border: 1px solid rgb(180, 180, 180);
   border-left: none;
   border-top-right-radius: 3px;

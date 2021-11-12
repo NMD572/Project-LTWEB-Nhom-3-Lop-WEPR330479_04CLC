@@ -16,9 +16,6 @@
 html{
     font-family: Arial, Helvetica, sans-serif;
 }
-.load5s{
-    visibility: hidden;
-}
 #titleViewContent{
 	font-size:45px;
 	margin-bottom:8px;
@@ -28,13 +25,15 @@ html{
     margin-left: 0px;
     margin-bottom: 15px;
     height:0.5px;
-    width: 83vw;
+    width: 80vw;
+    min-width: 780px;
     border-width:0;
     color:gray;
     background-color: rgba(210, 210, 210,0.5);
 }
 #flexContainer{
-    width: 83vw;
+    width: 80vw;
+    min-width: 780px;
     padding-top:0px;
     padding-left:0px;
     border: 1px solid rgb(180, 180, 180);
@@ -124,8 +123,6 @@ tr:nth-child(even) {
 }
 </style>
 <body>
-<h1 id="load">Loading</h1>
-<div class="load5s">
         <h1 id="titleViewContent">View Content</h1>
         <hr id="hrViewContent">
         <div id="flexContainer" >
@@ -161,24 +158,5 @@ tr:nth-child(even) {
             </form>
         </div>
     </div>
-</div>
-    <script>
-        window.addEventListener("load",function(){
-            showViewContent();
-        })
-        function showViewContent(){
-            const timeLimit=5;  //đơn vị: second
-            let i=0;
-            const timer=setInterval(function(){
-                i++;
-                if(i==timeLimit)
-                {
-                    clearInterval(timer);
-                    document.querySelector(".load5s").style.visibility="visible";
-                    document.querySelector("#load").style.display="none";
-                }
-            },1000);
-        }
-    </script>
 </body>
 </html>
