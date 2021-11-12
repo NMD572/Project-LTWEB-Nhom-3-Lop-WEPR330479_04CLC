@@ -11,7 +11,7 @@
         margin-top: 12%;
         margin-left: 35%;
         margin-right: 35%;
-        min-width: 500px;
+        min-width: 430px;
         
     }
 .AfLogin{
@@ -24,7 +24,7 @@
 }
 input{
     border: 0.5px solid lightgrey;
-    border-radius: 10px;   
+    border-radius: 4px;   
     padding-left: 10px;
 }   
 #title1{
@@ -32,7 +32,7 @@ input{
         padding: 20px;
         font-size: 20px;
 		width: 98.94%;
-		background: lightgrey;
+		background: rgb(240, 240, 240);
         border: 0px solid grey;
 		border-radius: 6px;
 }
@@ -43,7 +43,8 @@ input{
         position: static;
         font-size: 40px;
         color: #fff;
-    
+    border: 0px solid grey;
+	border-radius: 6px;
     background-color: #228B22;
     border-color: #228B22;
     margin-top: 20px;
@@ -68,6 +69,7 @@ input{
      text-decoration: none;
      font-size: 25px;
      margin-top: 15px;
+     color:blueviolet;
  }
 </style>
 	<body>

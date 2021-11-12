@@ -3,33 +3,33 @@
 <!DOCTYPE html>
 <style>
     .title{
-        width:100vw;
+        width:82vw;
 		
         font-size: 40px;
         font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         border-bottom: 1px solid #b3b3b3 ;
-      
+      	font-weight: bold;
         
     }
     #divProfilefrom{
         left: 0px;
-        padding: 20px;
+        padding: 10px;
         font-size: 20px;
-		width: 98.94vw;
-		background: lightgrey;
+		width: 80.94vw;
+		background: rgb(240, 240, 240);
         border: 0px solid grey;
-		border-radius: 6px;
+		border-radius: 4px;
         margin-bottom: 10px;
     }
 .Edit{
      margin-top: 5px;
-	 margin-bottom: 10px;
+	 
      
     
 		/* height:600px; */
 		border: 1px solid grey;
-		border-radius: 6px;
-		width: 98vw;
+		border-radius: 4px;
+		width: 80vw;
         font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
        
 }
@@ -46,7 +46,7 @@
   margin: 4px 2px;
   cursor: pointer;
   border: 0.5px solid #b3b3b3 ;
-  border-radius: 6px;
+  border-radius: 4px;
   background-color: whitesmoke;
   margin-left:20px;
   margin-top: 20px;
@@ -55,18 +55,19 @@ input{
     border: 0.5px solid #b3b3b3 ;
     border-radius: 10px;   
     padding-left: 10px;
-    margin-bottom: 10px;
+     margin-bottom: 10px;
 }      
 .row{
     display: flex;
     
     height: 55px;
-    min-width: 75vw;
+    min-width: 72vw;
    
 }
 .inputform{
     margin-left:20px;
     
+     margin-bottom: 20px;
     
     
 }
@@ -112,7 +113,7 @@ input{
                         <div class = "row">
                             <h3>Description</h3>
                         </div>
-                        <input type ="text"name ="description" class = "row" id ="des"  />
+                        <textarea type ="text"name ="description" class = "row" id ="des"></textarea>
                     </div>
              <input type="submit" value ="Submit Button" id ="button"/> 
              <input type="submit" value ="Reset Button" id ="button"/> <br>
