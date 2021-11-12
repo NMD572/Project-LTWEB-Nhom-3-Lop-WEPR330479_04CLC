@@ -13,7 +13,8 @@
     }
     #divProfilefrom{
         left: 0px;
-        padding: 10px;
+        padding-left: 20px;
+        padding-top: 10px;
         font-size: 20px;
 		width: 80.94vw;
 		background: rgb(240, 240, 240);
@@ -51,12 +52,13 @@
   margin-left:20px;
   margin-top: 20px;
 }
-input{
+#b{
     border: 0.5px solid #b3b3b3 ;
     border-radius: 10px;   
     padding-left: 10px;
      margin-bottom: 10px;
 }      
+
 .row{
     display: flex;
     
@@ -78,7 +80,7 @@ input{
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login</title> 
+<title>Edit Profile</title> 
 </head>
 	<body>
         <div class = "title">
@@ -95,11 +97,11 @@ input{
                         <div class = row>
                             <h3>First Name</h3>
                         </div>
-                        <input type ="text" name ="firstname" class = "row"  placeholder="Enter the first name"/>
+                        <input type ="text" name ="firstname" class = "row" id ="b" placeholder="Enter the first name"/>
                         <div class = row>
                             <h3>Last Name</h3> 
                         </div>
-                        <input type ="text" name ="lastname" class = "row" placeholder="Enter the last name"/>
+                        <input type ="text" name ="lastname" class = "row" id ="b" placeholder="Enter the last name"/>
                         <div class = "row">
                             <h3>Email</h3>
                         </div>
@@ -109,11 +111,11 @@ input{
                         <div class = "row">
                             <h3>Phone</h3>
                         </div>
-                        <input type ="text" name ="phone" class = "row" placeholder="Enter your phone number"/>
+                        <input type ="text" name ="phone" class = "row" id ="b" placeholder="Enter your phone number"/>
                         <div class = "row">
                             <h3>Description</h3>
                         </div>
-                        <textarea type ="text"name ="description" class = "row" id ="des"></textarea>
+                        <textarea type ="text"name ="description" class = "row" id ="b" id ="des"></textarea>
                     </div>
              <input type="submit" value ="Submit Button" id ="button"/> 
              <input type="submit" value ="Reset Button" id ="button"/> <br>

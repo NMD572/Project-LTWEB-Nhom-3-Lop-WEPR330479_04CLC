@@ -44,8 +44,8 @@ input{
         color: #fff;
     border: 0px solid grey;
 	border-radius: 6px;
-    background-color: #228B22;
-    border-color: #228B22;
+    background-color: green;
+    border-color: green;
     margin-top: 20px;
 }
       #b{

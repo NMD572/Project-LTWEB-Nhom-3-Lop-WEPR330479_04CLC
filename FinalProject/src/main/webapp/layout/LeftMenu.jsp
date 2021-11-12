@@ -25,7 +25,7 @@ html{
   height: 60px;
   width: 100%;
   padding-top: 12.5px;
-  padding-left: 7px;
+  padding-left: 16px;
 }
 .floatSearch{
   float:left;
