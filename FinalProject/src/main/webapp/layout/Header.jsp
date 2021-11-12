@@ -41,6 +41,10 @@ html{
     margin-left: -105px;
     width: 150px;
 }
+
+#nav li{
+    background-color: #fff;
+}
 #liProfile{
     border: rgb(180, 180, 180) solid 1px;
     border-top-left-radius: 3px;

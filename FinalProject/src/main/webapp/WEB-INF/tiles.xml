@@ -26,4 +26,9 @@
     <put-attribute name="title" value="Edit Profile" />
     <put-attribute name="body" value="/view/EditProfile.jsp" />
   </definition>
+  <!-- Search page -->
+  <definition name="search" extends="view">
+    <put-attribute name="title" value="Search Content" />
+    <put-attribute name="body" value="/view/SearchContent.jsp" />
+  </definition>
 </tiles-definitions>

@@ -55,7 +55,7 @@ public class SearchContentController extends HttpServlet {
 		else
 			contents = dbContent.searchContentForMember(UserConstant.UserID,search);
 		request.setAttribute("listContent", contents);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("view.tiles");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("search.tiles");
 		dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

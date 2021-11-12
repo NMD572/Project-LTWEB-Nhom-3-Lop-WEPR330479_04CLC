@@ -33,7 +33,7 @@ html{
     width: 1500px;
     padding-top:0px;
     padding-left:0px;
-    border: 1.5px solid rgb(180, 180, 180);
+    border: 1px solid rgb(180, 180, 180);
     border-top: 0;
     border-radius: 3px;
 }
@@ -59,15 +59,35 @@ table,th,tr,td{
     border-collapse: collapse;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
+    font-size: 17px;
 }
 tr{
     height: 60px;
+}
+td>div{
+    height: 30px;
+    width: 100%;
 }
 #trHeader{
     height: 40px;
 }
 .marginLeftHeader{
     padding-left: 10px;
+}
+#briefContent{
+    padding: 0;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+#briefContent>textarea{
+    border: none;
+    resize: none;
+    background-color: inherit;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    height: 100%;
+    width: 100%;
 }
 .centerHeader{
     text-align: center;
@@ -77,7 +97,7 @@ tr:nth-child(even) {
 }
 #tableContent td > a{
     text-decoration: none;
-    color: green;
+    color: #28a745;
 }
 #divNextPreviousPage{
     margin: auto;
@@ -85,10 +105,10 @@ tr:nth-child(even) {
     height:40px;
 }
 .formatButton{
-    background-color: green;
     border:none;
     border-radius: 2px;
-    color: white;
+    color: #fff;
+    background-color: #28a745;
    	height:30px;
   	width:30px;
 }
@@ -113,14 +133,14 @@ tr:nth-child(even) {
                     <th class="marginLeftHeader" style="width:15%">Title</th>
                     <th class="marginLeftHeader" style="width:43%">Brief</th>
                     <th class="marginLeftHeader" style="width:20%">Created Date</th>
-                    <th class="centerHeader" style="width:15%">Actions</th>
+                    <th class="centerHeader" style="width:15%">Action</th>
                 </tr>
                 <c:forEach var="content" items="${listContent}">
                 	<tr>
-                		<td class="centerHeader"><c:out value="${content.getStt()}" /></td>
-                		<td class="marginLeftHeader"><c:out value="${content.getTitle()}" /></td>
-                		<td class="marginLeftHeader"><c:out value="${content.getBrief()}" /></td>
-                		<td class="marginLeftHeader"><c:out value="${content.getCreateDate()}" /></td>
+                		<td class="centerHeader"><div><c:out value="${content.getStt()}" /></div></td>
+                		<td class="marginLeftHeader"><div><c:out value="${content.getTitle()}" /></div></td>
+                		<td class="marginLeftHeader" id="briefContent"><textarea rows="2"><c:out value="${content.getBrief()}" /></textarea></td>
+                		<td class="marginLeftHeader"><div><c:out value="${content.getCreateDate()}" /></div></td>
                 		<td class="centerHeader">
             				<a href="EditContentController?id=<c:out value="${content.getId()}" />">Edit</a>
             				<a href="DeleteContentController?id=<c:out value="${content.getId()}" />">Delete</a>
