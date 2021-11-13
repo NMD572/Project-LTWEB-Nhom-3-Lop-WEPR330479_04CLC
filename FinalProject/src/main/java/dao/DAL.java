@@ -7,7 +7,7 @@ import java.sql.Connection;
 public class DAL {
 	private String jdbcURL = "jdbc:mysql://localhost:3306/webproject";
     private String jdbcUsername = "root";
-    private String jdbcPassword = "0393279375";
+    private String jdbcPassword = "19110269";
     public DAL() {
     	
     }
