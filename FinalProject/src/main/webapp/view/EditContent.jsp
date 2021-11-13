@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>Content form</title>
+    <title>Edit Content</title>
 </head>
 <body>
 <div class = "container">
@@ -38,43 +38,46 @@
             <button type="submit" class="btn btn-success">Reset Button</button>
         </div>
     </form>
-<%--    <table >--%>
-<%--        <tr>--%>
-<%--            <td>Title :</td>--%>
-<%--            &lt;%&ndash; Below is the JSP expression used to display string value of an expression &ndash;%&gt;--%>
-<%--            <td><%=cont.getTitle()%></td>--%>
-<%--        </tr>--%>
-
-<%--        <tr>--%>
-<%--            <td>Brief :</td>--%>
-<%--            <td><%=cont.getBrief()%></td>--%>
-<%--        </tr>--%>
-
-<%--        <tr>--%>
-<%--            <td>Content :</td>--%>
-<%--            <td><%=cont.getContent()%></td>--%>
-<%--        </tr>--%>
-<%--    </table>--%>
 
 
-</div>
+	</div>
 </body>
 </html>
 
 
 <style>
+    #divBody
+    {
+        margin-top: 40px;
+        margin-left: 30px;
+        width: 200%;
+    }
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+        zoom: 100%;
+    }
+    .container
+    {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+
     .form-title
     {
         font-family: Arial, Helvetica, sans-serif;
         border-bottom: 1px solid lightgrey;
         /* border: 1px solid lightgrey; */
-        width: 1400px;
+        width: 73%;
         height: 50px;
         justify-content: center;
     }
     .container form .title
     {
-        width:1100px;
+        width:78%;
         height: 90px;
         margin-top:10px;
         margin-left: 20px;
@@ -84,6 +87,9 @@
         font-family: Arial, Helvetica, sans-serif;
 
     }
+    .container form .title ::placeholder{
+        color: lightgray
+    }
     .container form .title input
     {
         margin-top: 5px;
@@ -92,7 +98,7 @@
     }
     .container form .brief
     {
-        width:1100px;
+        width:78%;
         margin-left:20px;
         /*border: 1px solid red;*/
         display: flex;
@@ -108,7 +114,7 @@
     }
     .container form .content
     {
-        width:1100px;
+        width:78%;
         margin-left:20px;
         /* border: 1px solid green;  */
         display: flex;
@@ -140,13 +146,13 @@
         /* height:600px; */
         border: 1px solid grey;
         border-radius: 2px;
-        width: 1400px;
+        width: 73%;
     }
     .container form .content-form-elements
     {
         font-family: Arial, Helvetica, sans-serif;
         padding: 10px;
-        width: 1398px;
+        width:100%;
         background: rgb(240, 240, 240);
         /* border: 1px solid black; 		 */
     }
@@ -157,17 +163,24 @@
     .container form .btn
     {
         margin-left: 10px;
-        margin-bottom: 15px;
+        margin-bottom: 8px;
         font-size: 15px;
         font-family: Arial, Helvetica, sans-serif;
-        height: 30px;
+        height: 4%;
 
-        width: 250px;
-        justify-content: center;
+        width: 35%;
+        justify-content: left;
         display: flex;
     }
     .container form .btn button
     {
+        justify-content: center;
+        text-align: center;
+        border:none;
+        height: 85%;
         line-height: 30px;
+        border-radius:3px;
+        color: #fff;
+        background-color: #28a745;
     }
 </style>

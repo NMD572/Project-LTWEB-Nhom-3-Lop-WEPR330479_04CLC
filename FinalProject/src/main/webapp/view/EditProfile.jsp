@@ -6,13 +6,13 @@
         width:82vw;
 		
         font-size: 40px;
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
         border-bottom: 1px solid #b3b3b3 ;
       	font-weight: bold;
-        
+         padding-bottom: 10px;
     }
     #divProfilefrom{
-        left: 0px;
+       
         padding-left: 20px;
         padding-top: 10px;
         font-size: 20px;
@@ -23,15 +23,12 @@
         margin-bottom: 10px;
     }
 .Edit{
-     margin-top: 5px;
-	 
-     
-    
+     margin-top: 25px;
 		/* height:600px; */
 		border: 1px solid grey;
 		border-radius: 2px;
 		width: 80vw;
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
        
 }
 
@@ -39,42 +36,50 @@
    
   
   color: black;
-  padding: 10px 25px;
+  padding: 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  border: 0.5px solid #b3b3b3 ;
+  border: 0.5px solid #28a745; ;
   border-radius: 4px;
-  background-color: whitesmoke;
+  background-color: #28a745;
   margin-left:20px;
-  margin-top: 20px;
+  margin-top: 10px;
+  color :#fff;
+  margin-bottom: 20px;
+}
+#c{
+   padding-top:  15px;
 }
 #b{
     border: 0.5px solid #b3b3b3 ;
     border-radius: 10px;   
     padding-left: 10px;
-     margin-bottom: 10px;
+     
 }      
-
+#a{
+   padding-top: 18px;
+}
 .row{
     display: flex;
     
-    height: 55px;
+    min-height: 42px;
     min-width: 72vw;
    
 }
 .inputform{
     margin-left:20px;
-    
-     margin-bottom: 20px;
-    
-    
+  
+     margin-bottom: 10px;
 }
 #des{
     height: 100px;
+    border: 0.5px solid #b3b3b3 ;
+    border-radius: 10px;   
+    padding-left: 10px;
 }
 </style>
 <html>
@@ -95,27 +100,27 @@
                      </div>
                     <div class ="inputform">
                         <div class = row>
-                            <h3>First Name</h3>
+                            <h3 id ="a">First Name</h3>
                         </div>
                         <input type ="text" name ="firstname" class = "row" id ="b" placeholder="Enter the first name"/>
                         <div class = row>
-                            <h3>Last Name</h3> 
+                            <h3 id ="a">Last Name</h3> 
                         </div>
                         <input type ="text" name ="lastname" class = "row" id ="b" placeholder="Enter the last name"/>
                         <div class = "row">
-                            <h3>Email</h3>
+                            <h3 id ="a">Email</h3>
                         </div>
                         <div class = "row">
-                        <p>  your_email@example.com </p>
+                        <p id ="c">  your_email@example.com </p>
                         </div>
                         <div class = "row">
-                            <h3>Phone</h3>
+                            <h3 id ="a">Phone</h3>
                         </div>
                         <input type ="text" name ="phone" class = "row" id ="b" placeholder="Enter your phone number"/>
                         <div class = "row">
-                            <h3>Description</h3>
+                            <h3 id ="a">Description</h3>
                         </div>
-                        <textarea type ="text"name ="description" class = "row" id ="b" id ="des"></textarea>
+                        <textarea type ="text"name ="description" class = "row"  id ="des"></textarea>
                     </div>
              <input type="submit" value ="Submit Button" id ="button"/> 
              <input type="submit" value ="Reset Button" id ="button"/> <br>

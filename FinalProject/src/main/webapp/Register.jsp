@@ -68,7 +68,7 @@ input{
     text-decoration: none;
      font-size: 25px;
      margin-top: 15px;
-     color:blueviolet;
+     color:#0086b3;
  }
 </style>
 <body>

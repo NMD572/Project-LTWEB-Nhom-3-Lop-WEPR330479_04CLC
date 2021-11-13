@@ -6,6 +6,8 @@
 <title>Content form</title>
 </head>
 <body>
+<h1 id="load">Loading</h1>
+<div class="load5s">
 	<div class = "container">
 
 		<div class = "form-title"> <h1>Add Content</h1> </div>
@@ -44,23 +46,63 @@
 
 		</form>
 	</div>
+</div>
+<script>
+    window.addEventListener("load",function(){
+        showViewContent();
+    })
+    function showViewContent(){
+        const timeLimit=5;  //đơn vị: second
+        let i=0;
+        const timer=setInterval(function(){
+            i++;
+            if(i==timeLimit)
+            {
+                clearInterval(timer);
+                document.querySelector(".load5s").style.visibility="visible";
+                document.querySelector("#load").style.display="none";
+            }
+        },1000);
+    }
+</script>
 </body>
 </html>
+	<style>
+	.load5s{
+    visibility: hidden;
+	}
+		#divBody
+		{
+			margin-top: 40px;
+			margin-left: 30px;
+			width: 200%;
+		}
+	 *{
+		 padding: 0;
+		 margin: 0;
+		 box-sizing: border-box;
+		 font-family: Arial, Helvetica, sans-serif;
+		 zoom: 100%;
+	 }
+	.container
+	{
+		display: block;
+		max-width: 100%;
+		height: auto;
+	}
 
-
-<style>
 	.form-title
 	{
 		font-family: Arial, Helvetica, sans-serif;
 		border-bottom: 1px solid lightgrey;
 		/* border: 1px solid lightgrey; */
-		width: 1400px;
+		width: 73%;
 		height: 50px;
 		justify-content: center;
 	}
 	.container form .title
 	{
-		width:1100px;
+		width:78%;
 		height: 90px;
 		margin-top:10px;
 		margin-left: 20px;
@@ -81,7 +123,7 @@
 	}
 	.container form .brief
 	{
-		width:1100px;
+		width:78%;
 		margin-left:20px;
 		/*border: 1px solid red;*/
 		display: flex;
@@ -97,7 +139,7 @@
 	}
 	.container form .content
 	{
-		width:1100px;
+		width:78%;
 		margin-left:20px;
 		/* border: 1px solid green;  */
 		display: flex;
@@ -129,13 +171,13 @@
 		/* height:600px; */
 		border: 1px solid grey;
 		border-radius: 2px;
-		width: 1400px;
+		width: 73%;
 	}
 	.container form .content-form-elements
 	{
 		font-family: Arial, Helvetica, sans-serif;
 		padding: 10px;
-		width: 1398px;
+		width:100%;
 		background: rgb(240, 240, 240);
 		/* border: 1px solid black; 		 */
 	}
@@ -143,20 +185,27 @@
 	{
 		margin-left: 10px;
 	}
-	.container form .btn
-	{
-		margin-left: 10px;
-		margin-bottom: 15px;
-		font-size: 15px;
-		font-family: Arial, Helvetica, sans-serif;
-		height: 30px;
+		.container form .btn
+		{
+			margin-left: 10px;
+			margin-bottom: 8px;
+			font-size: 15px;
+			font-family: Arial, Helvetica, sans-serif;
+			height: 4%;
 
-		width: 250px;
-		justify-content: center;
-		display: flex;
-	}
-	.container form .btn button
-	{
-		line-height: 30px;
-	}
+			width: 35%;
+			justify-content: left;
+			display: flex;
+		}
+		.container form .btn button
+		{
+			justify-content: center;
+			text-align: center;
+			border:none;
+			height: 85%;
+			line-height: 30px;
+			border-radius:3px;
+			color: #fff;
+			background-color: #28a745;
+		}
 </style>

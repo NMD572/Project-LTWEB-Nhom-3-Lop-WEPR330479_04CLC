@@ -87,13 +87,13 @@ td>div{
 tr:nth-child(even) {
     background-color: rgba(210, 210, 210,0.3);
 }
-#tableContent td > a{
+#tableContent button > a{
     text-decoration: none;
-    color: #28a745;
+    color: #fff;
 }
 #divNextPreviousPage{
     margin: auto;
-    width: 15%;
+    width: 25%;
     height:40px;
 }
 .formatButton{
@@ -103,6 +103,10 @@ tr:nth-child(even) {
     background-color: #28a745;
    	height:30px;
   	width:30px;
+}
+
+.buttonTable{
+	width:45px;
 }
 #numberOfPage{
 	margin-left:5px;
@@ -133,20 +137,22 @@ tr:nth-child(even) {
                 		<td class="marginLeftHeader" id="briefContent"><textarea rows="2"><c:out value="${content.getBrief()}" /></textarea></td>
                 		<td class="marginLeftHeader"><div><c:out value="${content.getCreateDate()}" /></div></td>
                 		<td class="centerHeader">
-            				<a href="EditContentController?id=<c:out value="${content.getId()}" />">Edit</a>
-            				<a href="DeleteContentController?id=<c:out value="${content.getId()}" />">Delete</a>
+                        	<button class="formatButton buttonTable"><a href="EditContentController?id=<c:out value="${content.getId()}" />">Edit</a></button>
+                        	<button class="formatButton buttonTable"><a href="DeleteContentController?id=<c:out value="${content.getId()}" />">Delete</a></button>
             			</td>      
                 	</tr>
-             </c:forEach>
-        </table>
-    </div>
-    <div id="divNextPreviousPage">
-        <form action="ViewContentController" method="post">
-            <button class="formatButton"><</button>
-            <label id="numberOfPage">1</label>
-            <button class="formatButton">></button>
-        </form>
-    </div>
+                </c:forEach>
+            </table>
+        </div>
+        <div id="divNextPreviousPage">
+            <form action="ViewContentController" method="post">
+            	<button class="formatButton"><<</button>
+                <button class="formatButton"><</button>
+                <label id="numberOfPage">1</label>
+                <button class="formatButton">></button>
+                <button class="formatButton">>></button>
+            </form>
+        </div>
 </div>
 </div>
 <script>
