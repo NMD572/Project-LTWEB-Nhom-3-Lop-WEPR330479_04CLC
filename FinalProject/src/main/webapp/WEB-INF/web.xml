@@ -22,8 +22,23 @@
 		<filter-name>CharacterSetFilter</filter-name>
 		<filter-class>config.CharsetFilter</filter-class>
 	</filter>
+	<!-- Format Page Not Found -->
 	<filter-mapping>
 		<filter-name>CharacterSetFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<error-page>
+        <error-code>500</error-code>
+        <location>/view/PageNotFound.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/*</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/view/PageNotFound.jsp</location>
+    </error-page>
 </web-app>
