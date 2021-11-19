@@ -97,7 +97,7 @@ input{
                         <input type="submit" value ="Login" id ="button"/> 
                     </div>
                     <div class="row">
-                        <a href="Register.jsp" target="_blank"id ="c">Click here to Register</a>
+                        <a href="register.tiles" target="_blank"id ="c">Click here to Register</a>
                     </div>
                 </div>
 				</form>

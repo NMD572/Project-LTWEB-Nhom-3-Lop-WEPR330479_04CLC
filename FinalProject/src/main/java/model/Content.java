@@ -1,8 +1,11 @@
 package model;
 
+/**
+ * @author Nguyen Minh Dang
+ *
+ */
 public class Content {
 	private int id;
-	private int stt;
 	private String Title;
 	private String Brief;
 	private String Content;
@@ -24,11 +27,10 @@ public class Content {
 	this.Brief = brief;
 	this.Content = content;
 	}
-	
-	public Content(int id, int stt, String title, String brief, String createDate) {
+
+	public Content(int id, String title, String brief, String createDate, int mode) {
 		super();
 		this.id = id;
-		this.stt = stt;
 		Title = title;
 		Brief = brief;
 		CreateDate = createDate;
@@ -95,13 +97,5 @@ public class Content {
 	}
 	public void setAuthorID(int authorID) {
 		this.AuthorID = authorID;
-	}
-
-	public int getStt() {
-		return stt;
-	}
-
-	public void setStt(int stt) {
-		this.stt = stt;
 	}
 }

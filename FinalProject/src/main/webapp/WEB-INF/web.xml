@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>FinalProject</display-name>
   <welcome-file-list>
-    <welcome-file>Login.jsp</welcome-file>
+    <welcome-file>login.tiles</welcome-file>
   </welcome-file-list>
   <listener>
 		<listener-class>org.apache.tiles.extras.complete.CompleteAutoloadTilesListener
@@ -22,11 +22,13 @@
 		<filter-name>CharacterSetFilter</filter-name>
 		<filter-class>config.CharsetFilter</filter-class>
 	</filter>
-	<!-- Format Page Not Found -->
+	
 	<filter-mapping>
 		<filter-name>CharacterSetFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- Format Page Not Found -->
 	<error-page>
         <error-code>500</error-code>
         <location>/view/PageNotFound.jsp</location>
@@ -34,7 +36,7 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/*</location>
+        <location>/view/PageNotFound.jsp</location>
     </error-page>
 
     <error-page>

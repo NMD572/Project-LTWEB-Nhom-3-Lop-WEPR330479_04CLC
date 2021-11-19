@@ -52,9 +52,9 @@ public class RegisterController extends HttpServlet {
 		
 		if(password.equals(repassword)) {
 			RegisterDAO.InsertMember(regis);
-			response.sendRedirect("Login.jsp");
+			response.sendRedirect("login.tiles");
 		}
-		else response.sendRedirect("Register.jsp");
+		else response.sendRedirect("register.tiles");
 		
 		
 		

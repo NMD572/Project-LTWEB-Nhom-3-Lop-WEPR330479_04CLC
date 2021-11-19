@@ -20,14 +20,15 @@
     <put-attribute name="title" value="Edit Content" />
     <put-attribute name="body" value="/view/EditContent.jsp" />
   </definition>
-  <!-- Search page -->
-  <definition name="search" extends="view">
-    <put-attribute name="title" value="Search Content" />
-    <put-attribute name="body" value="/view/SearchContent.jsp" />
-  </definition>
   <!-- EditProfile page -->
   <definition name="editprofile" extends="view">
     <put-attribute name="title" value="Edit Profile" />
     <put-attribute name="body" value="/view/EditProfile.jsp" />
+  </definition>
+  <!-- Login Form -->
+  <definition name="login" template="/view/Login.jsp">
+  </definition>
+  <!-- Register Form -->
+  <definition name="register" template="/view/Register.jsp">
   </definition>
 </tiles-definitions>

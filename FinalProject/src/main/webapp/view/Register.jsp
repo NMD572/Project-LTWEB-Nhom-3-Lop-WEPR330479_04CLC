@@ -98,7 +98,7 @@ input{
                 <input type="submit" value ="Register"id ="button" />
             </div>
             <div class="row">
-                <a href="Login.jsp" target="_blank"id ="a">Click here to Login</a>
+                <a href="login.tiles" target="_blank"id ="a">Click here to Login</a>
             </div>
         </div>
         </form>

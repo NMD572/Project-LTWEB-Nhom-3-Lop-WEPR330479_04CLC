@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-</head>
 <style>
 * {
     margin:0;
@@ -38,7 +38,7 @@ html{
   height: 35px;
   width: 75%;
 }
-::placeholder{
+#divSearch::placeholder{
   color:grey;
 }
 #divSearch>form>button{
@@ -74,11 +74,17 @@ html{
   padding-right: 2px;
 }
 </style>
+</head>
 <body>
 <div id="divMenu">
         <div id="divSearch">
             <form action="SearchContentController" method="post" >
+            <c:if test="${searchContent != null}">
+                <input class="floatSearch" type="text" name="searchString" placeholder="Search..." value="<c:out value='${searchContent}'/>">
+            </c:if>
+            <c:if test="${!(searchContent != null)}">
                 <input class="floatSearch" type="text" name="searchString" placeholder="Search...">
+            </c:if>
                 <button class="floatSearch">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>

@@ -34,7 +34,7 @@ html{
     color:gray;
     background-color: rgba(210, 210, 210,0.5);
 }
-#flexContainer{
+#flexContentContainer{
     width: 80vw;
     min-width: 780px;
     padding-top:0px;
@@ -43,18 +43,26 @@ html{
     border-top: 0;
     border-radius: 3px;
 }
+#flexSearchContainer{
+    width: 80vw;
+    min-width: 780px;
+    padding-top:0px;
+    padding-left:0px;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 3px;
+}
 #divViewContentList{
     background-color: rgba(210, 210, 210,0.3);
     border-top:1.5px solid rgb(180, 180, 180);
     border-bottom: 1.5px solid rgb(180, 180, 180);
     height: 45px;
     line-height: 45px;
-    margin-bottom: 20px;
     padding-left: 10px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
 table{
+    margin-top: 20px;
     width: 98%;
     margin-left: 1%;
     margin-bottom: 15px;
@@ -134,8 +142,13 @@ tr:nth-child(even) {
 <div class="load5s">
         <h1 id="titleViewContent">View Content</h1>
         <hr id="hrViewContent">
-        <div id="flexContainer" >
+        <c:if test="${!(searchContent != null)}">
+         <div id="flexContentContainer">
             <div id="divViewContentList">View Content List</div>
+        </c:if>
+        <c:if test="${searchContent != null}">
+         <div id="flexSearchContainer">
+        </c:if>
             <div id="divTable" >
             <table id="tableContent">
                 <tr id="trHeader">
@@ -146,19 +159,21 @@ tr:nth-child(even) {
                     <th class="centerHeader" style="width:15%">Action</th>
                 </tr>
                 <c:forEach var="content" items="${listContent}">
+                	<c:set scope="session" var="incr" value="${1}" />
                 	<tr>
-                		<td class="centerHeader"><div><c:out value="${content.getStt()}" /></div></td>
+                		<td class="centerHeader"><div><c:out value="${incr}" /></div></td>
                 		<td class="marginLeftHeader"><div><c:out value="${content.getTitle()}" /></div></td>
-                		<td class="marginLeftHeader" id="briefContent"><textarea rows="2"><c:out value="${content.getBrief()}" /></textarea></td>
+                		<td class="marginLeftHeader" id="briefContent"><textarea readonly rows="2"><c:out value="${content.getBrief()}" /></textarea></td>
                 		<td class="marginLeftHeader"><div><c:out value="${content.getCreateDate()}" /></div></td>
                 		<td class="centerHeader">
                         	<button class="formatButton buttonTable"><a href="EditContentController?id=<c:out value="${content.getId()}" />">Edit</a></button>
                         	<button class="formatButton buttonTable"><a href="DeleteContentController?id=<c:out value="${content.getId()}" />">Delete</a></button>
             			</td>      
                 	</tr>
+                	<c:set var="incr" value="${incr+1}" />
                 </c:forEach>
             </table>
-        </div>
+         </div>
         <div id="divNextPreviousPage">
             <form action="ViewContentController" method="post">
             	<button class="formatButton"><<</button>
