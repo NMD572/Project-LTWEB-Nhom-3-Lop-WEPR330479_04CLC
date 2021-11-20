@@ -8,13 +8,7 @@
 <title><tiles:getAsString name="title"/></title>
 </head>
 <style>
-#divInline{	
-	display: flex;
-}
-#divBody{
-	margin-top: 40px;
-	margin-left: 30px;
-}
+    <%@include file="/resource/MyStyle.css"%>
 </style>
 <body>
 <header>

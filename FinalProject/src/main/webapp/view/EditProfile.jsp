@@ -2,133 +2,172 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <style>
-    .title{
-        width:82vw;
-		
-        font-size: 40px;
-        font-family: Arial, Helvetica, sans-serif;
-        border-bottom: 1px solid #b3b3b3 ;
-      	font-weight: bold;
-         padding-bottom: 10px;
-    }
-    #divProfilefrom{
-       
-        padding-left: 20px;
-        padding-top: 10px;
-        font-size: 20px;
-		width: 80.94vw;
-		background: rgb(240, 240, 240);
-        border: 0px solid grey;
-		border-radius: 2px;
-        margin-bottom: 10px;
-    }
-.Edit{
-     margin-top: 25px;
-		/* height:600px; */
-		border: 1px solid grey;
-		border-radius: 2px;
-		width: 80vw;
-        font-family: Arial, Helvetica, sans-serif;
-       
-}
-
-#button{
-   
-  
-  color: black;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border: 0.5px solid #28a745; ;
-  border-radius: 4px;
-  background-color: #28a745;
-  margin-left:20px;
-  margin-top: 10px;
-  color :#fff;
-  margin-bottom: 20px;
-}
-#c{
-   padding-top:  15px;
-}
-#b{
-    border: 0.5px solid #b3b3b3 ;
-    border-radius: 10px;   
-    padding-left: 10px;
-     
-}      
-#a{
-   padding-top: 18px;
-}
-.row{
-    display: flex;
-    
-    min-height: 42px;
-    min-width: 72vw;
-   
-}
-.inputform{
-    margin-left:20px;
-  
-     margin-bottom: 10px;
-}
-#des{
-    height: 100px;
-    border: 0.5px solid #b3b3b3 ;
-    border-radius: 10px;   
-    padding-left: 10px;
-}
+    <%@include file="/resource/MyStyle.css"%>
 </style>
+
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Edit Profile</title> 
 </head>
 	<body>
-        <div class = "title">
+        <div class = "titleedit">
             Edit Profile</div>
-  		<div class ="Edit" id ='editform'>
+  		<div class ="Editprofile" id ='editform'>
             
 				
         <div class="AfEdit">
 				<form action ="EditUserController" method ="post" class = "editform">
-                    <div class = row>
-                        <div id="divProfilefrom">Profile Form Elements</div>
+                    <div class = rowedit>
+                        <div class="divProfilefrom">Profile Form Elements</div>
                      </div>
                     <div class ="inputform">
                         <div class = row>
-                            <h3 id ="a">First Name</h3>
+                            <h3 class ="inputedita">First Name</h3>
                         </div>
-                        <input type ="text" name ="firstname" class = "row" id ="b" placeholder="Enter the first name"/>
-                        <div class = row>
-                            <h3 id ="a">Last Name</h3> 
+                        <div class = rowedit>
+                            <input type ="text" name ="firstname" id="fname" class ="inputeditb" placeholder="Enter the first name"/>
                         </div>
-                        <input type ="text" name ="lastname" class = "row" id ="b" placeholder="Enter the last name"/>
-                        <div class = "row">
-                            <h3 id ="a">Email</h3>
+                        <div class="error">
+                            <span id= "fname_error"> </span>
+                             </div>
+                        <div class = rowedit>
+                            <h3 class ="inputedita">Last Name</h3> 
                         </div>
-                        <div class = "row">
-                        <p id ="c">  your_email@example.com </p>
+                        <div class = rowedit>
+                            <input type ="text" name ="lastname" id="lname" class ="inputeditb" placeholder="Enter the last name"/>
                         </div>
-                        <div class = "row">
-                            <h3 id ="a">Phone</h3>
+                        <div class="error">
+                            <span id= "lname_error"> </span>
+                             </div>
+                        <div class = "rowedit">
+                            <h3 class ="inputedita">Email</h3>
                         </div>
-                        <input type ="text" name ="phone" class = "row" id ="b" placeholder="Enter your phone number"/>
-                        <div class = "row">
-                            <h3 id ="a">Description</h3>
+                        <div class = "rowedit">
+                        <p class="displayemail">  your_email@example.com </p>
                         </div>
-                        <textarea type ="text"name ="description" class = "row"  id ="des"></textarea>
+                        <div class = "rowedit">
+                            <h3 class ="inputedita">Phone</h3>
+                        </div>
+                        <div class = rowedit>
+                            <input type ="text" name ="phone" id="phone" class ="inputeditb" placeholder="Enter your phone number"/>
+                        </div>
+                        <div class="error">
+                            <span id= "phone_error"> </span>
+                             </div>
+                        <div class = "rowedit">
+                            <h3 class ="inputedita">Description</h3>
+                        </div>
+                        <div class = rowedit>
+                            <textarea type ="text" id="des"  name ="description"  class ="inputdes"></textarea>
+                        </div>
+                        <div class="error">
+                            <span id= "des_error"> </span>
+                             </div>
+                       
                     </div>
-             <input type="submit" value ="Submit Button" id ="button"/> 
-             <input type="submit" value ="Reset Button" id ="button"/> <br>
+             <input type="submit" value ="Submit Button" id = "submitbt" class ="buttoneditpro"/> 
+             <input type="submit" value ="Reset Button" class ="buttoneditpro"/> <br>
 				</form>
         </div>
    		</div>
     
+           <script> 
+            const inputBtn=document.querySelector('#submitbt');
+                inputBtn.addEventListener("click",(e) =>{
+                    
+                    var flag =true;
+                    
+                    const fname = document.getElementById("fname").value;
+                    const lname = document.getElementById("lname").value;
+                    const phone= document.getElementById("phone").value;
+                    const des= document.getElementById("des").value;
+                    
+                    if(fname=="") 
+                    {
+                        showError('fname','First name can not be blank!!');
+                        flag =false;
+                    
+                     }
+                    else if(fname.length<3 || fname.length>30 ) 
+                        {
+                        showError('fname','Must enter from 3->30 characters');
+                        flag =false;
+                       
+                        }
+                    else 
+                    {
+                    showError('fname','');
+                    flag = true;
+                    }
+                    if(lname=="") 
+                    {
+                        showError('lname','Last name can not be blank!!');
+                        flag =false;
+                    
+                     }
+                    else if(lname.length<3 || lname.length>30 ) 
+                        {
+                        showError('lname','Must enter from 3->30 characters');
+                        flag =false;
+                       
+                        }
+                        else 
+                    {
+                    showError('lname','');
+                    flag = true;
+                    }
+                    if(phone=="") 
+                    {
+                        showError('phone','Phone can not be blank!!');
+                        flag =false;
+                    
+                     }
+                    else if(phone.length<3 || phone.length>30 ) 
+                        {
+                        showError('phone','Must enter from 3->30 characters');
+                        flag =false;
+                       
+                        }
+                        else 
+                    {
+                    showError('phone','');
+                    flag = true;
+                    }
+                   
+                    if(des=="")
+                    {
+                    showError('des','');
+                    flag = false;
+                    }
+                    else if(des.length>200 ) 
+                        {
+                        showError('des','Must enter < 200 characters');
+                        flag =false;
+                       
+                        }
+                    else
+                    {
+                        showError('des','');
+                    flag = true;
+                    }
+                   
+                    if(flag==false){
+                        e.preventDefault();
+                    }
+                   
+                   
+                })
+            
+               
+        
     
+    
+     function showError(key,mess){
+         
+         document.getElementById(key+ '_error').innerHTML = mess;
+     }
+            </script>
    
 	</body>
 </html>

@@ -55,7 +55,6 @@ public class EditUserController extends HttpServlet {
 		edit.setFirstName(firstname);
 		edit.setLastName(lastname);
 		edit.setPhone(phone);
-		
 		edit.setDescription(description);
 		edit.setId(UserConstant.UserID);
 		RegisterDAO editDAO=new RegisterDAO();
@@ -67,9 +66,6 @@ public class EditUserController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
-		
-		
 	}
 
 }

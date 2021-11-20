@@ -6,73 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-* {
-    margin:0;
-    padding:0; 
-    box-sizing: border-box;
-  }
-html{
-  font-family: Helvetica, Arial, sans-serif;
-}
-#divMenu{
-  background-color: rgb(240, 240, 240);
-  border-right:  1px solid rgb(180, 180, 180);
-  height: calc(100vh - 50px);
-  width: 15vw;
-  min-width: 150px;
-}
-#divSearch{
-  height: 60px;
-  width: 100%;
-  padding-top: 12.5px;
-  padding-left: 16px;
-}
-.floatSearch{
-  float:left;
-}
-#divSearch>form>input{
-  border: 1px solid rgb(180, 180, 180);
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-  padding-left: 10px;
-  height: 35px;
-  width: 75%;
-}
-#divSearch::placeholder{
-  color:grey;
-}
-#divSearch>form>button{
-  height: 35px;
-  width: 15%;
-  border: 1px solid rgb(180, 180, 180);
-  border-left: none;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  background-color: white;
-  
-}
-.menuContent{
-  border-top: 1px solid rgb(200, 200, 200);
-  height: 40px;
-}
-#divFormContent{
-  border-bottom: 1px solid rgb(200, 200, 200);
-}
-#divViewContent{
-	width:100%;
-}
-#divViewContent>a, #divFormContent>a{
-  width: 250px;
-  display: inline-block;
-  color: hsl(220, 100%, 40%);
-  text-decoration: none;
-  line-height: 40px;
-  padding-left: 10px;
-}
-#divViewContent>a>svg,#divFormContent>a>svg{
-  padding-top: 1px;
-  padding-right: 2px;
-}
+    <%@include file="/resource/MyStyle.css"%>
 </style>
 </head>
 <body>

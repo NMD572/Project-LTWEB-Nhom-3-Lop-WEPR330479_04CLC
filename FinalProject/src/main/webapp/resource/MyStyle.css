@@ -1,12 +1,482 @@
 @charset "UTF-8";
 /*Kiến trúc tiles*/
 /*Header*/
-
+* {
+    margin:0;
+    padding:0;  
+    box-sizing: border-box;
+}
+html{
+    font-family: Helvetica, Arial, sans-serif;
+}
+#header{
+    border-bottom: 1px solid rgb(180, 180, 180);  
+    background-color: rgb(240, 240, 240);
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+#header > div{
+    line-height: 50px;
+}
+#divCMS{
+    color: rgb(80, 80, 80);
+    width: 50px;
+    padding-left: 10px;
+    text-transform: uppercase;
+}
+#divUser{
+    position: relative;
+    width: 45px;
+}
+#nav{
+    visibility: hidden;
+    list-style-type: none;
+    position: absolute;
+    margin-left: -105px;
+    width: 150px;
+}
+#nav li{
+    background-color: #fff;
+}
+#liProfile{
+    border: rgb(180, 180, 180) solid 1px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+#liLogout{
+    border: rgb(180, 180, 180) solid 1px;
+    border-top: 0px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+#divUser:hover,#nav li:hover {
+    background-color: rgb(200, 200, 200);
+}
+#nav li a{
+    color: #000;
+    display: inline-block;
+    height: 50px;
+    width: 148px;
+    text-decoration: none;
+    line-height: 50px;
+}
+#liProfile a{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#liLogout a{
+    padding-left: 20px;
+    padding-right: 55px;
+}
+#nav li svg{
+    padding-top:5px;
+    margin-right: 2px;
+}
 /*Left Menu*/
-
+#divMenu{
+  background-color: rgb(240, 240, 240);
+  border-right:  1px solid rgb(180, 180, 180);
+  height: calc(100vh - 50px);
+  width: 15vw;
+  min-width: 150px;
+}
+#divSearch{
+  height: 60px;
+  width: 100%;
+  padding-top: 12.5px;
+  padding-left: 16px;
+}
+.floatSearch{
+  float:left;
+}
+#divSearch>form>input{
+  border: 1px solid rgb(180, 180, 180);
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  padding-left: 10px;
+  height: 35px;
+  width: 75%;
+}
+#divSearch::placeholder{
+  color:grey;
+}
+#divSearch>form>button{
+  height: 35px;
+  width: 15%;
+  border: 1px solid rgb(180, 180, 180);
+  border-left: none;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  background-color: white;
+  
+}
+.menuContent{
+  border-top: 1px solid rgb(200, 200, 200);
+  height: 40px;
+}
+#divFormContent{
+  border-bottom: 1px solid rgb(200, 200, 200);
+}
+#divViewContent{
+	width:100%;
+}
+#divViewContent>a, #divFormContent>a{
+  width: 250px;
+  display: inline-block;
+  color: hsl(220, 100%, 40%);
+  text-decoration: none;
+  line-height: 40px;
+  padding-left: 10px;
+}
+#divViewContent>a>svg,#divFormContent>a>svg{
+  padding-top: 1px;
+  padding-right: 2px;
+}
+/*Hết Left Menu*/
 /*Definepage*/
-
+#divInline{	
+	display: flex;
+}
+#divBody{
+	margin-top: 40px;
+	margin-left: 30px;
+}
 /*Hết Kiến trúc tiles*/
 /*View + Search content Form*/
-
+.load5s{
+    visibility: hidden;
+}
+#titleViewContent{
+	font-size:45px;
+	margin-bottom:8px;
+}
+#hrViewContent{
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 15px;
+    height:0.5px;
+    width: 80vw;
+    min-width: 780px;
+    border-width:0;
+    color:gray;
+    background-color: rgba(210, 210, 210,0.5);
+}
+#flexContentContainer{
+    width: 80vw;
+    min-width: 780px;
+    padding-top:0px;
+    padding-left:0px;
+    border: 1px solid rgb(180, 180, 180);
+    border-top: 0;
+    border-radius: 3px;
+}
+#flexSearchContainer{
+    width: 80vw;
+    min-width: 780px;
+    padding-top:0px;
+    padding-left:0px;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 3px;
+}
+#divViewContentList{
+    background-color: rgba(210, 210, 210,0.3);
+    border-top:1.5px solid rgb(180, 180, 180);
+    border-bottom: 1.5px solid rgb(180, 180, 180);
+    height: 45px;
+    line-height: 45px;
+    padding-left: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+table{
+    margin-top: 20px;
+    width: 98%;
+    margin-left: 1%;
+    margin-bottom: 15px;
+}
+table,th,tr,td{
+    border:1px gray;
+    border:solid rgb(180, 180, 180) thin;
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    font-size: 17px;
+}
+tr{
+    height: 60px;
+}
+td>div{
+    height: 30px;
+    width: 100%;
+}
+#trHeader{
+    height: 40px;
+}
+.marginLeftHeader{
+    padding-left: 10px;
+}
+#briefContent{
+    padding: 0;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+#briefContent>textarea{
+    border: none;
+    resize: none;
+    background-color: inherit;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    height: 100%;
+    width: 100%;
+}
+.centerHeader{
+    text-align: center;
+}
+tr:nth-child(even) {
+    background-color: rgba(210, 210, 210,0.3);
+}
+#divNextPreviousPage{
+    margin: auto;
+    width: 25%;
+    height:40px;
+}
+.formatButton{
+    border:none;
+    border-radius: 2px;
+    color: #fff;
+    background-color: #28a745;
+   	height:30px;
+  	width:30px;
+}
+.formatButton > a{
+	text-decoration: none;
+    color: #fff;
+}
+.buttonTable{
+	width:45px;
+}
+#numberOfPage{
+	margin-left:5px;
+	margin-right:5px;
+	font-size:20px;
+	line-height:30px;
+}
 /*Hết View + Search content Form*/
+
+/* login */
+.error{
+    display: flex;
+    color:red;
+}
+.rememberme{
+    padding: 10px 0 0;
+}
+.Login{
+    margin-top: 12%;
+    margin-left: 35%;
+    margin-right: 35%;
+    min-width: 430px;
+
+}
+.AfLogin{
+
+    border: 1px solid grey;
+    border-radius: 2px;
+    width: 98%;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+.titlelogin{
+
+    padding: 20px;
+    font-size: 20px;
+    width: 98.94%;
+    background: rgb(240, 240, 240);
+    border: 0px solid grey;
+    border-radius: 2px;
+}
+
+.inputsubmit{
+    padding: 20px 30px 20px 30px;
+    width:90%;
+    position: static;
+    font-size: 40px;
+    color: #fff;
+    border: 0px solid grey;
+    border-radius: 6px;
+    background-color: green;
+    border-color: green;
+    margin-top: 20px;
+}
+.inputloginb{
+    width: 90%;
+    height: 45px;
+    margin: 10px 0 10px;
+    border: 0.5px solid lightgrey;
+    border-radius: 4px;
+    padding-left: 10px;
+}
+
+.inputform{
+    margin-left:20px
+}
+.rowlogin{
+    display: flex;
+
+    min-height: 30px;
+    min-width: 75%;
+
+}
+.inputloginc {
+    text-decoration: none;
+    font-size: 25px;
+    margin-top: 15px;
+    color:#0086b3;
+}
+/* regis */
+.Register{
+    margin-top: 9%;
+    margin-left: 31%;
+    margin-right: 31%;
+    min-width: 430px;
+
+}
+.AfRegis{
+
+    border: 1px solid grey;
+    border-radius: 2px;
+    width: 98%;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.registerinput{
+    border: 0.5px solid lightgrey;
+    border-radius: 4px;
+    padding-left: 10px;
+    width: 90%;
+    min-height: 45px;
+    margin: 10px 0 10px;
+}
+.titleregis{
+
+    padding: 20px;
+    font-size: 20px;
+    width: 98.94%;
+    background: rgb(240, 240, 240);
+    border: 0px solid grey;
+    border-radius: 2px;
+}
+
+.registersubmit{
+    padding: 20px 30px 20px 30px;
+    width:90%;
+    position: static;
+    font-size: 40px;
+    color: #fff;
+    border: 0px solid grey;
+    border-radius: 6px;
+    background-color: green;
+    border-color: green;
+    margin-top: 20px;
+}
+
+
+
+.rowregis{
+    display: flex;
+
+    min-height: 35px;
+    min-width: 75%;
+
+}
+.registera{
+    text-decoration: none;
+    font-size: 25px;
+    margin-top: 15px;
+    color:#0086b3;
+}
+/* editprofile*/
+.titleedit{
+    width:82vw;
+
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-bottom: 1px solid #b3b3b3 ;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+.divProfilefrom{
+
+    padding-left: 20px;
+    padding-top: 10px;
+    font-size: 20px;
+    width: 80.94vw;
+    background: rgb(240, 240, 240);
+    border: 0px solid grey;
+    border-radius: 2px;
+    margin-bottom: 10px;
+}
+.Editprofile{
+    margin-top: 25px;
+    /* height:600px; */
+    border: 1px solid grey;
+    border-radius: 2px;
+    width: 80vw;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.buttoneditpro{
+
+
+    color: black;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: 0.5px solid #28a745; ;
+    border-radius: 4px;
+    background-color: #28a745;
+    margin-left:20px;
+    margin-top: 10px;
+    color :#fff;
+    margin-bottom: 20px;
+}
+.displayemail{
+    padding-top:  15px;
+}
+.inputeditb{
+    border: 0.5px solid #b3b3b3 ;
+    border-radius: 10px;
+    padding-left: 10px;
+    width: 72vw;
+    height: 42px;
+}
+.inputedita{
+    padding-top: 18px;
+
+}
+.rowedit{
+    display: flex;
+
+    min-height: 42px;
+    min-width: 72vw;
+
+}
+.inputformedit{
+    margin-left:20px;
+
+    margin-bottom: 10px;
+}
+.inputdes{
+    height: 100px;
+    border: 0.5px solid #b3b3b3 ;
+    border-radius: 10px;
+    padding-left: 10px;
+    width: 72vw;
+}

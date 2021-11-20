@@ -5,78 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-* {
-    margin:0;
-    padding:0;  
-    box-sizing: border-box;
-}
-html{
-    font-family: Helvetica, Arial, sans-serif;
-}
-#header{
-    border-bottom: 1px solid rgb(180, 180, 180);  
-    background-color: rgb(240, 240, 240);
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-}
-#header > div{
-    line-height: 50px;
-}
-#divCMS{
-    color: rgb(80, 80, 80);
-    width: 50px;
-    padding-left: 10px;
-    text-transform: uppercase;
-}
-#divUser{
-    position: relative;
-    width: 45px;
-}
-#nav{
-    visibility: hidden;
-    list-style-type: none;
-    position: absolute;
-    margin-left: -105px;
-    width: 150px;
-}
-#nav li{
-    background-color: #fff;
-}
-#liProfile{
-    border: rgb(180, 180, 180) solid 1px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-}
-#liLogout{
-    border: rgb(180, 180, 180) solid 1px;
-    border-top: 0px;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px
-}
-#divUser:hover,#nav li:hover {
-    background-color: rgb(200, 200, 200);
-}
-#nav li a{
-    color: #000;
-    display: inline-block;
-    height: 50px;
-    width: 148px;
-    text-decoration: none;
-    line-height: 50px;
-}
-#liProfile a{
-    padding-left: 20px;
-    padding-right: 20px;
-}
-#liLogout a{
-    padding-left: 20px;
-    padding-right: 55px;
-}
-#nav li svg{
-    padding-top:5px;
-    margin-right: 2px;
-}
+    <%@include file="/resource/MyStyle.css"%>
 </style>
 </head>
 <body>
