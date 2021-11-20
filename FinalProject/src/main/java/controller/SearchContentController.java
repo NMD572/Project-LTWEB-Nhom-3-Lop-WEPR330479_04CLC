@@ -50,17 +50,47 @@ public class SearchContentController extends HttpServlet {
 			search=" ";
 		try {
 		List<Content> contents = new ArrayList<Content>();
+		//Khi load view content thi mac dinh quay tro ve trang 1
+		int offset=0;
+		//Xu ly maxPage
+		int listcontentsize=0;
 		if(UserConstant.UserID==ContentConstant.adminID)
-			contents = dbContent.searchAllContent(search);
+		{
+			contents = dbContent.searchAllContent(search,offset,ContentConstant.limitContent);
+			listcontentsize=dbContent.countContentsForSearch(search);
+			System.out.println(listcontentsize);
+		}
 		else
-			contents = dbContent.searchContentForMember(UserConstant.UserID,search);
-		request.setAttribute("searchContent", request.getParameter("searchString"));
+		{
+			contents = dbContent.searchContentForMember(UserConstant.UserID,search,offset,ContentConstant.limitContent);
+			listcontentsize=dbContent.countContentsForSearchForMember(search,UserConstant.UserID);
+			System.out.println(listcontentsize);
+		}
+		//Tra ve current page
+		int currentPage=1;
+		request.setAttribute("currentPage", currentPage);
+		//Tra ve danh sach content va maxPage
 		request.setAttribute("listContent", contents);
+		int maxPage=handleMaxPage(listcontentsize);
+		request.setAttribute("maxPage", maxPage);
+		//Tra ve chuoi search input
+		request.setAttribute("searchContent", request.getParameter("searchString"));
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("view.tiles");
 		dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	private int handleMaxPage(int listcontentsize)
+	{
+		int maxPage=0;
+		maxPage+=listcontentsize/10;
+		if(listcontentsize%10!=0)		//Xu ly truong hop thua ra
+		{
+			maxPage++;
+		}
+		return maxPage;
 	}
 
 }

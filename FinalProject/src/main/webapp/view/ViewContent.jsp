@@ -109,10 +109,6 @@ td>div{
 tr:nth-child(even) {
     background-color: rgba(210, 210, 210,0.3);
 }
-#tableContent button > a{
-    text-decoration: none;
-    color: #fff;
-}
 #divNextPreviousPage{
     margin: auto;
     width: 25%;
@@ -126,7 +122,10 @@ tr:nth-child(even) {
    	height:30px;
   	width:30px;
 }
-
+.formatButton > a{
+	text-decoration: none;
+    color: #fff;
+}
 .buttonTable{
 	width:45px;
 }
@@ -142,7 +141,7 @@ tr:nth-child(even) {
 <div class="load5s">
         <h1 id="titleViewContent">View Content</h1>
         <hr id="hrViewContent">
-        <c:if test="${!(searchContent != null)}">
+        <c:if test="${searchContent == null}">
          <div id="flexContentContainer">
             <div id="divViewContentList">View Content List</div>
         </c:if>
@@ -157,9 +156,12 @@ tr:nth-child(even) {
                     <th class="marginLeftHeader" style="width:43%">Brief</th>
                     <th class="marginLeftHeader" style="width:20%">Created Date</th>
                     <th class="centerHeader" style="width:15%">Action</th>
-                </tr>
+                </tr>         
+                <c:set scope="session" var="incr" value="${(currentPage-1)*10+1}" />
+                <c:if test="${maxPage != null}">
+                	<c:set scope="session" var="maxP" value="${maxPage}" />
+                </c:if>
                 <c:forEach var="content" items="${listContent}">
-                	<c:set scope="session" var="incr" value="${1}" />
                 	<tr>
                 		<td class="centerHeader"><div><c:out value="${incr}" /></div></td>
                 		<td class="marginLeftHeader"><div><c:out value="${content.getTitle()}" /></div></td>
@@ -175,13 +177,15 @@ tr:nth-child(even) {
             </table>
          </div>
         <div id="divNextPreviousPage">
-            <form action="ViewContentController" method="post">
-            	<button class="formatButton"><<</button>
-                <button class="formatButton"><</button>
-                <label id="numberOfPage">1</label>
-                <button class="formatButton">></button>
-                <button class="formatButton">>></button>
-            </form>
+        <c:if test="${currentPage > 1}">
+            <button class="formatButton"><a href="PagingContentController?numberOfPage=1&searchContent=<c:out value="${searchContent}"/>"><<</a></button>
+            <button class="formatButton"><a href="PagingContentController?numberOfPage=<c:out value="${currentPage-1}"/>&searchContent=<c:out value="${searchContent}"/>" ><</a></button>
+        </c:if>
+            <label id="numberOfPage"><c:out value="${currentPage}"/></label>
+        <c:if test="${currentPage < maxP}">
+            <button class="formatButton"><a href="PagingContentController?numberOfPage=<c:out value="${currentPage+1}"/>&searchContent=<c:out value="${searchContent}"/>">></a></button>
+            <button class="formatButton"><a href="PagingContentController?numberOfPage=<c:out value="${maxP}"/>&searchContent=<c:out value="${searchContent}"/>">>></a></button>	
+        </c:if>
         </div>
     </div>
 </div>

@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,13 +19,16 @@ public class ContentDAO
 {
 	static DAL dal=new DAL();
 	private static String insert_query = "INSERT INTO content (Title, Brief, Content,CreateDate,UpdateTime,AuthorId) VALUES (?, ?, ?,NOW(),NOW(),?)";
-	private static String select_all_content_query = "Select ID, Title, Brief, DATE_FORMAT(CreateDate, \"%d/%m/%Y %H:%i\") as CreateDate From (Select ID,Title,Brief, CreateDate From Content Order by CreateDate desc) as A Limit 0,10;";
-	private static String select_content_For_Member_query = "Select ID, Title, Brief, DATE_FORMAT(CreateDate, \"%d/%m/%Y %H:%i\") as CreateDate From (Select ID, Title,Brief,CreateDate From Content Where Content.AuthorId=? Order by CreateDate desc) as A Limit 0,10;";
 	private static String delete_query = "DELECT from content where id = ?";
 	private static String update_query = "UPDATE content SET Title = ?, Brief = ?, Content = ? where id = ?";
-	private static String searchAllContent_Procedure = "{ CALL searchAllContentWithPaging(?,0,10) }"; //chinh lai 0,10 de phan trang
-	private static String searchContentForMember_Procedure = "{ CALL searchContentForMemberWithPaging(?,?,0,10) }"; //chinh lai 0 10 de phan trang
-
+	private static String getAllContent_Procedure = "{ CALL getAllContent(?,?) }";
+	private static String getContentForMember_Procedure = "{ CALL getContentForMember(?,?,?) }"; 
+	private static String searchAllContent_Procedure = "{ CALL searchAllContentWithPaging(?,?,?) }";
+	private static String searchContentForMember_Procedure = "{ CALL searchContentForMemberWithPaging(?,?,?,?) }";
+	private static String selectCountAllContent = "Select count(*) as SLContent From Content;";
+	private static String selectCountAllContentForMember = "Select count(*) as SLContent From Content Where AuthorID=?";
+	private static String selectCountAllContentForSearch = "Select count(*) as SLContent From Content Where Concat(Title,Brief,CreateDate) like Concat('%',?,'%')"; 
+	private static String selectCountAllContentForSearchForMember = "Select count(*) as SLContent From Content Where Concat(Title,Brief,CreateDate) like Concat('%',?,'%') and AuthorID=?"; 
 	private static String select_contentinfo_from_id = "Select * FROM content where id = ?";
 	public ContentDAO(){
 		
@@ -78,11 +82,13 @@ public class ContentDAO
 		return rowsAffected;
 	}
 	
-	public List<Content> getAllContent()
+	public List<Content> getAllContent(int offset, int limit)
 	{
 		List<Content> contents = new ArrayList<Content>();				    		
-		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(select_all_content_query)) 
-		{  					
+		try (Connection cnn = dal.getConnection() ; CallableStatement stmt = cnn.prepareCall(getAllContent_Procedure)) 
+		{
+			stmt.setInt(1, offset);
+			stmt.setInt(2, limit);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next())
 			{
@@ -102,12 +108,14 @@ public class ContentDAO
 		}		
 		return contents;
 	}
-	public List<Content> getContentForMember(int memberID)
+	public List<Content> getContentForMember(int memberID,int offset, int limit)
 	{
 		List<Content> contents = new ArrayList<Content>();				    		
-		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(select_content_For_Member_query)) 
+		try (Connection cnn = dal.getConnection() ; CallableStatement stmt = cnn.prepareCall(getContentForMember_Procedure)) 
 		{
 			stmt.setInt(1, memberID);
+			stmt.setInt(2, offset);
+			stmt.setInt(3, limit);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next())
 			{
@@ -127,12 +135,14 @@ public class ContentDAO
 		}		
 		return contents;
 	}
-	public List<Content> searchAllContent(String search)
+	public List<Content> searchAllContent(String search,int offset, int limit)
 	{
 		List<Content> contents = new ArrayList<Content>();				    		
 		try (Connection cnn = dal.getConnection() ; CallableStatement stmt = cnn.prepareCall(searchAllContent_Procedure)) 
 		{
 			stmt.setString(1, search);
+			stmt.setInt(2, offset);
+			stmt.setInt(3, limit);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next())
 			{
@@ -152,14 +162,15 @@ public class ContentDAO
 		}		
 		return contents;
 	}
-	public List<Content> searchContentForMember(int memberID,String search)
+	public List<Content> searchContentForMember(int memberID,String search,int offset, int limit)
 	{
-		
 		List<Content> contents = new ArrayList<Content>();				    		
 		try (Connection cnn = dal.getConnection() ; CallableStatement stmt = cnn.prepareCall(searchContentForMember_Procedure)) 
 		{
 			stmt.setInt(1, memberID);
 			stmt.setString(2, search);
+			stmt.setInt(3, offset);
+			stmt.setInt(4, limit);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next())
 			{
@@ -179,7 +190,86 @@ public class ContentDAO
 		}		
 		return contents;
 	}
-	
+	public int countContents()
+	{
+		int count=0;
+		try (Connection cnn = dal.getConnection() ; Statement stmt = cnn.createStatement()) 
+		{
+			ResultSet rs = stmt.executeQuery(selectCountAllContent);
+			while (rs.next()) {
+			count=rs.getInt("SLContent");
+			}
+			rs.close();
+			cnn.close();  				  
+		}
+		catch(Exception e)
+		{ 
+			//System.out.println(e);
+			e.printStackTrace();
+		}		
+		return count;
+	}
+	public int countContentsForMember(int UserID)
+	{
+		int count=0;
+		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(selectCountAllContentForMember)) 
+		{
+			stmt.setInt(1, UserID);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+			count=rs.getInt("SLContent");
+			}
+			rs.close();
+			cnn.close();  				  
+		}
+		catch(Exception e)
+		{ 
+			//System.out.println(e);
+			e.printStackTrace();
+		}		
+		return count;
+	}
+	public int countContentsForSearch(String search)
+	{
+		int count=0;
+		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(selectCountAllContentForSearch)) 
+		{
+			stmt.setString(1, search);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				count=rs.getInt("SLContent");
+			}
+			rs.close();
+			cnn.close();  				  
+		}
+		catch(Exception e)
+		{ 
+			//System.out.println(e);
+			e.printStackTrace();
+		}		
+		return count;
+	}
+	public int countContentsForSearchForMember(String search, int UserID)
+	{
+		int count=0;
+		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(selectCountAllContentForSearchForMember)) 
+		{
+			stmt.setString(1, search);
+			stmt.setInt(2, UserID);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				count=rs.getInt("SLContent");
+			}
+			rs.close();
+			cnn.close();  				  
+		}
+		catch(Exception e)
+		{ 
+			//System.out.println(e);
+			e.printStackTrace();
+		}		
+		return count;
+	}
 	public Content selectContentInfo(int id)
 	{
 		Content ct = new Content(id);
