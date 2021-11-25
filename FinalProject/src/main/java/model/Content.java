@@ -1,18 +1,78 @@
 package model;
 
-/**
- * @author Nguyen Minh Dang
- *
- */
 public class Content {
 	private int id;
-	private String Title;
-	private String Brief;
-	private String Content;
-	private String CreateDate;
-	private String UpdateTime;
-	private String Sort;
-	private int AuthorID;
+	private String title;
+	private String brief;
+	private String content;
+	private String createDate;
+	private String updateTime;
+	private String sort;
+	private int authorID;
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getBrief() {
+		return brief;
+	}
+
+	public void setBrief(String brief) {
+		this.brief = brief;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+
+	public int getAuthorID() {
+		return authorID;
+	}
+
+	public void setAuthorID(int authorID) {
+		this.authorID = authorID;
+	}
 
 	public Content(int id)
 	{
@@ -20,82 +80,35 @@ public class Content {
 		this.id = id;
 	}
 	
-	public Content(int id, String title, String brief, String content) {
-	super();
-	this.id = id;
-	this.Title = title;
-	this.Brief = brief;
-	this.Content = content;
+	public Content(String title, String brief, String content) {
+		super();
+		this.title = title;
+		this.brief = brief;
+		this.content = content;
 	}
+
+	public Content(int id, String title, String brief, String content) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.brief = brief;
+		this.content = content;
+	}
+	
 
 	public Content(int id, String title, String brief, String createDate, int mode) {
 		super();
 		this.id = id;
-		Title = title;
-		Brief = brief;
-		CreateDate = createDate;
+		this.title = title;
+		this.brief = brief;
+		this.createDate = createDate;
 	}
-
+	
 	public Content(String title, String brief, String content, int authorID) {
 		super();
-		Title = title;
-		Brief = brief;
-		Content = content;
-		AuthorID = authorID;
-	}
-
-	public Content(String title, String brief, String content) {
-	super();
-	this.Title = title;
-	this.Brief = brief;
-	this.Content = content;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getBrief() {
-		return Brief;
-	}
-	public void setBrief(String brief) {
-		Brief = brief;
-	}
-	public String getTitle() {
-		return Title;
-	}
-	public void setTitle(String title) {
-		Title = title;
-	}
-	public String getContent() {
-		return Content;
-	}
-	public void setContent(String content) {
-		Content = content;
-	}
-	public String getCreateDate() {
-		return CreateDate;
-	}
-	public void setCreateDate(String createDate) {
-		CreateDate = createDate;
-	}
-	public String getUpdateTime() {
-		return UpdateTime;
-	}
-	public void setUpdateTime(String updateTime) {
-		UpdateTime = updateTime;
-	}
-	public String getSort() {
-		return Sort;
-	}
-	public void setSort(String sort) {
-		Sort = sort;
-	}
-	public int getAuthorID() {
-		return AuthorID;
-	}
-	public void setAuthorID(int authorID) {
-		this.AuthorID = authorID;
-	}
+		this.title = title;
+		this.brief = brief;
+		this.content = content;
+		this.authorID = authorID;
+	}	
 }

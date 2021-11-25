@@ -31,38 +31,41 @@ public class ViewContentController extends HttpServlet {
 		ContentDAO dbContent = new ContentDAO();
 		try {
 		List<Content> contents = new ArrayList<Content>();
-		//Khi load view content thi mac dinh quay tro ve trang 1
+		//Khi load view content thi mac dinh quay tro ve trang 1, 
+		//va offset(phan tu bat dau) se mac dinh la 0 vi dong dau tien trong mysql se co index=0
 		int currentPage=1;
 		int offset=0;
+		//Gui currentPage ve form Viewcontent de in ra so trang va tinh toan stt trong bang content
 		request.setAttribute("currentPage", currentPage);
-		int listcontentsize=0;
-		//Xu ly maxPage
-		if(UserConstant.UserID==ContentConstant.adminID)
+		int listContentSize=0;
+		//Neu la admin thi se load 10 content dau trong tat ca content cua user
+		if(UserConstant.UserID==UserConstant.adminID)
 		{
 			contents = dbContent.getAllContent(offset,ContentConstant.limitContent);
-			listcontentsize=dbContent.countContents();
-			//System.out.println(listcontentsize);
+			//Dung selec count(*) ... de dem so luong content cua toan bo User
+			listContentSize=dbContent.countContents();
 		}
+		//Neu la user thi se load 10 content dau tien cua nguoi nay
 		else
 		{
 			contents = dbContent.getContentForMember(UserConstant.UserID,offset,ContentConstant.limitContent);
-			listcontentsize=dbContent.countContentsForMember(UserConstant.UserID);
-			//System.out.println(listcontentsize);
+			listContentSize=dbContent.countContentsForMember(UserConstant.UserID);
 		}
 		request.setAttribute("listContent", contents);
-		int maxPage=handleMaxPage(listcontentsize);
+		//Xu ly maxPage va gui maxPage ve cho form Viewcontent
+		int maxPage=handleMaxPage(listContentSize);
 		request.setAttribute("maxPage", maxPage);
-		RequestDispatcher dispatcher =request.getRequestDispatcher("view.tiles");
-		dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("view.tiles");
+		dispatcher.forward(request, response);
 	}
-	private int handleMaxPage(int listcontentsize)
+	private int handleMaxPage(int listContentSize)
 	{
 		int maxPage=0;
-		maxPage+=listcontentsize/10;
-		if(listcontentsize%10!=0)		//Xu ly truong hop thua ra
+		maxPage+=listContentSize/10;
+		if(listContentSize%10!=0)		//Xu ly truong hop thua ra (11,21,...) thi maxPage tang len 1
 		{
 			maxPage++;
 		}

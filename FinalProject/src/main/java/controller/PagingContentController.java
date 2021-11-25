@@ -16,9 +16,6 @@ import constant.UserConstant;
 import constant.ContentConstant;
 import model.Content;
 
-/**
- * Servlet implementation class PagingContentController
- */
 @WebServlet(urlPatterns = {"/PagingContentController"})
 public class PagingContentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,57 +27,71 @@ public class PagingContentController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ContentDAO dbContent = new ContentDAO();
 		List<Content> contents = new ArrayList<Content>();
-		int numberOfPage = Integer.parseInt(request.getParameter("numberOfPage"));
-		String search = request.getParameter("searchContent");
-		//String search=null;
-		int offset=(numberOfPage-1)*(ContentConstant.limitContent);
-		request.setAttribute("currentPage", numberOfPage);
-		//request.setAttribute("maxPage", maxPage);
-		int listcontentsize=0;
-		if(search == null)
+		try 
 		{
-			if(UserConstant.UserID==ContentConstant.adminID)
+			//Lay ra so trang can xu ly
+			int numberOfPage = Integer.parseInt(request.getParameter("numberOfPage"));
+			//Lay ra noi dung search. Neu khong co thi bien search se = null
+			String search = request.getParameter("searchContent");
+			//Tinh toan offset=(so trang - 1) * 10(co dinh).
+			int offset=(numberOfPage-1)*(ContentConstant.limitContent);
+			//Gui lai currentPage ve cho form ViewContent de cap nhat gia tri
+			request.setAttribute("currentPage", numberOfPage);
+			int listContentSize=0;
+			//Neu khong co chuoi search
+			if(search == null)
 			{
-				contents = dbContent.getAllContent(offset,ContentConstant.limitContent);
-				listcontentsize=dbContent.countContents();
-				//System.out.println(listcontentsize);
+				//Neu la admin, lay toan bo content cua tat ca cac User
+				if(UserConstant.UserID==UserConstant.adminID)
+				{
+					contents = dbContent.getAllContent(offset,ContentConstant.limitContent);
+					//Dung selec count(*) ... de dem so luong content cua toan bo User
+					listContentSize=dbContent.countContents();
+				}
+				//Neu khong phai la admin, thi kiem content theo UserID
+				else
+				{
+					contents = dbContent.getContentForMember(UserConstant.UserID,offset,ContentConstant.limitContent);
+					listContentSize=dbContent.countContentsForMember(UserConstant.UserID);
+				}
 			}
+			//Neu co chuoi search
 			else
 			{
-				contents = dbContent.getContentForMember(UserConstant.UserID,offset,ContentConstant.limitContent);
-				listcontentsize=dbContent.countContentsForMember(UserConstant.UserID);
-				//System.out.println(listcontentsize);
+				//Neu la admin thi kiem content theo chuoi search
+				if(UserConstant.UserID==UserConstant.adminID)
+				{
+					contents = dbContent.searchAllContent(search,offset,ContentConstant.limitContent);
+					listContentSize=dbContent.countContentsForSearch(search);
+				}
+				//Neu khong phai la admin thi kiem content theo chuoi search va UserID
+				else
+				{
+					contents = dbContent.searchContentForMember(UserConstant.UserID,search,offset,ContentConstant.limitContent);
+					listContentSize=dbContent.countContentsForSearchForMember(search,UserConstant.UserID);
+				}
+				//Vi co chuoi search nen ta can gui lai cho form ViewContent de hien thi len
+				request.setAttribute("searchContent", search);
 			}
+			request.setAttribute("listContent", contents);
+			//Xu ly maxPage va gui maxPage ve cho form Viewcontent
+			int maxPage=handleMaxPage(listContentSize);
+			request.setAttribute("maxPage", maxPage);
 		}
-		else
+		catch(Exception ex)
 		{
-			if(UserConstant.UserID==ContentConstant.adminID)
-			{
-				contents = dbContent.searchAllContent(search,offset,ContentConstant.limitContent);
-				listcontentsize=dbContent.countContentsForSearch(search);
-			}
-			else
-			{
-				contents = dbContent.searchContentForMember(UserConstant.UserID,search,offset,ContentConstant.limitContent);
-				listcontentsize=dbContent.countContentsForSearchForMember(search,UserConstant.UserID);
-			}
-			request.setAttribute("searchContent", search);
+			ex.printStackTrace();
 		}
-		request.setAttribute("listContent", contents);
-		int maxPage=handleMaxPage(listcontentsize);
-		request.setAttribute("maxPage", maxPage);
+		request.setAttribute("paging", true);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("view.tiles");
 		dispatcher.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-	private int handleMaxPage(int listcontentsize)
+	private int handleMaxPage(int listContentSize)
 	{
 		int maxPage=0;
-		maxPage+=listcontentsize/10;
-		if(listcontentsize%10!=0)		//Xu ly truong hop thua ra
+		maxPage+=listContentSize/10;
+		if(listContentSize%10!=0)		//Xu ly truong hop thua ra (11,21,...) thi maxPage tang len 1
 		{
 			maxPage++;
 		}

@@ -144,7 +144,7 @@ html{
 }
 /*Hết Kiến trúc tiles*/
 /*View + Search content Form*/
-.load5s{
+.forceHidden{
     visibility: hidden;
 }
 #titleViewContent{

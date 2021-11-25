@@ -16,77 +16,62 @@ import constant.UserConstant;
 import dao.ContentDAO;
 import model.Content;
 
-/**
- * Servlet implementation class SearchContentController
- */
+
 @WebServlet("/SearchContentController")
 public class SearchContentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public SearchContentController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		ContentDAO dbContent = new ContentDAO();
-		String search = request.getParameter("searchString");
-		if(search.length()==0)
-			search=" ";
-		try {
 		List<Content> contents = new ArrayList<Content>();
-		//Khi load view content thi mac dinh quay tro ve trang 1
-		int offset=0;
-		//Xu ly maxPage
-		int listcontentsize=0;
-		if(UserConstant.UserID==ContentConstant.adminID)
-		{
-			contents = dbContent.searchAllContent(search,offset,ContentConstant.limitContent);
-			listcontentsize=dbContent.countContentsForSearch(search);
-			System.out.println(listcontentsize);
-		}
-		else
-		{
-			contents = dbContent.searchContentForMember(UserConstant.UserID,search,offset,ContentConstant.limitContent);
-			listcontentsize=dbContent.countContentsForSearchForMember(search,UserConstant.UserID);
-			System.out.println(listcontentsize);
-		}
-		//Tra ve current page
-		int currentPage=1;
-		request.setAttribute("currentPage", currentPage);
-		//Tra ve danh sach content va maxPage
-		request.setAttribute("listContent", contents);
-		int maxPage=handleMaxPage(listcontentsize);
-		request.setAttribute("maxPage", maxPage);
-		//Tra ve chuoi search input
-		request.setAttribute("searchContent", request.getParameter("searchString"));
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("view.tiles");
-		dispatcher.forward(request, response);
+		
+		try {
+			//Xu ly chuoi search
+			String search = request.getParameter("searchString");
+			if(search.length()==0)
+				search=" ";								//Tranh truong hop de null thi se gay ra loi khi thuc hien truy van sql
+			//offset(phan tu bat dau) se mac dinh la 0 vi dong dau tien trong mysql se co index=0
+			int offset=0;
+			int listContentSize=0;
+			//Neu la admin thi se load 10 content dau trong tat ca content cua user
+			if(UserConstant.UserID==UserConstant.adminID)
+			{
+				contents = dbContent.searchAllContent(search,offset,ContentConstant.limitContent);
+				//Dung selec count(*) ... de dem so luong content cua toan bo User
+				listContentSize=dbContent.countContentsForSearch(search);
+			}
+			//Neu la user thi se load 10 content dau tien cua nguoi nay
+			else
+			{
+				contents = dbContent.searchContentForMember(UserConstant.UserID,search,offset,ContentConstant.limitContent);
+				listContentSize=dbContent.countContentsForSearchForMember(search,UserConstant.UserID);
+			}
+			//Khi search content thi mac dinh quay tro ve trang 1
+			int currentPage=1;
+			request.setAttribute("currentPage", currentPage);
+			//Tra ve danh sach content va maxPage
+			request.setAttribute("listContent", contents);
+			//Xu ly maxPage va gui maxPage ve cho form Viewcontent
+			int maxPage=handleMaxPage(listContentSize);
+			request.setAttribute("maxPage", maxPage);
+			//Tra ve chuoi search input de khi load len the input trong form
+			request.setAttribute("searchContent", request.getParameter("searchString"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("view.tiles");
+		dispatcher.forward(request, response);
 	}
-	private int handleMaxPage(int listcontentsize)
+	private int handleMaxPage(int listContentSize)
 	{
 		int maxPage=0;
-		maxPage+=listcontentsize/10;
-		if(listcontentsize%10!=0)		//Xu ly truong hop thua ra
+		maxPage+=listContentSize/10;
+		if(listContentSize%10!=0)		//Xu ly truong hop thua ra (11,21,...) thi maxPage tang len 1
 		{
 			maxPage++;
 		}

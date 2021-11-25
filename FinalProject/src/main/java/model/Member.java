@@ -3,15 +3,15 @@ package model;
 
 public class Member {
 	private int id;
-	private String FirstName;
-	private String LastName;
-	private String Username;
-	private String Password;
-	private String Phone;
-	private String Email;
-	private String Description;
-	private String CreatedDate;
-	private String UpdateTime;
+	private String firstName;
+	private String lastName;
+	private String username;
+	private String password;
+	private String phone;
+	private String email;
+	private String description;
+	private String createdDate;
+	private String updateTime;
 	public int getId() {
 		return id;
 	}
@@ -19,57 +19,57 @@ public class Member {
 		this.id = id;
 	}
 	public String getFirstName() {
-		return FirstName;
+		return firstName;
 	}
 	public void setFirstName(String firstName) {
-		FirstName = firstName;
+		this.firstName = firstName;
 	}
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		this.lastName = lastName;
 	}
 	public String getUsername() {
-		return Username;
+		return username;
 	}
 	public void setUsername(String username) {
-		Username = username;
+		this.username = username;
 	}
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 	public String getPhone() {
-		return Phone;
+		return phone;
 	}
 	public void setPhone(String phone) {
-		Phone = phone;
+		this.phone = phone;
 	}
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 	public String getCreatedDate() {
-		return CreatedDate;
+		return createdDate;
 	}
 	public void setCreatedDate(String createdDate) {
-		CreatedDate = createdDate;
+		this.createdDate = createdDate;
 	}
 	public String getUpdateTime() {
-		return UpdateTime;
+		return updateTime;
 	}
 	public void setUpdateTime(String updateTime) {
-		UpdateTime = updateTime;
+		this.updateTime = updateTime;
 	}
 }

@@ -26,9 +26,9 @@ public class ContentDAO
 	private static String searchAllContent_Procedure = "{ CALL searchAllContentWithPaging(?,?,?) }";
 	private static String searchContentForMember_Procedure = "{ CALL searchContentForMemberWithPaging(?,?,?,?) }";
 	private static String selectCountAllContent = "Select count(*) as SLContent From Content;";
-	private static String selectCountAllContentForMember = "Select count(*) as SLContent From Content Where AuthorID=?";
+	private static String selectCountContentForMember = "Select count(*) as SLContent From Content Where AuthorID=?";
 	private static String selectCountAllContentForSearch = "Select count(*) as SLContent From Content Where Concat(Title,Brief,CreateDate) like Concat('%',?,'%')"; 
-	private static String selectCountAllContentForSearchForMember = "Select count(*) as SLContent From Content Where Concat(Title,Brief,CreateDate) like Concat('%',?,'%') and AuthorID=?"; 
+	private static String selectCountContentForSearchForMember = "Select count(*) as SLContent From Content Where Concat(Title,Brief,CreateDate) like Concat('%',?,'%') and AuthorID=?"; 
 	private static String select_contentinfo_from_id = "Select * FROM content where id = ?";
 	public ContentDAO(){
 		
@@ -95,15 +95,14 @@ public class ContentDAO
 				int id = rs.getInt("ID");
 				String title = rs.getString("Title");
 				String brief = rs.getString("Brief");
-				String createdate = rs.getString("CreateDate");
-				contents.add(new Content(id,title,brief,createdate,1));
+				String createDate = rs.getString("CreateDate");
+				contents.add(new Content(id,title,brief,createDate,1));
 			}
 			rs.close();
 			cnn.close();  				  
 		}
 		catch(Exception e)
 		{ 
-			//System.out.println(e);
 			e.printStackTrace();
 		}		
 		return contents;
@@ -122,15 +121,14 @@ public class ContentDAO
 				int id = rs.getInt("ID");
 				String title = rs.getString("Title");
 				String brief = rs.getString("Brief");
-				String createdate =rs.getString("CreateDate");
-				contents.add(new Content(id,title,brief,createdate,1));
+				String createDate =rs.getString("CreateDate");
+				contents.add(new Content(id,title,brief,createDate,1));
 			}
 			rs.close();
 			cnn.close();  				  
 		}
 		catch(Exception e)
-		{ 
-			//System.out.println(e);
+		{
 			e.printStackTrace();
 		}		
 		return contents;
@@ -149,15 +147,14 @@ public class ContentDAO
 				int id = rs.getInt("ID");
 				String title = rs.getString("Title");
 				String brief = rs.getString("Brief");
-				String createdate =rs.getString("CreateDate");
-				contents.add(new Content(id,title,brief,createdate,1));
+				String createDate =rs.getString("CreateDate");
+				contents.add(new Content(id,title,brief,createDate,1));
 			}
 			rs.close();
 			cnn.close();  				  
 		}
 		catch(Exception e)
 		{ 
-			//System.out.println(e);
 			e.printStackTrace();
 		}		
 		return contents;
@@ -177,15 +174,14 @@ public class ContentDAO
 				int id = rs.getInt("ID");
 				String title = rs.getString("Title");
 				String brief = rs.getString("Brief");
-				String createdate =rs.getString("CreateDate");
-				contents.add(new Content(id,title,brief,createdate,1));
+				String createDate =rs.getString("CreateDate");
+				contents.add(new Content(id,title,brief,createDate,1));
 			}
 			rs.close();
 			cnn.close();  				  
 		}
 		catch(Exception e)
 		{ 
-			//System.out.println(e);
 			e.printStackTrace();
 		}		
 		return contents;
@@ -196,7 +192,7 @@ public class ContentDAO
 		try (Connection cnn = dal.getConnection() ; Statement stmt = cnn.createStatement()) 
 		{
 			ResultSet rs = stmt.executeQuery(selectCountAllContent);
-			while (rs.next()) {
+			if(rs.next()) {
 			count=rs.getInt("SLContent");
 			}
 			rs.close();
@@ -204,7 +200,6 @@ public class ContentDAO
 		}
 		catch(Exception e)
 		{ 
-			//System.out.println(e);
 			e.printStackTrace();
 		}		
 		return count;
@@ -212,11 +207,11 @@ public class ContentDAO
 	public int countContentsForMember(int UserID)
 	{
 		int count=0;
-		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(selectCountAllContentForMember)) 
+		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(selectCountContentForMember)) 
 		{
 			stmt.setInt(1, UserID);
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
+			if(rs.next()) {
 			count=rs.getInt("SLContent");
 			}
 			rs.close();
@@ -224,7 +219,6 @@ public class ContentDAO
 		}
 		catch(Exception e)
 		{ 
-			//System.out.println(e);
 			e.printStackTrace();
 		}		
 		return count;
@@ -236,7 +230,7 @@ public class ContentDAO
 		{
 			stmt.setString(1, search);
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
+			if(rs.next()) {
 				count=rs.getInt("SLContent");
 			}
 			rs.close();
@@ -244,7 +238,6 @@ public class ContentDAO
 		}
 		catch(Exception e)
 		{ 
-			//System.out.println(e);
 			e.printStackTrace();
 		}		
 		return count;
@@ -252,12 +245,12 @@ public class ContentDAO
 	public int countContentsForSearchForMember(String search, int UserID)
 	{
 		int count=0;
-		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(selectCountAllContentForSearchForMember)) 
+		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(selectCountContentForSearchForMember)) 
 		{
 			stmt.setString(1, search);
 			stmt.setInt(2, UserID);
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
+			if(rs.next()) {
 				count=rs.getInt("SLContent");
 			}
 			rs.close();
@@ -265,7 +258,6 @@ public class ContentDAO
 		}
 		catch(Exception e)
 		{ 
-			//System.out.println(e);
 			e.printStackTrace();
 		}		
 		return count;
