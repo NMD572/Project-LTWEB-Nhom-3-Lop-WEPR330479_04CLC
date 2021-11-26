@@ -25,15 +25,18 @@ public class SearchContentController extends HttpServlet {
         super();
     }
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		doPost(request,response);
+	}
+    
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ContentDAO dbContent = new ContentDAO();
 		List<Content> contents = new ArrayList<Content>();
-		
-		
 		try {
 			//Xu ly chuoi search
 			String search = request.getParameter("searchString");
-			if(search.length()==0)
+			if(search=="")
 				search=" ";								//Tranh truong hop de null thi se gay ra loi khi thuc hien truy van sql
 			//offset(phan tu bat dau) se mac dinh la 0 vi dong dau tien trong mysql se co index=0
 			int offset=0;
@@ -64,6 +67,10 @@ public class SearchContentController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		//Tra ve reponse message tu deletecontentcontroller (neu co)
+		String responseMessage=(String) request.getAttribute("responseMessage");
+		if(responseMessage!="")
+			request.setAttribute("responseMessage", responseMessage);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("view.tiles");
 		dispatcher.forward(request, response);
 	}

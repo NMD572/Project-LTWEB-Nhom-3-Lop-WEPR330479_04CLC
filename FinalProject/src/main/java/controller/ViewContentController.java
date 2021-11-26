@@ -58,6 +58,10 @@ public class ViewContentController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		//Tra ve reponse message tu deletecontentcontroller (neu co)
+		String responseMessage=(String) request.getAttribute("responseMessage");
+		if(responseMessage!="")
+			request.setAttribute("responseMessage", responseMessage);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("view.tiles");
 		dispatcher.forward(request, response);
 	}

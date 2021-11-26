@@ -19,7 +19,7 @@ public class ContentDAO
 {
 	static DAL dal=new DAL();
 	private static String insert_query = "INSERT INTO content (Title, Brief, Content,CreateDate,UpdateTime,AuthorId) VALUES (?, ?, ?,NOW(),NOW(),?)";
-	private static String delete_query = "DELECT from content where id = ?";
+	private static String delete_query = "DELETE from content where id = ?";
 	private static String update_query = "UPDATE content SET Title = ?, Brief = ?, Content = ? where id = ?";
 	private static String getAllContent_Procedure = "{ CALL getAllContent(?,?) }";
 	private static String getContentForMember_Procedure = "{ CALL getContentForMember(?,?,?) }"; 
@@ -30,19 +30,22 @@ public class ContentDAO
 	private static String selectCountAllContentForSearch = "Select count(*) as SLContent From Content Where Concat(Title,Brief,CreateDate) like Concat('%',?,'%')"; 
 	private static String selectCountContentForSearchForMember = "Select count(*) as SLContent From Content Where Concat(Title,Brief,CreateDate) like Concat('%',?,'%') and AuthorID=?"; 
 	private static String select_contentinfo_from_id = "Select * FROM content where id = ?";
+	private static String checkAvailableContent_procedure = "{ CALL checkAvailableContent(?,?,?) }";
 	public ContentDAO(){
 		
 	}
-	//PreparedStatement interface
-	public void InsertContent (Content content)
-	{					    		
+	
+	public boolean InsertContent (Content content)
+	{
+		boolean rowsAffected=false;
 		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(insert_query)) 
 			{  					
 				stmt.setString(1,content.getTitle());  
 				stmt.setString(2,content.getBrief()); 
 				stmt.setString(3,content.getContent());
 				stmt.setInt(4, content.getAuthorID());
-				int i=stmt.executeUpdate();  
+				int i=stmt.executeUpdate();
+				rowsAffected = i > 0;
 				System.out.println(i+" records inserted");  
 				  
 				cnn.close();  				  
@@ -51,20 +54,28 @@ public class ContentDAO
 			{ 
 				//System.out.println(e);
 				e.printStackTrace();
-			}			
+			}
+		return rowsAffected;
 	}
 	
 	public boolean UpdateContent(Content content) throws SQLException
 	{
-		boolean rowsAffected;
+		boolean rowsAffected = false;
 		try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(update_query)) 
 		{
-			stmt.setString(1,content.getTitle());  
-			stmt.setString(2,content.getBrief()); 
+
+			stmt.setString(1,content.getTitle());
+			stmt.setString(2,content.getBrief());
 			stmt.setString(3,content.getContent());
+			stmt.setInt(4, content.getId());
 			int i=stmt.executeUpdate();  
-			rowsAffected = i > 0;	  
+			rowsAffected = i >= 0;
 			cnn.close();  
+		}
+		catch(Exception e)
+		{
+			//System.out.println(e);
+			e.printStackTrace();
 		}
 		return rowsAffected;
 	}
@@ -288,5 +299,31 @@ public class ContentDAO
 			e.printStackTrace();
 		}
 		return ct;
+	}
+	
+	
+	public static boolean checkAvailableContent (Content content)
+	{
+		boolean columnsCount = false;
+		try (Connection cnn = dal.getConnection(); PreparedStatement stmt = cnn.prepareStatement(checkAvailableContent_procedure))
+		{
+			stmt.setString(1,content.getTitle());
+			stmt.setString(2,content.getBrief());
+			stmt.setString(3,content.getContent());
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next())
+			{
+				int i = rs.getRow();
+				columnsCount = i > 0;
+			}
+			rs.close();
+			cnn.close();
+		}
+		catch(Exception e)
+		{
+			//System.out.println(e);
+			e.printStackTrace();
+		}
+		return  columnsCount;
 	}
 }
