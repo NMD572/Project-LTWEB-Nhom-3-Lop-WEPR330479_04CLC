@@ -10,7 +10,7 @@
 <style>
     <%@include file="/resource/MyStyle.css"%>
 </style>
-<body>
+<body  onload="getcookiedata()">
 <div class ="Login">
 
     <div class="AfLogin">
@@ -22,11 +22,11 @@
             </div>
             <div class = "inputform">
                 <div class="rowlogin">
-                    <input type ="text"  class ="inputloginb" id= "username" name ="username" placeholder="E-mail"/>
+                    <input type ="text"  class ="inputloginb" id= "email" name ="email" placeholder="E-mail"/>
 
                 </div>
                 <div class="error">
-                    <span id= "username_error"> </span>
+                    <span id= "email_error"> </span>
                 </div>
                 <div class="rowlogin">
                     <input type ="password" name ="password" class ="inputloginb" id= "password" placeholder="Pasword" />
@@ -51,37 +51,39 @@
         </form>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
-        <button type="button" class="btn btn-danger" onclick="signOut();">Sign Out</button>
+       
 
         <script src="https://apis.google.com/js/platform.js" async defer></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
     </div>
 
-</div>
 </div>
 <script >
     function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
-        $("#uid").text(profile.getId());
-        $("#name2").text(profile.getName());
-        $("#email2").text(profile.getEmail());
-
-        $("#image").attr('src', profile.getImageUrl());
-        $(".data").css("display", "block");
-        $(".g-signin2").css("display", "none");
-        var id_token = googleUser.getAuthResponse().id_token;
-        if( id_token !=null)
-        {
-            window.location.assign("/FinalProject/ViewContentController")
-        }
+        
+    	
+    	sessionStorage.setItem("fullnameGG",profile.getName());
+		sessionStorage.setItem("emailGG",profile.getEmail());
+		sessionStorage.setItem("imageGG",profile.getImageUrl());
+       	sessionStorage.setItem("checkidGG",profile.getId());
+        //var id_token = googleUser.getAuthResponse().id_token;
+        //if( id_token !=null)
+       // {
+        	
+           // window.location.assign("/FinalProject/ViewContentController")
+        //}
+        if((profile.getId())!=null)
+        	signOut();
+        alert("You have been signed in successfully");
+        	window.location.assign('addUserGoogle.tiles')
     }
 
     function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
-            alert("You have been signed out successfully");
-            $(".data").css("display", "none");
-            $(".g-signin2").css("display", "block");
+            
         });
     }
     //output
@@ -89,49 +91,54 @@
 
     const inputBtn=document.querySelector('.inputsubmit');
     inputBtn.addEventListener("click",(e) =>{
+    	sessionStorage.removeItem("checkidGG");
+    	//check remember thi moi luu
+    	 var check = document.getElementById('remember-me');
+         if(check.checked){
+        	 setcookie();
+         }
+        var flagEmail =true;
+        var flagPassword =true;
+        const email = document.getElementById("email").value;
+        const passWord= document.getElementById("password").value;
 
-        var flag =true;
 
-        const username = document.getElementById("username").value;
-        const password= document.getElementById("password").value;
-
-
-        if(username=="")
+        if(email=="")
         {
-            showError('username','Email can not be blank!!');
-            flag =false;
+            showError('email','Email can not be blank!!');
+            flagEmail =false;
 
         }
-        else if(username.length<5 || username.length>50 )
+        else if(email.length<5 || email.length>50 )
         {
-            showError('username','Must enter from 5->50 characters');
-            flag =false;
+            showError('email','Must enter from 5->50 characters');
+            flagEmail =false;
 
         }
         else
         {
-            showError('username','');
-            flag = true;
+            showError('email','');
+            flagEmail = true;
         }
-        if (password=="")
+        if (passWord=="")
         {
             showError('password','Password can not be blank!!');
-            flag =false;
+            flagPassword =false;
 
         }
-        else if(password.length<8 || password.length>30 )
+        else if(passWord.length<8 || password.length>30 )
         {
             showError('password','Must enter from 8->30 characters');
-            flag =false;
+            flagPassword =false;
 
         }
         else
         {
             showError('password','');
-            flag = true;
+            flagPassword = true;
 
         }
-        if(flag==false){
+        if(flagPassword==false|| flagEmail==false){
             e.preventDefault();
         }
 
@@ -141,10 +148,51 @@
 
 
 
+
     function showError(key,mess){
 
         document.getElementById(key+ '_error').innerHTML = mess;
     }
+    function setcookie(){
+        var u =document.getElementById('email').value;
+        var p =document.getElementById('password').value;
+	//set host
+        document.cookie="myusrname="+u+";path=http://localhost:8080/FinalProject/";
+        document.cookie="mypswd="+p+";path=http://localhost:8080/FinalProject/";
+       }
+
+	
+       function getcookiedata(){
+
+        console.log(document.cookie);
+
+        var user=getCookie('myusrname');
+        var pswd=getCookie('mypswd');
+
+        document.getElementById('email').value=user;
+        document.getElementById('password').value=pswd;
+        //var check = document.getElementById('remember-me');
+        //console.log(check.checked);
+       }
+
+
+
+//lay ra cookie
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+   }
 </script>
 
 </body>

@@ -10,68 +10,73 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import constant.UserConstant;
 import model.*;
 import dao.*;
 
 /**
- * Servlet implementation class RegisterController
+ * Servlet implementation class AddGoogleUserController
  */
-@WebServlet("/RegisterController")
-public class RegisterController extends HttpServlet {
+@WebServlet("/AddGoogleUserController")
+public class AddGoogleUserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       String userName;
-       String passWord;
-       String email;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterController() {
+    public AddGoogleUserController() {
         super();
         // TODO Auto-generated constructor stub
+        
     }
+    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//fix: can than
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request,response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		 String userName;
+	     String passWord;
+	     String email;
 		userName = request.getParameter("username");
 		passWord = request.getParameter("password");
-		
-		
-		 
-		 
-		
 		email = request.getParameter("email");
+		
 		Member regis = new Member();
 		regis.setUsername(userName);
 		regis.setPassword(passWord);
 		regis.setEmail(email);
-		
+		LoginDAO loginDAO = new LoginDAO();
 		try {
 		if(!RegisterDAO.checkEmail(email)) {
 			RegisterDAO.InsertMember(regis);
-			response.sendRedirect("login.tiles");
+			UserConstant.UserID=loginDAO.getUserID(email);
+			request.setAttribute("id", loginDAO.getUserID(email));
+			response.sendRedirect("ViewContentController");
 		}
-		else response.sendRedirect("register.tiles");
+		else {
+			UserConstant.UserID=loginDAO.getUserID(email);
+			request.setAttribute("id", loginDAO.getUserID(email));
+			response.sendRedirect("ViewContentController");
+			
+		}
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
+			 //TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
-		
-		
-   
 	}
 
 }

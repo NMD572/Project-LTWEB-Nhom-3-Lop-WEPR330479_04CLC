@@ -16,8 +16,8 @@ import constant.UserConstant;
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String username;
-	private String password;
+	private String email;
+	private String passWord;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,23 +38,26 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		username = request.getParameter("username");
-		password = request.getParameter("password");
+		email = request.getParameter("email");
+		passWord = request.getParameter("password");
 		UserConstant.UserID=0;
 		Member login = new Member();
-		login.setUsername(username);
+		login.setEmail(email);
 		LoginDAO loginDAO = new LoginDAO();
 		LoginDAO.authenticateUser(login);
-		if(password.equals(login.getPassword())) //If function returns success string then user will be rooted to Home page
+		if(passWord.equals(login.getPassword())) //If function returns success string then user will be rooted to Home page
         {
-            request.setAttribute("userName", username); //with setAttribute() you can define a "key" and value pair so that you can get it in future using getAttribute("key")
-            UserConstant.UserID=loginDAO.getUserID(username);
-            request.getRequestDispatcher("ViewContentController").forward(request, response);//RequestDispatcher is used to send the control to the invoked page.
+            request.setAttribute("id", loginDAO.getUserID(email)); //with setAttribute() you can define a "key" and value pair so that you can get it in future using getAttribute("key")
+            UserConstant.UserID=loginDAO.getUserID(email);
+            
+            
+            response.sendRedirect("ViewContentController");
         }
         else
         {
-            request.setAttribute("errMessage", username); //If authenticateUser() function returnsother than SUCCESS string it will be sent to Login page again. Here the error message returned from function has been stored in a errMessage key.
-            request.getRequestDispatcher("register.tiles").forward(request, response);//forwarding the request
+            request.setAttribute("errMessage", email); //If authenticateUser() function returnsother than SUCCESS string it will be sent to Login page again. Here the error message returned from function has been stored in a errMessage key.
+  
+            response.sendRedirect("register.tiles");
         }
 	}
 

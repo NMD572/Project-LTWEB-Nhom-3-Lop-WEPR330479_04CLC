@@ -31,4 +31,7 @@
   <!-- Register Form -->
   <definition name="register" template="/view/Register.jsp">
   </definition>
+   <!-- add user gg-->
+  <definition name="addUserGoogle" template="/view/AddUserGoogle.jsp">
+  </definition>
 </tiles-definitions>

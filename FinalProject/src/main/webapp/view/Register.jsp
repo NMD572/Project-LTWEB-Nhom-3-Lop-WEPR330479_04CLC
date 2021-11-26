@@ -4,14 +4,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="index.css"/>
+    
     <title>Register</title>
 </head>
 <style>
     <%@include file="/resource/MyStyle.css"%>
 </style>
-<body>
-<div class ="Register">
+<body >
+<div class ="Register" >
     <div class="AfRegis">
         <form action ="RegisterController" method ="post" class = "registerform" id ="register-form" name="form"  method="post" onsubmit="return validate()">
             <div class="rowregis" >
@@ -43,7 +43,7 @@
                     <input type ="password" name ="repassword" id ="pass-confirm" class ="registerinput" placeholder="Re Password" />
                 </div>
                 <div class="error">
-                    <span id= "repassword_error"> </span>
+                    <span id= "repassword_error" name ="huhu" value="haha"> </span>
                 </div>
                 <div class="rowregis">
                     <input type="submit" value ="Register" class ="registersubmit" />
@@ -54,92 +54,97 @@
             </div>
         </form>
     </div>
+    </div>
+    
     <script>
-        const inputBtn=document.querySelector('.registersubmit');
-        inputBtn.addEventListener("click",(e) =>{
+    const inputBtn=document.querySelector('.registersubmit');
+    inputBtn.addEventListener("click",(e) =>{
 
-            var flag =true;
+        var flagUsername =true;
+        var flagEmail =true;
+        var flagPassword =true;
+        var flagRepassword =true;
 
-            const username = document.getElementById("user-name").value;
-            const email = document.getElementById("e-mail").value;
-            const password= document.getElementById("pass-word").value;
-            const repassword= document.getElementById("pass-confirm").value;
+        const userName = document.getElementById("user-name").value;
+        const email = document.getElementById("e-mail").value;
+        const passWord= document.getElementById("pass-word").value;
+        const rePassword= document.getElementById("pass-confirm").value;
 
-            if(username=="")
-            {
-                showError('username','Username can not be blank!!');
-                flag =false;
+        if(userName=="")
+        {
+            showError('username','Username can not be blank!!');
+            flagUsername =false;
 
-            }
-            else if(username.length<3 || username.length>30 )
-            {
-                showError('username','Must enter from 5->50 characters');
-                flag =false;
+        }
+        else if(userName.length<3 || userName.length>30 )
+        {
+            showError('username','Must enter from 5->50 characters');
+            flagUsername =false;
 
-            }
-            else
-            {
-                showError('username','');
-                flag = true;
-            }
-            if (password=="")
-            {
-                showError('password','Password can not be blank!!');
-                flag =false;
+        }
+        else
+        {
+            showError('username','');
+            flagUsername = true;
+        }
+        if (passWord=="")
+        {
+            showError('password','Password can not be blank!!');
+            flagPassword =false;
 
-            }
-            else if(password.length<8 || password.length>30 )
-            {
-                showError('password','Must enter from 8->30 characters');
-                flag =false;
+        }
+        else if(passWord.length<8 || passWord.length>30 )
+        {
+            showError('password','Must enter from 8->30 characters');
+            flagPassword =false;
 
-            }
-            else
-            {
-                showError('password','');
-                flag = true;
+        }
+        else
+        {
+            showError('password','');
+            flagPassword = true;
 
-            }
-            if(repassword==""){
-                showError('repassword','Can not be blank!!');
-                flag =false;
-            }
-            else if(repassword.length<8 || repassword.length>30 )
-            {
-                showError('repassword','Must enter from 8->30 characters');
-                flag =false;
+        }
+        if(rePassword==""){
+            showError('repassword','Can not be blank!!');
+            flagRepassword =false;
+        }
+        else if(rePassword.length<8 || rePassword.length>30 )
+        {
+            showError('repassword','Must enter from 8->30 characters');
+            flagRepassword =false;
 
-            }
-            else if(repassword!=password){
-                showError('repassword','Not corret Re Password!!');
-                flag =false;
-            }
-            else {
-                showError('repassword','');
-                flag = true;
-            }
-            if(email==""){
-                showError('email','Can not be blank!!');
-                flag =false;
-            }
-            else if(email.length <5){
-                showError('email','Must enter at least 5 characters');
-                flag =false;
-            }
-            else if(!validateEmailAddress(email)){
-                showError('email','Pls insert a correct email!!');
-                flag =false;
-            }
-            else {
-                showError('email','');
-                flag = true;
-            }
-            if(flag==false){
-                e.preventDefault();
-            }
+        }
+        else if(rePassword!=passWord){
+            showError('repassword','Not corret Re Password!!');
+            flagRepassword =false;
+        }
+        else {
+            showError('repassword','');
+            flagRepassword = true;
+        }
+        if(email==""){
+            showError('email','Can not be blank!!');
+            flagEmail =false;
+        }
+        else if(email.length <5){
+            showError('email','Must enter at least 5 characters');
+            flagEmail =false;
+        }
+        else if(!validateEmailAddress(email)){
+            showError('email','Pls insert a correct email!!');
+            flagEmail =false;
+        }
+        else {
+            showError('email','');
+            flagEmail = true;
+        }
+        if(flagEmail==false || flagPassword==false || flagRepassword==false || flagUsername==false){
+            e.preventDefault();
+        }
 
 
-        })
+    })
 
 
 
@@ -152,6 +157,7 @@
 
             document.getElementById(key+ '_error').innerHTML = mess;
         }
+        
     </script>
 </body>
 </html>

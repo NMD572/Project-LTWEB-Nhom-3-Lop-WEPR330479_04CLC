@@ -279,6 +279,18 @@ tr:nth-child(even) {
 /*Hết View + Search content Form*/
 
 /* login */
+
+
+#image{
+	 margin-top: -10px;
+	padding-left: 10px;
+}
+.g-signin2{
+    padding: 20px ;
+   
+    
+        
+}
 .error{
     display: flex;
     color:red;
@@ -306,7 +318,7 @@ tr:nth-child(even) {
 
     padding: 20px;
     font-size: 20px;
-    width: 98.94%;
+    width: 100%;
     background: rgb(240, 240, 240);
     border: 0px solid grey;
     border-radius: 2px;
@@ -376,7 +388,7 @@ tr:nth-child(even) {
 
     padding: 20px;
     font-size: 20px;
-    width: 98.94%;
+    width: 100%;
     background: rgb(240, 240, 240);
     border: 0px solid grey;
     border-radius: 2px;
@@ -422,14 +434,14 @@ tr:nth-child(even) {
 }
 .divProfilefrom{
 
-    padding-left: 20px;
-    padding-top: 10px;
+    padding: 20px;
+   
     font-size: 20px;
     width: 80.94vw;
     background: rgb(240, 240, 240);
     border: 0px solid grey;
     border-radius: 2px;
-    margin-bottom: 10px;
+    
 }
 .Editprofile{
     margin-top: 25px;
@@ -441,31 +453,51 @@ tr:nth-child(even) {
 
 }
 
-.buttoneditpro{
+.buttoneditpro1{
+   
+  
+  color: black;
+  
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border: 0.5px solid #28a745; ;
+  border-radius: 4px;
+  background-color: #28a745;
+  
+  padding: 10px;
+  margin-left:20px;
+  margin-top: 10px;
+  color :#fff;
+  margin-bottom: 20px;
+}
 
-
+.buttoneditpro2{
     color: black;
-    padding: 10px;
+  
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    font-size: 17px;
     cursor: pointer;
     border: 0.5px solid #28a745; ;
     border-radius: 4px;
     background-color: #28a745;
-    margin-left:20px;
-    margin-top: 10px;
     color :#fff;
-    margin-bottom: 20px;
-}
+    
+  
+    
+    
+  }
 .displayemail{
     padding-top:  15px;
 }
 .inputeditb{
     border: 0.5px solid #b3b3b3 ;
-    border-radius: 10px;
+    border-radius: 4px;
     padding-left: 10px;
     width: 72vw;
     height: 42px;
@@ -489,10 +521,12 @@ tr:nth-child(even) {
 .inputdes{
     height: 100px;
     border: 0.5px solid #b3b3b3 ;
-    border-radius: 10px;
+    border-radius: 4px;
     padding-left: 10px;
     width: 72vw;
+    padding-top: 3px;
 }
+
 /*Add, edit content*/
 .load5s{
     visibility: hidden;

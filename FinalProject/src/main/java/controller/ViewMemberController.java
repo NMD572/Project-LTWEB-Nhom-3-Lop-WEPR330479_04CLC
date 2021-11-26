@@ -1,31 +1,28 @@
 package controller;
 
 import java.io.IOException;
+import model.*;
+import dao.*;
+import constant.UserConstant;
 
-import java.sql.SQLException;
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.*;
-import dao.*;
-
 /**
- * Servlet implementation class RegisterController
+ * Servlet implementation class ViewMemberController
  */
-@WebServlet("/RegisterController")
-public class RegisterController extends HttpServlet {
+@WebServlet("/ViewMemberController")
+public class ViewMemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       String userName;
-       String passWord;
-       String email;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterController() {
+    public ViewMemberController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,43 +32,33 @@ public class RegisterController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//fix: can than
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request,response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		userName = request.getParameter("username");
-		passWord = request.getParameter("password");
+		// TODO Auto-generated method stub
 		
 		
-		 
-		 
+		int idmember =UserConstant.UserID;
 		
-		email = request.getParameter("email");
-		Member regis = new Member();
-		regis.setUsername(userName);
-		regis.setPassword(passWord);
-		regis.setEmail(email);
-		
+		Member member = new Member();
 		try {
-		if(!RegisterDAO.checkEmail(email)) {
-			RegisterDAO.InsertMember(regis);
-			response.sendRedirect("login.tiles");
+			RegisterDAO.GetMember(idmember, member);
+			request.setAttribute("viewemail", member.getEmail());
+			request.setAttribute("viewfname", member.getFirstName());
+			request.setAttribute("viewlname", member.getLastName());
+			request.setAttribute("viewphone", member.getPhone());
+			request.setAttribute("viewdes", member.getDescription());
+			RequestDispatcher dispatcher =request.getRequestDispatcher("editprofile.tiles");
+			dispatcher.forward(request, response);
+			
 		}
-		else response.sendRedirect("register.tiles");
-		}
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
+		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-   
 	}
 
 }

@@ -14,15 +14,15 @@ public class LoginDAO {
 	{
 		
 	}
-	private static String getID ="select id from member Where username=? ";
-	private static String sql ="select Username,Password from member Where username=?";
-	public int getUserID(String username)
+	private static String getID ="select id from member Where Email=? ";
+	private static String sql ="select Email,Password from member Where Email=?";
+	public int getUserID(String email)
 	{
 		int id=5;
 		Connection connection = dal.getConnection();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(getID);
-			preparedStatement.setString(1, username);
+			preparedStatement.setString(1, email);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next())
 			{
@@ -40,20 +40,20 @@ public class LoginDAO {
      {
          //String Username = login.getUsername(); //Assign user entered values to temporary variables.
         //String Password = login.getPassword();
-         String userNameDB = "";
-         String passwordDB = "";
+         String emailDB = "";
+         String passWordDB = "";
          try (Connection cnn = dal.getConnection() ; PreparedStatement stmt = cnn.prepareStatement(sql)) 
 			{
-        	 stmt.setString(1, login.getUsername());
+        	 stmt.setString(1, login.getEmail());
         	 ResultSet rs = stmt.executeQuery();
         	 
 
         	 while (rs.next())
  			{
-        		 userNameDB = rs.getString("Username"); //fetch the values present in database
-                 passwordDB = rs.getString("Password");
-                 login.setUsername(userNameDB);
-                 login.setPassword(passwordDB);
+        		 emailDB = rs.getString("Email"); //fetch the values present in database
+                 passWordDB = rs.getString("Password");
+                 login.setEmail(emailDB);
+                 login.setPassword(passWordDB);
  			}
  			rs.close();
  			cnn.close();  	
@@ -64,26 +64,6 @@ public class LoginDAO {
 				e.printStackTrace();
 			}		
  
-//         try
-//         {
-//        	 //fix
-//        	 //resultSet = dal.getData(sql);
-//             
-//             while(resultSet.next()) // Until next row is present otherwise it return false
-//             {
-//              userNameDB = resultSet.getString("Username"); //fetch the values present in database
-//              passwordDB = resultSet.getString("Password");
-//              
-//               if(Username.equals(userNameDB) && Password.equals(passwordDB))
-//               {
-//                  return "SUCCESS"; ////If the user entered values are already present in the database, which means user has already registered so return a SUCCESS message.
-//               }
-//             }
-//         }
-//             catch(SQLException e)
-//             {
-//                e.printStackTrace();
-//             }
-//             return "Invalid user credentials"; // Return appropriate message in case of failure
+
      }
 }
