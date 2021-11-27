@@ -7,9 +7,11 @@
    
     <title>Add User Google</title>
 </head>
-
+<style>
+	<%@include file="/resource/MyStyle.css"%>
+</style>
 <body onload="addggaccount()">
-
+	<div class ="displayaddgg">
         <form action ="AddGoogleUserController" method ="post" class = "registerform" id ="registerform" name="form"  method="post" onsubmit="return validate()">
             <div class="rowregis" >
                 <div class ="titleregis">
@@ -48,7 +50,7 @@
                
             </div>
         </form>
-  
+  	</div>
     
     <script>
     

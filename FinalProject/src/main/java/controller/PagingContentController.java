@@ -30,13 +30,12 @@ public class PagingContentController extends HttpServlet {
 		try 
 		{
 			//Lay ra so trang can xu ly
-			int numberOfPage = Integer.parseInt(request.getParameter("numberOfPage"));
+			int numberOfPage = Integer.parseInt(request.getParameter(ContentConstant.numberOfPage));
 			//Lay ra noi dung search. Neu khong co thi bien search se = null
-			String search = request.getParameter("searchContent");
+			String search = request.getParameter(ContentConstant.searchContent);
 			//Tinh toan offset=(so trang - 1) * 10(co dinh).
 			int offset=(numberOfPage-1)*(ContentConstant.limitContent);
-			//Gui lai currentPage ve cho form ViewContent de cap nhat gia tri
-			request.setAttribute("currentPage", numberOfPage);
+			
 			int listContentSize=0;
 			//Neu khong co chuoi search
 			if(search == null)
@@ -71,18 +70,20 @@ public class PagingContentController extends HttpServlet {
 					listContentSize=dbContent.countContentsForSearchForMember(search,UserConstant.UserID);
 				}
 				//Vi co chuoi search nen ta can gui lai cho form ViewContent de hien thi len
-				request.setAttribute("searchContent", search);
+				request.setAttribute(ContentConstant.searchContent, search);
 			}
-			request.setAttribute("listContent", contents);
-			//Xu ly maxPage va gui maxPage ve cho form Viewcontent
+			//Gui lai currentPage ve cho form ViewContent de cap nhat gia tri
+			request.setAttribute(ContentConstant.currentPage, numberOfPage);
+			//Tra ve danh sach content va maxPage
+			request.setAttribute(ContentConstant.listContent, contents);
 			int maxPage=handleMaxPage(listContentSize);
-			request.setAttribute("maxPage", maxPage);
+			request.setAttribute(ContentConstant.maxPage, maxPage);
 		}
 		catch(Exception ex)
 		{
 			ex.printStackTrace();
 		}
-		request.setAttribute("paging", true);
+		request.setAttribute(ContentConstant.paging, true);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("view.tiles");
 		dispatcher.forward(request, response);
 	}

@@ -19,7 +19,7 @@
  <div class="load5s">
 </c:if>
 
-    <div class ="form-title">
+    <div class ="form-title-view">
         <h1 id="titleViewContent">View Content</h1>
         <div class ="form-notification" id = "notification">
             <p>${responseMessage}</p>
@@ -38,8 +38,8 @@
             	<table id="tableContent">
                 	<tr id="trHeader">
                     	<th class="centerHeader" style="width:7%">#</th>
-                    	<th class="marginLeftHeader" style="width:15%">Title</th>
-                    	<th class="marginLeftHeader" style="width:43%">Brief</th>
+                    	<th class="marginLeftHeader" style="width:20%">Title</th>
+                    	<th class="marginLeftHeader" style="width:38%">Brief</th>
                     	<th class="marginLeftHeader" style="width:20%">Created Date</th>
                     	<th class="centerHeader" style="width:15%">Action</th>
                 	</tr>

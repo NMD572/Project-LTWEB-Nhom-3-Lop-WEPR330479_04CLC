@@ -35,11 +35,13 @@ public class SearchContentController extends HttpServlet {
 		List<Content> contents = new ArrayList<Content>();
 		try {
 			//Xu ly chuoi search
-			String search = request.getParameter("searchString");
+			String search = request.getParameter(ContentConstant.searchStringInput);
 			if(search=="")
 				search=" ";								//Tranh truong hop de null thi se gay ra loi khi thuc hien truy van sql
 			//offset(phan tu bat dau) se mac dinh la 0 vi dong dau tien trong mysql se co index=0
 			int offset=0;
+			//Khi search content thi mac dinh quay tro ve trang 1
+			int currentPage=1;
 			int listContentSize=0;
 			//Neu la admin thi se load 10 content dau trong tat ca content cua user
 			if(UserConstant.UserID==UserConstant.adminID)
@@ -54,23 +56,21 @@ public class SearchContentController extends HttpServlet {
 				contents = dbContent.searchContentForMember(UserConstant.UserID,search,offset,ContentConstant.limitContent);
 				listContentSize=dbContent.countContentsForSearchForMember(search,UserConstant.UserID);
 			}
-			//Khi search content thi mac dinh quay tro ve trang 1
-			int currentPage=1;
-			request.setAttribute("currentPage", currentPage);
+			request.setAttribute(ContentConstant.currentPage, currentPage);
 			//Tra ve danh sach content va maxPage
-			request.setAttribute("listContent", contents);
+			request.setAttribute(ContentConstant.listContent, contents);
 			//Xu ly maxPage va gui maxPage ve cho form Viewcontent
 			int maxPage=handleMaxPage(listContentSize);
-			request.setAttribute("maxPage", maxPage);
+			request.setAttribute(ContentConstant.maxPage, maxPage);
 			//Tra ve chuoi search input de khi load len the input trong form
-			request.setAttribute("searchContent", request.getParameter("searchString"));
+			request.setAttribute(ContentConstant.searchContent, request.getParameter(ContentConstant.searchStringInput));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		//Tra ve reponse message tu deletecontentcontroller (neu co)
-		String responseMessage=(String) request.getAttribute("responseMessage");
+		String responseMessage=(String) request.getAttribute(ContentConstant.responseMessage);
 		if(responseMessage!="")
-			request.setAttribute("responseMessage", responseMessage);
+			request.setAttribute(ContentConstant.responseMessage, responseMessage);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("view.tiles");
 		dispatcher.forward(request, response);
 	}

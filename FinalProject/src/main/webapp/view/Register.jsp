@@ -13,7 +13,7 @@
 <body >
 <div class ="Register" >
     <div class="AfRegis">
-        <form action ="RegisterController" method ="post" class = "registerform" id ="register-form" name="form"  method="post" onsubmit="return validate()">
+        <form action ="RegisterController" method ="post" class = "registerform" id ="register-form" name="form"  method="post" >
             <div class="rowregis" >
                 <div class ="titleregis">
                     Register

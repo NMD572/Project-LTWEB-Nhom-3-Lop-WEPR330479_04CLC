@@ -31,13 +31,13 @@ public class ViewContentController extends HttpServlet {
 		ContentDAO dbContent = new ContentDAO();
 		try {
 		List<Content> contents = new ArrayList<Content>();
+		
 		//Khi load view content thi mac dinh quay tro ve trang 1, 
 		//va offset(phan tu bat dau) se mac dinh la 0 vi dong dau tien trong mysql se co index=0
 		int currentPage=1;
 		int offset=0;
-		//Gui currentPage ve form Viewcontent de in ra so trang va tinh toan stt trong bang content
-		request.setAttribute("currentPage", currentPage);
 		int listContentSize=0;
+		
 		//Neu la admin thi se load 10 content dau trong tat ca content cua user
 		if(UserConstant.UserID==UserConstant.adminID)
 		{
@@ -45,23 +45,29 @@ public class ViewContentController extends HttpServlet {
 			//Dung selec count(*) ... de dem so luong content cua toan bo User
 			listContentSize=dbContent.countContents();
 		}
+		
 		//Neu la user thi se load 10 content dau tien cua nguoi nay
 		else
 		{
 			contents = dbContent.getContentForMember(UserConstant.UserID,offset,ContentConstant.limitContent);
 			listContentSize=dbContent.countContentsForMember(UserConstant.UserID);
 		}
-		request.setAttribute("listContent", contents);
+		
+		request.setAttribute(ContentConstant.listContent, contents);
+		//Gui currentPage ve form Viewcontent de in ra so trang va tinh toan stt trong bang content
+		request.setAttribute(ContentConstant.currentPage, currentPage);
 		//Xu ly maxPage va gui maxPage ve cho form Viewcontent
 		int maxPage=handleMaxPage(listContentSize);
-		request.setAttribute("maxPage", maxPage);
-		} catch (Exception e) {
+		request.setAttribute(ContentConstant.maxPage, maxPage);
+		} catch (Exception e) 
+		{
 			e.printStackTrace();
 		}
+		
 		//Tra ve reponse message tu deletecontentcontroller (neu co)
-		String responseMessage=(String) request.getAttribute("responseMessage");
+		String responseMessage=(String) request.getAttribute(ContentConstant.responseMessage);
 		if(responseMessage!="")
-			request.setAttribute("responseMessage", responseMessage);
+			request.setAttribute(ContentConstant.responseMessage, responseMessage);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("view.tiles");
 		dispatcher.forward(request, response);
 	}

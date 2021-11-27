@@ -194,7 +194,7 @@ public class ContentDAO
 		catch(Exception e)
 		{ 
 			e.printStackTrace();
-		}		
+		}	
 		return contents;
 	}
 	public int countContents()
@@ -203,7 +203,8 @@ public class ContentDAO
 		try (Connection cnn = dal.getConnection() ; Statement stmt = cnn.createStatement()) 
 		{
 			ResultSet rs = stmt.executeQuery(selectCountAllContent);
-			if(rs.next()) {
+			if(rs.next()) 
+			{
 			count=rs.getInt("SLContent");
 			}
 			rs.close();
@@ -222,7 +223,8 @@ public class ContentDAO
 		{
 			stmt.setInt(1, UserID);
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next()) {
+			if(rs.next()) 
+			{
 			count=rs.getInt("SLContent");
 			}
 			rs.close();
@@ -241,7 +243,8 @@ public class ContentDAO
 		{
 			stmt.setString(1, search);
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next()) {
+			if(rs.next()) 
+			{
 				count=rs.getInt("SLContent");
 			}
 			rs.close();
@@ -261,7 +264,8 @@ public class ContentDAO
 			stmt.setString(1, search);
 			stmt.setInt(2, UserID);
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next()) {
+			if(rs.next()) 
+			{
 				count=rs.getInt("SLContent");
 			}
 			rs.close();

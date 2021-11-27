@@ -1,4 +1,8 @@
 @charset "UTF-8";
+/*Edit User Google*/
+.displayaddgg{
+	 visibility: hidden;
+}
 /*Kiến trúc tiles*/
 /*Header*/
 * {
@@ -150,7 +154,7 @@ html{
 .forceHidden{
     visibility: hidden;
 }
-.form-title
+.form-title-view
 {
     display: flex;
     justify-content: space-between;
@@ -159,10 +163,11 @@ html{
 	font-size:45px;
 	margin-bottom:8px;
 }
-.form-title #notification
+.form-title-view #notification
 {
     margin-top: 2%;
     font-size: 20px;
+    margin-right:10%;
 }
 #hrViewContent{
     margin-top: 0px;

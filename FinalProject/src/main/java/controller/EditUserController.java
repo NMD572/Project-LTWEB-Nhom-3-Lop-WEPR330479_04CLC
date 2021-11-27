@@ -55,6 +55,8 @@ public class EditUserController extends HttpServlet {
 		edit.setFirstName(firstname);
 		edit.setLastName(lastname);
 		edit.setPhone(phone);
+		if(request.getParameter("description")!=null)
+			description=request.getParameter("description");
 		edit.setDescription(description);
 		edit.setId(UserConstant.UserID);
 		 // edit.setId(integer.(request.getAttribute("id")));
@@ -66,11 +68,15 @@ public class EditUserController extends HttpServlet {
 		
 		
 		RegisterDAO editDAO=new RegisterDAO();
-		try {
-			if(editDAO.UpdateMember(edit)) {
+		try 
+		{
+			if(editDAO.UpdateMember(edit)) 
+			{
 				
 				request.getRequestDispatcher("ViewMemberController").forward(request, response);//RequestDispatcher is used to send the control to the invoked page.
 			}
+			else 
+				request.getRequestDispatcher("editprofile.tiles").forward(request, response);//dont load 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
